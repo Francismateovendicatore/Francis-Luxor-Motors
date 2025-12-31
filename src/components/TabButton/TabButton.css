@@ -1,0 +1,161 @@
+/* REFINED INTERACTION SUITE - PREMIUM DESIGN 
+   Targets: #reactExamples, #reactExamples2, #ReactExamplesStockDefinition
+*/
+
+:root {
+  --luxury-gold: #c5a059;
+  --luxury-silver: #e0e0e0;
+  --bg-deep: #050505;
+  --bg-surface: #0a0a0a;
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --accent-glow: rgba(197, 160, 89, 0.15);
+  --font-serif: "Playfair Display", serif;
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Section Headers --- */
+#reactExamples h2,
+#reactExamples2 h2,
+#ReactExamplesStockDefinition h2 {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  color: var(--luxury-silver);
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+#reactExamples h2::after,
+#reactExamples2 h2::after,
+#ReactExamplesStockDefinition h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 1px;
+  margin: 1.5rem auto 0;
+  background: var(--luxury-gold);
+  transition: width 0.6s var(--ease-premium);
+}
+
+#reactExamples h2:hover::after,
+#reactExamples2 h2:hover::after,
+#ReactExamplesStockDefinition h2:hover::after {
+  width: 100px;
+}
+
+/* --- Navigation Menus --- */
+#reactExamples menu,
+#reactExamples2 menu,
+#ReactExamplesStockDefinition menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto 3.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+/* --- Premium Buttons --- */
+#reactExamples button,
+#reactExamples2 button,
+#ReactExamplesStockDefinition button {
+  padding: 0.8rem 1.8rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  background: transparent;
+  color: var(--luxury-silver);
+  border: 1px solid var(--border-glass);
+  border-radius: 0; /* Sharp, architectonic edges */
+  cursor: pointer;
+  position: relative;
+  transition: all 0.5s var(--ease-premium);
+  overflow: hidden;
+}
+
+#reactExamples button::before,
+#reactExamples2 button::before,
+#ReactExamplesStockDefinition button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+#reactExamples button:hover,
+#reactExamples2 button:hover,
+#ReactExamplesStockDefinition button:hover {
+  border-color: var(--luxury-gold);
+  color: var(--luxury-gold);
+  background: var(--accent-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+#reactExamples button:hover::before,
+#reactExamples2 button:hover::before,
+#ReactExamplesStockDefinition button:hover::before {
+  left: 100%;
+}
+
+/* Active State */
+#reactExamples button.active,
+#reactExamples2 button.active,
+#ReactExamplesStockDefinition button.active {
+  background: var(--luxury-gold);
+  border-color: var(--luxury-gold);
+  color: #000;
+  font-weight: 600;
+}
+
+/* --- Section Dividers --- */
+section + section::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 100px;
+  margin: 4rem auto;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--luxury-gold),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+/* --- Visual Response Surface --- */
+.display-surface {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  padding: 3rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+}
+
+.display-surface .value {
+  font-family: var(--font-serif);
+  color: var(--luxury-gold);
+  font-size: 1.8rem;
+  display: block;
+  margin-top: 0.5rem;
+}

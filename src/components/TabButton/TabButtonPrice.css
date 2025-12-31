@@ -1,0 +1,324 @@
+/* =========================================================
+   REFINED INTERACTION SUITE - PREMIUM DESIGN
+   Este bloque define un sistema visual elegante y premium
+   para secciones específicas de React
+   Targets:
+   - #reactExamples
+   - #reactExamples2
+   - #ReactExamplesStockDefinition
+   ========================================================= */
+
+/* ---------------- VARIABLES GLOBALES ---------------- */
+:root {
+  /* Color dorado de lujo (acentos, hover, activos) */
+  --luxury-gold: #c5a059;
+
+  /* Color plateado elegante para textos principales */
+  --luxury-silver: #e0e0e0;
+
+  /* Fondo negro profundo para secciones */
+  --bg-deep: #050505;
+
+  /* Fondo de superficie (cards, contenedores) */
+  --bg-surface: #0a0a0a;
+
+  /* Bordes tipo cristal (glassmorphism) */
+  --border-glass: rgba(255, 255, 255, 0.08);
+
+  /* Brillo dorado suave para hover */
+  --accent-glow: rgba(197, 160, 89, 0.15);
+
+  /* Fuente serif elegante (lujo, autos, moda) */
+  --font-serif: "Playfair Display", serif;
+
+  /* Curva de animación premium (suave y natural) */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------------- TÍTULOS DE SECCIÓN (H2) ---------------- */
+#reactExamples h2,
+#reactExamples2 h2,
+#ReactExamplesStockDefinition h2 {
+
+  /* Centra el texto horizontalmente */
+  text-align: center;
+
+  /* Fuente elegante tipo editorial */
+  font-family: var(--font-serif);
+
+  /* Tamaño grande pero refinado */
+  font-size: 2.2rem;
+
+  /* Peso ligero para sensación premium */
+  font-weight: 300;
+
+  /* Espaciado entre letras para look luxury */
+  letter-spacing: 0.15em;
+
+  /* Todo en mayúsculas */
+  text-transform: uppercase;
+
+  /* Separación inferior del contenido */
+  margin-bottom: 4rem;
+
+  /* Color plateado suave */
+  color: var(--luxury-silver);
+
+  /* Necesario para pseudo-elementos (::after) */
+  position: relative;
+
+  /* Transición suave en interacciones */
+  transition: var(--transition-smooth);
+}
+
+/* ---------------- LÍNEA DECORATIVA BAJO EL H2 ---------------- */
+#reactExamples h2::after,
+#reactExamples2 h2::after,
+#ReactExamplesStockDefinition h2::after {
+
+  /* Elemento vacío decorativo */
+  content: "";
+
+  /* Se comporta como bloque */
+  display: block;
+
+  /* Ancho inicial de la línea */
+  width: 50px;
+
+  /* Grosor fino */
+  height: 1px;
+
+  /* Centrado horizontal */
+  margin: 1.5rem auto 0;
+
+  /* Color dorado */
+  background: var(--luxury-gold);
+
+  /* Animación suave al cambiar ancho */
+  transition: width 0.6s var(--ease-premium);
+}
+
+/* ---------------- ANIMACIÓN AL PASAR EL MOUSE ---------------- */
+#reactExamples h2:hover::after,
+#reactExamples2 h2:hover::after,
+#ReactExamplesStockDefinition h2:hover::after {
+
+  /* La línea se alarga elegantemente */
+  width: 100px;
+}
+
+/* ---------------- MENÚ DE NAVEGACIÓN ---------------- */
+#reactExamples menu,
+#reactExamples2 menu,
+#ReactExamplesStockDefinition menu {
+
+  /* Flexbox para alinear botones */
+  display: flex;
+
+  /* Centra horizontalmente */
+  justify-content: center;
+
+  /* Permite salto de línea si no caben */
+  flex-wrap: wrap;
+
+  /* Espacio entre botones */
+  gap: 1.2rem;
+
+  /* Ancho adaptable */
+  width: 95%;
+  max-width: 1200px;
+
+  /* Centrado y separación inferior */
+  margin: 0 auto 3.5rem;
+
+  /* Elimina padding por defecto */
+  padding: 0;
+
+  /* Elimina viñetas */
+  list-style: none;
+}
+
+/* ---------------- BOTONES PREMIUM ---------------- */
+#reactExamples button,
+#reactExamples2 button,
+#ReactExamplesStockDefinition button {
+
+  /* Espaciado interno elegante */
+  padding: 0.8rem 1.8rem;
+
+  /* Texto pequeño tipo UI premium */
+  font-size: 0.75rem;
+
+  /* Peso normal */
+  font-weight: 400;
+
+  /* Texto en mayúsculas */
+  text-transform: uppercase;
+
+  /* Espaciado amplio entre letras */
+  letter-spacing: 0.2em;
+
+  /* Fondo transparente */
+  background: transparent;
+
+  /* Texto plateado */
+  color: var(--luxury-silver);
+
+  /* Borde sutil tipo cristal */
+  border: 1px solid var(--border-glass);
+
+  /* Bordes rectos (arquitectónico) */
+  border-radius: 0;
+
+  /* Cursor de interacción */
+  cursor: pointer;
+
+  /* Necesario para efectos internos */
+  position: relative;
+
+  /* Transiciones suaves */
+  transition: all 0.5s var(--ease-premium);
+
+  /* Oculta efectos que se salgan */
+  overflow: hidden;
+}
+
+/* ---------------- EFECTO DE BRILLO DESLIZANTE ---------------- */
+#reactExamples button::before,
+#reactExamples2 button::before,
+#ReactExamplesStockDefinition button::before {
+
+  content: "";
+  position: absolute;
+
+  /* Inicia fuera del botón */
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  /* Gradiente tipo reflejo */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+
+  transition: 0.5s;
+}
+
+/* ---------------- HOVER DEL BOTÓN ---------------- */
+#reactExamples button:hover,
+#reactExamples2 button:hover,
+#ReactExamplesStockDefinition button:hover {
+
+  /* Borde dorado */
+  border-color: var(--luxury-gold);
+
+  /* Texto dorado */
+  color: var(--luxury-gold);
+
+  /* Fondo con brillo suave */
+  background: var(--accent-glow);
+
+  /* Elevación visual */
+  transform: translateY(-2px);
+
+  /* Sombra profunda */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Movimiento del brillo */
+#reactExamples button:hover::before,
+#reactExamples2 button:hover::before,
+#ReactExamplesStockDefinition button:hover::before {
+  left: 100%;
+}
+
+/* ---------------- BOTÓN ACTIVO ---------------- */
+#reactExamples button.active,
+#reactExamples2 button.active,
+#ReactExamplesStockDefinition button.active {
+
+  /* Fondo dorado sólido */
+  background: var(--luxury-gold);
+
+  /* Borde dorado */
+  border-color: var(--luxury-gold);
+
+  /* Texto negro para contraste */
+  color: #000;
+
+  /* Texto más fuerte */
+  font-weight: 600;
+}
+
+/* ---------------- DIVISOR ENTRE SECCIONES ---------------- */
+section + section::before {
+
+  content: "";
+  display: block;
+
+  /* Línea vertical */
+  width: 1px;
+  height: 100px;
+
+  /* Centrada */
+  margin: 4rem auto;
+
+  /* Degradado vertical elegante */
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--luxury-gold),
+    transparent
+  );
+
+  opacity: 0.3;
+}
+
+/* ---------------- CONTENEDOR DE RESPUESTA VISUAL ---------------- */
+.display-surface {
+
+  /* Fondo oscuro */
+  background: var(--bg-surface);
+
+  /* Borde tipo cristal */
+  border: 1px solid var(--border-glass);
+
+  /* Espaciado interno amplio */
+  padding: 3rem;
+
+  /* Texto centrado */
+  text-align: center;
+
+  /* Ancho máximo */
+  max-width: 800px;
+
+  /* Centrado horizontal */
+  margin: 0 auto;
+
+  /* Efecto blur detrás */
+  backdrop-filter: blur(10px);
+}
+
+/* ---------------- VALOR DESTACADO ---------------- */
+.display-surface .value {
+
+  /* Fuente elegante */
+  font-family: var(--font-serif);
+
+  /* Color dorado */
+  color: var(--luxury-gold);
+
+  /* Tamaño grande */
+  font-size: 1.8rem;
+
+  /* Comportamiento de bloque */
+  display: block;
+
+  /* Separación superior */
+  margin-top: 0.5rem;
+}

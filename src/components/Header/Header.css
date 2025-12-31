@@ -1,0 +1,308 @@
+/* =========================================================
+   HEADER.CSS
+   Archivo que controla el diseño visual del Header
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   :root
+   ---------------------------------------------------------
+   :root es el "nivel más alto" del documento.
+   Aquí se definen VARIABLES CSS reutilizables en todo el proyecto.
+   Sirve para:
+   - Mantener consistencia visual
+   - Cambiar colores / fuentes en un solo lugar
+----------------------------------------------------------*/
+:root {
+  /* Color de fondo del header.
+     Transparent significa que NO tiene color propio
+     y deja ver el fondo que haya detrás */
+  --header-bg: transparent;
+
+  /* Color principal del texto (blanco puro) */
+  --text-primary: #ffffff;
+
+  /* Color de texto secundario (más apagado) */
+  --text-muted: #888888;
+
+  /* Color dorado de acento (lujo / premium) */
+  --accent-gold: #c5a059;
+
+  /* Fuente elegante (serif = con remates) para títulos */
+  --font-serif: "Playfair Display", serif;
+
+  /* Fuente moderna (sans-serif) para textos pequeños */
+  --font-sans: "Inter", sans-serif;
+
+  /* Gradiente de lujo usado en el título */
+  --gradient-luxury: linear-gradient(
+    135deg,
+    #e0e0e0 0%,
+    #ffffff 25%,
+    #a6a6a6 50%,
+    #e0e0e0 75%,
+    #ffffff 100%
+  );
+
+  /* Curva de animación suave tipo “premium” */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* ---------------------------------------------------------
+   .header__root
+   ---------------------------------------------------------
+   Contenedor PRINCIPAL del header
+----------------------------------------------------------*/
+.header__root {
+  /* position: relative permite posicionar hijos
+     con position: absolute dentro de este contenedor */
+  position: relative;
+
+  /* Flexbox para centrar contenido */
+  display: flex;
+  justify-content: center; /* centra horizontal */
+  align-items: center;     /* centra vertical */
+
+  /* Espaciado interno:
+     arriba 8rem, lados 2rem, abajo 6rem */
+  padding: 8rem 2rem 6rem;
+
+  /* Fondo del header (viene de la variable) */
+  background-color: var(--header-bg);
+
+  /* overflow: hidden
+     OCULTA cualquier cosa que se salga del header
+     (brillos, animaciones, sombras grandes) */
+  overflow: hidden;
+
+  /* z-index controla la profundidad (qué va encima de qué) */
+  z-index: 10;
+}
+
+
+/* ---------------------------------------------------------
+   .header__content
+   ---------------------------------------------------------
+   Contenedor interno que limita el ancho
+----------------------------------------------------------*/
+.header__content {
+  display: flex;
+  flex-direction: column; /* elementos uno debajo del otro */
+  align-items: center;
+  text-align: center;
+
+  /* Limita el ancho máximo para no verse gigante */
+  max-width: 900px;
+  width: 100%;
+
+  position: relative;
+  z-index: 2; /* encima de efectos decorativos */
+}
+
+
+/* =========================================================
+   EMBLEM / LOGO
+   ========================================================= */
+
+/* Contenedor del logo */
+.header__emblem-wrapper {
+  position: relative;
+
+  /* margen inferior grande para separar del texto */
+  margin: 0 0 3rem 0;
+
+  width: 100px;
+  height: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Animación de entrada desde arriba */
+  animation: fadeDescend 1.5s var(--ease-out-expo) forwards;
+}
+
+
+/* Imagen del logo */
+.header__emblem {
+  width: 100%;
+  height: auto;
+
+  /* Mantiene proporción sin deformar */
+  object-fit: contain;
+
+  /* Sombra suave tipo brillo */
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+
+  opacity: 0.9;
+
+  /* Transición suave al hacer hover */
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+/* Efecto hover del logo */
+.header__emblem-wrapper:hover .header__emblem {
+  transform: scale(1.05); /* crece un poco */
+  opacity: 1;
+}
+
+
+/* Brillo decorativo detrás del logo */
+.header__emblem-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  /* Centra perfectamente */
+  transform: translate(-50%, -50%);
+
+  width: 140%;
+  height: 140%;
+
+  /* Gradiente radial = brillo circular */
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.08) 0%,
+    transparent 70%
+  );
+
+  /* No interfiere con el mouse */
+  pointer-events: none;
+
+  z-index: -1; /* queda detrás */
+}
+
+
+/* =========================================================
+   TEXTO / TIPOGRAFÍA
+   ========================================================= */
+
+.header__typography {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Animación de entrada desde abajo */
+  animation: fadeUp 1.5s var(--ease-out-expo) 0.2s forwards;
+
+  /* Empieza invisible */
+  opacity: 0;
+}
+
+
+/* TÍTULO PRINCIPAL */
+.header__title {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 400;
+
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+
+  /* Texto con gradiente */
+  background: var(--gradient-luxury);
+  background-size: 200% auto;
+
+  /* Truco para que el gradiente sea visible en texto */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Animación de brillo continuo */
+  animation: shimmer 8s linear infinite;
+}
+
+
+/* Línea decorativa debajo del título */
+.header__separator {
+  width: 60px;
+  height: 1px;
+
+  background-color: var(--accent-gold);
+
+  margin: 2rem 0;
+  opacity: 0.6;
+}
+
+
+/* Subtítulo */
+.header__subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+
+  color: var(--text-muted);
+  margin: 0;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+
+/* Baja suavemente desde arriba */
+@keyframes fadeDescend {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sube suavemente desde abajo */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Movimiento continuo del gradiente */
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE (MÓVILES)
+   ========================================================= */
+@media (max-width: 768px) {
+
+  .header__root {
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .header__title {
+    font-size: 2.5rem;
+  }
+
+  .header__emblem-wrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 2rem;
+  }
+
+  .header__separator {
+    margin: 1.5rem 0;
+  }
+
+  .header__subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    line-height: 1.6;
+  }
+}

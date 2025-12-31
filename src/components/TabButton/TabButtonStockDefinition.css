@@ -1,0 +1,138 @@
+/* =======================
+   TÍTULO PRINCIPAL (H2)
+======================= */
+#ReactExamplesStockDefinition h2 {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  line-height: 1.3;
+
+  /* Gradiente premium */
+  background: linear-gradient(
+    90deg,
+    #9f7aea,
+    #7c7cff,
+    #4338ca
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  margin-bottom: 3rem;
+  position: relative;
+  transition: transform 0.35s ease, text-shadow 0.35s ease;
+}
+
+/* Línea decorativa refinada */
+#ReactExamplesStockDefinition h2::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 4px;
+  margin: 14px auto 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(124,124,255,0.2),
+    rgba(124,124,255,0.9),
+    rgba(124,124,255,0.2)
+  );
+
+  border-radius: 6px;
+}
+
+/* Hover suave y elegante */
+#ReactExamplesStockDefinition h2:hover {
+  transform: translateY(-3px);
+  text-shadow: 0 8px 25px rgba(124,124,255,0.45);
+}
+
+
+/* =======================
+   MENÚ DE BOTONES
+======================= */
+#ReactExamplesStockDefinition menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+
+  width: 90%;
+  margin: 3rem auto 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+
+/* =======================
+   BOTONES
+======================= */
+#ReactExamplesStockDefinition button {
+  padding: 0.75rem 1.6rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  border-radius: 999px; /* estilo pill */
+  border: 1px solid rgba(124,124,255,0.15);
+
+  background: linear-gradient(
+    145deg,
+    #12001f,
+    #1a0833
+  );
+
+  color: var(--text-main);
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border 0.3s ease;
+}
+
+/* Hover PRO */
+#ReactExamplesStockDefinition button:hover {
+  background: linear-gradient(
+    145deg,
+    #4338ca,
+    #7c7cff
+  );
+
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(124,124,255,0.45);
+  border: 1px solid rgba(124,124,255,0.5);
+}
+
+/* Activo (pensado para useState) */
+#ReactExamplesStockDefinition button.active {
+  background: linear-gradient(
+    145deg,
+    #7c7cff,
+    #9f7aea
+  );
+
+  color: #0b0614;
+  box-shadow: 0 12px 35px rgba(159,122,234,0.6);
+}
+
+
+/* =======================
+   SEPARADOR ENTRE SECCIONES
+======================= */
+section::after {
+  content: "";
+  display: block;
+
+  width: 65%;
+  height: 1px;
+  margin: 4rem auto 0;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(124,124,255,0.5),
+    transparent
+  );
+}
