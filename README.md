@@ -1,1 +1,1 @@
-Mi primer repositorio, dedicado al desarrollo de una página web creada con JavaScript, HTML, CSS y React
+Plataforma interactiva de exhibición de vehículos de lujo desarrollada con React 18, enfocada en optimización de estados y diseño responsivo
