@@ -1,1 +1,13 @@
-Plataforma interactiva de exhibición de vehículos de lujo desarrollada con React 18, enfocada en optimización de estados y diseño responsivo
+# Francis-Luxor-Motors
+
+Proyecto desarrollado como parte del aprendizaje de los fundamentos de React.
+
+## Tecnologías utilizadas
+- React
+- JavaScript
+- HTML
+- CSS
+- Vite / Create React App
+
+## Autor
+Francis Mateo Jimenez
