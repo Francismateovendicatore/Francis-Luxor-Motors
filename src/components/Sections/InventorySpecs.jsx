@@ -2,24 +2,26 @@
    IMPORTACIONES
    ====================================================== */
 
-// Importamos el Hook useState desde React
-// useState nos permite manejar estado interno dentro
-// de un componente funcional
+// useState es un Hook de React
+// Sirve para guardar datos que pueden cambiar
+// y hacer que el componente se vuelva a dibujar
 import { useState } from "react";
 
-// Importamos el componente TabButton
-// Este componente representa cada botón del menú
-// y encapsula su propio diseño y comportamiento visual
+// TabButton es un componente reutilizable
+// Representa cada botón del menú (tab)
 import TabButton from "../TabButton/TabButton";
 
 /* ======================================================
-   FUENTE DE DATOS (DATA-DRIVEN DESIGN)
+   DATOS DEL INVENTARIO (DATA-DRIVEN)
    ====================================================== */
 
-// Objeto que contiene toda la información del inventario
-// Cada clave representa un vehículo (ID único)
-// Esto separa los DATOS de la LÓGICA y la VISTA
-// Buena práctica profesional
+// Aquí guardamos TODA la información de los vehículos
+// ❌ No es lógica
+// ❌ No es diseño
+// ✅ Solo datos
+//
+// Cada clave es un ID único
+// Esto hace el código más ordenado y profesional
 const INVENTORY_DATA = {
   chiron: {
     title: "5 Units Available",
@@ -73,50 +75,45 @@ const INVENTORY_DATA = {
 
 export default function InventorySpecs() {
   /* --------------------------------------------------
-     ESTADO LOCAL DEL COMPONENTE
+     ESTADO
      --------------------------------------------------
 
      selectedId:
      - Guarda el ID del vehículo seleccionado
-     - null significa que aún no hay selección
-     - Usamos IDs en lugar de texto para evitar errores
-       y mejorar escalabilidad
+     - Empieza en null (no hay selección)
+     - Cuando cambia, React vuelve a renderizar
   */
   const [selectedId, setSelectedId] = useState(null);
 
   /* --------------------------------------------------
-     DATOS DERIVADOS DEL ESTADO
+     DATO DERIVADO
      --------------------------------------------------
 
      selectedItem:
-     - Si hay un ID seleccionado, buscamos el objeto
-       correspondiente dentro de INVENTORY_DATA
-     - Si no hay selección, el valor es null
-     - Esto evita lógica compleja dentro del JSX
+     - Si hay un ID seleccionado
+       buscamos ese vehículo en INVENTORY_DATA
+     - Si no hay selección, vale null
+     - Esto evita escribir lógica dentro del JSX
   */
   const selectedItem = selectedId ? INVENTORY_DATA[selectedId] : null;
 
   return (
     /* ==================================================
-       SECCIÓN PRINCIPAL
+       CONTENEDOR PRINCIPAL
        ================================================== */
-
     <section id="inventory-specs" className="interaction-panel">
-      {/* Título principal de la sección */}
+      {/* Título del bloque */}
       <h2 className="panel-title">Inventory & Specifications</h2>
 
       {/* ==================================================
-         CONTENEDOR DE BOTONES (TABS)
+         MENÚ DE BOTONES
          ================================================== */}
-
       <div className="purple-theme">
-        {/* menu se usa como contenedor semántico
-            para un grupo de opciones */}
+        {/* menu agrupa opciones relacionadas */}
         <menu className="tab-bar">
           {/* Cada TabButton:
-              - Marca si está seleccionado
+              - Comprueba si está activo
               - Cambia el estado al hacer clic
-              - No maneja datos, solo interacción
           */}
 
           <TabButton
@@ -185,23 +182,15 @@ export default function InventorySpecs() {
       </div>
 
       {/* ==================================================
-         ÁREA DE VISUALIZACIÓN DE CONTENIDO
+         ZONA DE CONTENIDO
          ================================================== */}
-
       <div className="display-surface">
-        {/* Renderizado condicional:
-            - Si hay selección → mostramos datos
-            - Si no → mensaje de espera
-        */}
+        {/* Si hay selección mostramos info
+            Si no, mostramos mensaje */}
         {selectedItem ? (
           <div className="fade-in">
-            {/* Etiqueta informativa */}
             <span className="label">Inventory Status</span>
-
-            {/* Título dinámico */}
             <h3 className="inventory-title">{selectedItem.title}</h3>
-
-            {/* Descripción dinámica */}
             <p className="value-text">{selectedItem.description}</p>
           </div>
         ) : (

@@ -2,58 +2,65 @@
    IMPORTACIONES
    ====================================================== */
 
-// Importamos el hook useState desde React
-// useState permite que un componente funcional
-// mantenga y controle su propio estado interno
+// Importamos el hook useState desde React.
+// useState permite que el componente:
+// - tenga estado propio
+// - reaccione a interacciones del usuario
+// - se re-renderice automáticamente
 import { useState } from "react";
 
-// Importamos el componente TabButton
-// Este componente representa cada botón de selección
-// y encapsula:
-// - estilos
-// - eventos
-// - estado visual (activo / inactivo)
+// Importamos el componente TabButton.
+// Representa una pestaña individual:
+// - NO guarda estado
+// - recibe props
+// - ejecuta eventos
 import TabButton from "../TabButton/TabButton";
+
+// Importamos TabsMenu.
+// TabsMenu es un componente de COMPOSICIÓN:
+// - Renderiza los botones
+// - Renderiza el contenido (children)
+// - NO tiene lógica de negocio
+import TabsMenu from "../TabsMenu/TabsMenu";
 
 /* ======================================================
    COMPONENTE: ModelConfigurator
    ======================================================
 
-   RESPONSABILIDAD DEL COMPONENTE:
-   - Permitir seleccionar un modelo de vehículo
-   - Mostrar una configuración técnica asociada
-   - Controlar todo mediante estado local
+   RESPONSABILIDAD:
+   - Permitir seleccionar un modelo
+   - Mostrar su configuración técnica
+   - Controlar todo con estado LOCAL
 
-   PATRÓN UTILIZADO:
-   Botón → Evento → Cambio de estado → Render condicional
+   PATRÓN REACT:
+   Evento → Estado → Render
 
-   Este es un patrón fundamental en React
-   y muy usado en aplicaciones reales
+   NOTA IMPORTANTE:
+   - TabsMenu solo organiza
+   - ModelConfigurator piensa
 */
 
 export default function ModelConfigurator() {
   /* --------------------------------------------------
-     ESTADO LOCAL DEL COMPONENTE
+     ESTADO LOCAL
      --------------------------------------------------
 
      selectedModel:
-     - Guarda un STRING con la descripción del modelo
-     - Inicialmente es null (no hay selección)
-     - Cuando cambia, React vuelve a renderizar
-       el componente automáticamente
+     - Guarda un STRING con la descripción
+     - Inicia en null (sin selección)
+     - Al cambiar:
+         React vuelve a ejecutar el render
   */
   const [selectedModel, setSelectedModel] = useState(null);
 
   /* --------------------------------------------------
-     FUNCIÓN MANEJADORA DE SELECCIÓN
+     FUNCIÓN MANEJADORA
      --------------------------------------------------
 
      handleSelect:
-     - Recibe una descripción (string)
-     - Actualiza el estado selectedModel
-     - Centraliza la lógica de actualización
+     - Centraliza la actualización del estado
      - Evita repetir setSelectedModel en el JSX
-     - Hace el código más limpio y profesional
+     - Hace el código más limpio y mantenible
   */
   const handleSelect = (description) => {
     setSelectedModel(description);
@@ -61,158 +68,152 @@ export default function ModelConfigurator() {
 
   return (
     /* ==================================================
-       SECCIÓN PRINCIPAL DEL CONFIGURADOR
-       ==================================================
-
-       section:
-       - Elemento semántico HTML
-       - id permite navegación, scroll o anclajes
-       - className controla el estilo visual
-    */
+       SECCIÓN PRINCIPAL
+       ================================================== */
     <section id="reactExamples" className="interaction-panel">
-      {/* Título principal de la sección */}
+      {/* Título principal */}
       <h2 className="panel-title">Bespoke Configurator</h2>
 
-      {/* ==================================================
-         CONTENEDOR DE BOTONES
-         ==================================================
-
-         gold-theme:
-         - Solo controla la estética (CSS)
-         - No tiene lógica de negocio
-      */}
+      {/* Contenedor visual (solo CSS, cero lógica) */}
       <div className="gold-theme">
-        {/* menu:
-            - Contenedor semántico para opciones
-            - Agrupa botones relacionados
+        {/* ==================================================
+           TABS MENU
+           ==================================================
+
+           TabsMenu:
+           - NO sabe qué botones hay
+           - NO sabe qué muestran
+           - SOLO renderiza estructura
         */}
-        <menu className="tab-bar">
+        <TabsMenu
+          /* ----------------------------------------------
+             CONTENEDOR DE BOTONES
+             ----------------------------------------------
+             Usamos <menu> por semántica
+          */
+          ButtonsContainer="menu"
+          /* ----------------------------------------------
+             BOTONES (PROPS)
+             ----------------------------------------------
+             Enviamos todos los TabButton como JSX
+          */
+          buttons={
+            <>
+              <TabButton
+                // Activo si el texto contiene "BUGATTI"
+                isSelected={selectedModel?.includes("BUGATTI")}
+                // Al hacer click:
+                // → actualizamos el estado
+                onSelect={() =>
+                  handleSelect(
+                    "BUGATTI CHIRON: Active aerodynamics, ECU performance optimization, bespoke luxury interior."
+                  )
+                }
+              >
+                Bugatti Chiron
+              </TabButton>
+
+              <TabButton
+                isSelected={selectedModel?.includes("FERRARI")}
+                onSelect={() =>
+                  handleSelect(
+                    "FERRARI ROMA: Valved performance exhaust, adaptive lowered suspension, carbon driver package."
+                  )
+                }
+              >
+                Ferrari Roma
+              </TabButton>
+
+              <TabButton
+                isSelected={selectedModel?.includes("PAGANI")}
+                onSelect={() =>
+                  handleSelect(
+                    "PAGANI HUAYRA: Track-focused active aero, titanium exhaust system, bespoke atelier interior."
+                  )
+                }
+              >
+                Pagani Huayra
+              </TabButton>
+
+              <TabButton
+                isSelected={selectedModel?.includes("ROLLS")}
+                onSelect={() =>
+                  handleSelect(
+                    "ROLLS-ROYCE: Custom starlight headliner, Black Badge performance tuning, full bespoke leather."
+                  )
+                }
+              >
+                Rolls Royce
+              </TabButton>
+
+              <TabButton
+                isSelected={selectedModel?.includes("TOYOTA")}
+                onSelect={() =>
+                  handleSelect(
+                    "TOYOTA SUPRA MK5: Stage 2 turbo upgrade, adjustable coilovers, widebody aerodynamic kit."
+                  )
+                }
+              >
+                Toyota Supra MK5
+              </TabButton>
+
+              <TabButton
+                isSelected={selectedModel?.includes("KOENIGSEGG")}
+                onSelect={() =>
+                  handleSelect(
+                    "KOENIGSEGG REGERA: Hybrid power optimization, advanced weight reduction, high-speed aero package."
+                  )
+                }
+              >
+                Koenigsegg Regera
+              </TabButton>
+
+              <TabButton
+                isSelected={selectedModel?.includes("LAMBORGHINI")}
+                onSelect={() =>
+                  handleSelect(
+                    "LAMBORGHINI VENENO: Track-optimized aero, Inconel F1 exhaust, race-focused Alcantara interior."
+                  )
+                }
+              >
+                Lamborghini Veneno
+              </TabButton>
+
+              <TabButton
+                isSelected={selectedModel?.includes("ASTON")}
+                onSelect={() =>
+                  handleSelect(
+                    "ASTON MARTIN VALKYRIE: Motorsport suspension tuning, hybrid performance boost, minimalist carbon interior."
+                  )
+                }
+              >
+                Aston Martin Valkyrie
+              </TabButton>
+            </>
+          }
+        >
           {/* ==================================================
-             TAB BUTTONS
+             CHILDREN (CONTENIDO)
              ==================================================
 
-             Cada TabButton:
-             - Evalúa si está activo con isSelected
-             - Ejecuta una acción al hacer click
-             - No guarda estado propio
-             - Solo notifica al componente padre
+             children es el área que TabsMenu
+             renderiza debajo de los botones
           */}
+          <div className="display-surface">
+            {selectedModel ? (
+              <div className="fade-in">
+                {/* Etiqueta descriptiva */}
+                <span className="label">Configuration Blueprint</span>
 
-          <TabButton
-            // Determina si este botón está seleccionado
-            // Se basa en si el texto actual contiene "BUGATTI"
-            isSelected={selectedModel?.includes("BUGATTI")}
-            // Al hacer clic:
-            // - Se llama a handleSelect
-            // - Se actualiza el estado con la configuración
-            onSelect={() =>
-              handleSelect(
-                "BUGATTI CHIRON: Active aerodynamics, ECU performance optimization, bespoke luxury interior."
-              )
-            }
-          >
-            Bugatti Chiron
-          </TabButton>
-
-          <TabButton
-            isSelected={selectedModel?.includes("FERRARI")}
-            onSelect={() =>
-              handleSelect(
-                "FERRARI ROMA: Valved performance exhaust, adaptive lowered suspension, carbon driver package."
-              )
-            }
-          >
-            Ferrari Roma
-          </TabButton>
-
-          <TabButton
-            isSelected={selectedModel?.includes("PAGANI")}
-            onSelect={() =>
-              handleSelect(
-                "PAGANI HUAYRA: Track-focused active aero, titanium exhaust system, bespoke atelier interior."
-              )
-            }
-          >
-            Pagani Huayra
-          </TabButton>
-
-          <TabButton
-            isSelected={selectedModel?.includes("ROLLS")}
-            onSelect={() =>
-              handleSelect(
-                "ROLLS-ROYCE: Custom starlight headliner, Black Badge performance tuning, full bespoke leather."
-              )
-            }
-          >
-            Rolls Royce
-          </TabButton>
-
-          <TabButton
-            isSelected={selectedModel?.includes("TOYOTA")}
-            onSelect={() =>
-              handleSelect(
-                "TOYOTA SUPRA MK5: Stage 2 turbo upgrade, adjustable coilovers, widebody aerodynamic kit."
-              )
-            }
-          >
-            Toyota Supra MK5
-          </TabButton>
-
-          <TabButton
-            isSelected={selectedModel?.includes("KOENIGSEGG")}
-            onSelect={() =>
-              handleSelect(
-                "KOENIGSEGG REGERA: Hybrid power optimization, advanced weight reduction, high-speed aero package."
-              )
-            }
-          >
-            Koenigsegg Regera
-          </TabButton>
-
-          <TabButton
-            isSelected={selectedModel?.includes("LAMBORGHINI")}
-            onSelect={() =>
-              handleSelect(
-                "LAMBORGHINI VENENO: Track-optimized aero, Inconel F1 exhaust, race-focused Alcantara interior."
-              )
-            }
-          >
-            Lamborghini Veneno
-          </TabButton>
-
-          <TabButton
-            isSelected={selectedModel?.includes("ASTON")}
-            onSelect={() =>
-              handleSelect(
-                "ASTON MARTIN VALKYRIE: Motorsport suspension tuning, hybrid performance boost, minimalist carbon interior."
-              )
-            }
-          >
-            Aston Martin Valkyrie
-          </TabButton>
-        </menu>
-      </div>
-
-      {/* ==================================================
-         ÁREA DE RESULTADO / VISUALIZACIÓN
-         ==================================================
-
-         Renderizado condicional:
-         - Si hay un modelo seleccionado → mostrar datos
-         - Si no → mostrar mensaje de espera
-      */}
-      <div className="display-surface">
-        {selectedModel ? (
-          <div className="fade-in">
-            {/* Etiqueta descriptiva */}
-            <span className="label">Configuration Blueprint</span>
-
-            {/* Texto dinámico basado en el estado */}
-            <span className="value">{selectedModel}</span>
+                {/* Texto dinámico */}
+                <span className="value">{selectedModel}</span>
+              </div>
+            ) : (
+              // Mensaje por defecto
+              <span className="placeholder">Initiate Model Selection</span>
+            )}
           </div>
-        ) : (
-          <span className="placeholder">Initiate Model Selection</span>
-        )}
+        </TabsMenu>
       </div>
     </section>
   );
