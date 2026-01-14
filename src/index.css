@@ -1,0 +1,313 @@
+/* =========================================================
+   App.css - Estilos Globales Premium
+   Este archivo define la identidad visual completa
+   de la aplicación (colores, tipografía, layout, animaciones)
+   ========================================================= */
+
+/* ---------------- VARIABLES GLOBALES (CSS VARIABLES) ---------------- */
+:root {
+  /* Color de fondo principal (negro profundo) */
+  --bg-dark: #050505;
+
+  /* Color de paneles secundarios */
+  --bg-panel: #0a0a0a;
+
+  /* Color acento principal (dorado elegante) */
+  --accent-gold: #c5a059;
+
+  /* Texto principal (blanco) */
+  --text-primary: #ffffff;
+
+  /* Texto secundario (gris claro) */
+  --text-secondary: #a1a1a1;
+
+  /* Texto tenue / desactivado */
+  --text-muted: #555555;
+
+  /* Efecto cristal (glassmorphism) */
+  --glass: rgba(255, 255, 255, 0.03);
+
+  /* Bordes sutiles */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Tipografía principal (sans-serif moderna) */
+  --font-sans: "Inter", "Helvetica Neue", sans-serif;
+
+  /* Tipografía secundaria (serif elegante) */
+  --font-serif: "Playfair Display", serif;
+}
+
+/* ---------------- ESTILOS BASE DEL BODY ---------------- */
+body {
+  /* Elimina márgenes por defecto del navegador */
+  margin: 0;
+
+  /* Fondo general de la aplicación */
+  background-color: var(--bg-dark);
+
+  /* Color base del texto */
+  color: var(--text-primary);
+
+  /* Fuente principal */
+  font-family: var(--font-sans);
+
+  /* Mejora el renderizado de fuentes */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------- CONTENEDOR PRINCIPAL ---------------- */
+.app-container {
+  /* Altura mínima igual a la ventana */
+  min-height: 100vh;
+
+  /* Flexbox para estructura vertical */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- TÍTULOS GENERALES ---------------- */
+.section-title,
+.panel-title {
+  /* Centra el texto */
+  text-align: center;
+
+  /* Texto en mayúsculas */
+  text-transform: uppercase;
+
+  /* Espaciado entre letras (estilo lujo) */
+  letter-spacing: 0.25em;
+
+  /* Fuente delgada */
+  font-weight: 300;
+
+  /* Separación inferior */
+  margin-bottom: 3rem;
+
+  /* Color dorado */
+  color: var(--accent-gold);
+
+  /* Tamaño moderado */
+  font-size: 1.2rem;
+
+  /* Fuente moderna */
+  font-family: var(--font-sans);
+}
+
+/* ---------------- SECCIÓN PRINCIPAL DE TARJETAS ---------------- */
+.section-showcase {
+  /* Fondo oscuro */
+  background-color: var(--bg-dark);
+
+  /* Espaciado interno grande */
+  padding: 6rem 2rem;
+
+  /* Ancho máximo para pantallas grandes */
+  max-width: 1600px;
+
+  /* Centrado horizontal */
+  margin: 0 auto;
+}
+
+/* ---------------- GRID DE TARJETAS ---------------- */
+.cards-container {
+  /* Layout tipo grid */
+  display: grid;
+
+  /* Columnas automáticas responsivas */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+
+  /* Espacio entre tarjetas */
+  gap: 2.5rem;
+
+  /* Padding lateral */
+  padding: 0 1rem;
+}
+
+/* ---------------- CONTENEDOR DE INTERACCIONES ---------------- */
+.interaction-suite {
+  /* Layout vertical */
+  display: flex;
+  flex-direction: column;
+
+  /* Espacio entre secciones */
+  gap: 8rem;
+
+  /* Padding general */
+  padding: 6rem 10%;
+
+  /* Gradiente suave de fondo */
+  background: linear-gradient(to bottom, var(--bg-dark), #080808);
+
+  /* Línea superior divisoria */
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ---------------- PANEL INDIVIDUAL ---------------- */
+.interaction-panel {
+  /* Flex vertical */
+  display: flex;
+  flex-direction: column;
+
+  /* Centrado horizontal */
+  align-items: center;
+}
+
+/* ---------------- BARRA DE BOTONES (MENÚ) ---------------- */
+.tab-bar {
+  /* Flexbox */
+  display: flex;
+
+  /* Centra los botones */
+  justify-content: center;
+
+  /* Permite salto de línea */
+  flex-wrap: wrap;
+
+  /* Espacio entre botones */
+  gap: 0.8rem;
+
+  /* Separación inferior */
+  margin-bottom: 3rem;
+
+  /* Elimina padding por defecto */
+  padding: 0;
+
+  /* Elimina viñetas */
+  list-style: none;
+}
+
+/* ---------------- ESTILOS BASE DE BOTONES ---------------- */
+button {
+  /* Fondo transparente */
+  background: transparent;
+
+  /* Borde sutil */
+  border: 1px solid var(--border-subtle);
+
+  /* Color del texto */
+  color: var(--text-secondary);
+
+  /* Espaciado interno */
+  padding: 0.8rem 1.5rem;
+
+  /* Fuente moderna */
+  font-family: var(--font-sans);
+
+  /* Tamaño pequeño */
+  font-size: 0.75rem;
+
+  /* Mayúsculas */
+  text-transform: uppercase;
+
+  /* Espaciado entre letras */
+  letter-spacing: 0.1em;
+
+  /* Cursor de interacción */
+  cursor: pointer;
+
+  /* Transición suave */
+  transition: all 0.4s ease;
+}
+
+/* ---------------- BOTÓN HOVER / FOCUS ---------------- */
+button:hover,
+button:focus {
+  /* Borde dorado */
+  border-color: var(--accent-gold);
+
+  /* Texto dorado */
+  color: var(--accent-gold);
+
+  /* Fondo sutil dorado */
+  background: rgba(197, 160, 89, 0.05);
+}
+
+/* ---------------- PANEL DE RESULTADOS ---------------- */
+.display-surface {
+  /* Fondo tipo cristal */
+  background: var(--glass);
+
+  /* Borde fino */
+  border: 1px solid var(--border-subtle);
+
+  /* Espaciado interno */
+  padding: 3rem 4rem;
+
+  /* Texto centrado */
+  text-align: center;
+
+  /* Desenfoque del fondo */
+  backdrop-filter: blur(20px);
+
+  /* Ancho máximo */
+  width: 100%;
+  max-width: 700px;
+
+  /* Altura mínima */
+  min-height: 120px;
+
+  /* Flex centrado */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Sombra profunda */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* ---------------- ETIQUETA SUPERIOR ---------------- */
+.label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+/* ---------------- VALOR DESTACADO ---------------- */
+.value {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+/* ---------------- TEXTO DESCRIPTIVO ---------------- */
+.value-text {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 90%;
+}
+
+/* ---------------- TEXTO DE ESPERA ---------------- */
+.placeholder {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ---------------- ANIMACIÓN DE ENTRADA ---------------- */
+.fade-in {
+  /* Aplica animación personalizada */
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Definición de la animación */
+@keyframes fadeInUp {
+  /* Estado inicial */
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  /* Estado final */
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
