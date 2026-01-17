@@ -1,109 +1,38 @@
-/* ======================================================
-   IMPORTACIONES
-   ====================================================== */
-
-// Importamos el hook useState desde React.
-// useState permite que el componente:
-// - tenga estado propio
-// - reaccione a interacciones del usuario
-// - se re-renderice automáticamente
 import { useState } from "react";
-
-// Importamos el componente TabButton.
-// Representa una pestaña individual:
-// - NO guarda estado
-// - recibe props
-// - ejecuta eventos
 import TabButton from "../TabButton/TabButton";
-
-// Importamos TabsMenu.
-// TabsMenu es un componente de COMPOSICIÓN:
-// - Renderiza los botones
-// - Renderiza el contenido (children)
-// - NO tiene lógica de negocio
 import TabsMenu from "../TabsMenu/TabsMenu";
-
-/* ======================================================
-   COMPONENTE: ModelConfigurator
-   ======================================================
-
-   RESPONSABILIDAD:
-   - Permitir seleccionar un modelo
-   - Mostrar su configuración técnica
-   - Controlar todo con estado LOCAL
-
-   PATRÓN REACT:
-   Evento → Estado → Render
-
-   NOTA IMPORTANTE:
-   - TabsMenu solo organiza
-   - ModelConfigurator piensa
-*/
+import Section from "../Section/Section";
 
 export default function ModelConfigurator() {
-  /* --------------------------------------------------
-     ESTADO LOCAL
-     --------------------------------------------------
-
-     selectedModel:
-     - Guarda un STRING con la descripción
-     - Inicia en null (sin selección)
-     - Al cambiar:
-         React vuelve a ejecutar el render
-  */
+  /* ESTADO LOCAL: Guarda la descripción técnica del modelo seleccionado */
   const [selectedModel, setSelectedModel] = useState(null);
 
-  /* --------------------------------------------------
-     FUNCIÓN MANEJADORA
-     --------------------------------------------------
-
-     handleSelect:
-     - Centraliza la actualización del estado
-     - Evita repetir setSelectedModel en el JSX
-     - Hace el código más limpio y mantenible
-  */
   const handleSelect = (description) => {
     setSelectedModel(description);
   };
 
   return (
-    /* ==================================================
-       SECCIÓN PRINCIPAL
-       ================================================== */
-    <section id="reactExamples" className="interaction-panel">
-      {/* Título principal */}
-      <h2 className="panel-title">Bespoke Configurator</h2>
-
-      {/* Contenedor visual (solo CSS, cero lógica) */}
-      <div className="gold-theme">
-        {/* ==================================================
-           TABS MENU
-           ==================================================
-
-           TabsMenu:
-           - NO sabe qué botones hay
-           - NO sabe qué muestran
-           - SOLO renderiza estructura
-        */}
+    <Section
+      title="Bespoke Configurator"
+      id="reactExamples"
+      className="interaction-panel"
+    >
+      {/* Contenedor de tema con Flexbox para centrar todo el contenido */}
+      <div
+        className="gold-theme"
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <TabsMenu
-          /* ----------------------------------------------
-             CONTENEDOR DE BOTONES
-             ----------------------------------------------
-             Usamos <menu> por semántica
-          */
           ButtonsContainer="menu"
-          /* ----------------------------------------------
-             BOTONES (PROPS)
-             ----------------------------------------------
-             Enviamos todos los TabButton como JSX
-          */
           buttons={
             <>
               <TabButton
-                // Activo si el texto contiene "BUGATTI"
                 isSelected={selectedModel?.includes("BUGATTI")}
-                // Al hacer click:
-                // → actualizamos el estado
                 onSelect={() =>
                   handleSelect(
                     "BUGATTI CHIRON: Active aerodynamics, ECU performance optimization, bespoke luxury interior."
@@ -112,7 +41,6 @@ export default function ModelConfigurator() {
               >
                 Bugatti Chiron
               </TabButton>
-
               <TabButton
                 isSelected={selectedModel?.includes("FERRARI")}
                 onSelect={() =>
@@ -123,7 +51,6 @@ export default function ModelConfigurator() {
               >
                 Ferrari Roma
               </TabButton>
-
               <TabButton
                 isSelected={selectedModel?.includes("PAGANI")}
                 onSelect={() =>
@@ -134,7 +61,6 @@ export default function ModelConfigurator() {
               >
                 Pagani Huayra
               </TabButton>
-
               <TabButton
                 isSelected={selectedModel?.includes("ROLLS")}
                 onSelect={() =>
@@ -145,7 +71,6 @@ export default function ModelConfigurator() {
               >
                 Rolls Royce
               </TabButton>
-
               <TabButton
                 isSelected={selectedModel?.includes("TOYOTA")}
                 onSelect={() =>
@@ -156,7 +81,6 @@ export default function ModelConfigurator() {
               >
                 Toyota Supra MK5
               </TabButton>
-
               <TabButton
                 isSelected={selectedModel?.includes("KOENIGSEGG")}
                 onSelect={() =>
@@ -167,7 +91,6 @@ export default function ModelConfigurator() {
               >
                 Koenigsegg Regera
               </TabButton>
-
               <TabButton
                 isSelected={selectedModel?.includes("LAMBORGHINI")}
                 onSelect={() =>
@@ -178,7 +101,6 @@ export default function ModelConfigurator() {
               >
                 Lamborghini Veneno
               </TabButton>
-
               <TabButton
                 isSelected={selectedModel?.includes("ASTON")}
                 onSelect={() =>
@@ -192,29 +114,19 @@ export default function ModelConfigurator() {
             </>
           }
         >
-          {/* ==================================================
-             CHILDREN (CONTENIDO)
-             ==================================================
-
-             children es el área que TabsMenu
-             renderiza debajo de los botones
-          */}
+          {/* Zona de visualización centrada */}
           <div className="display-surface">
             {selectedModel ? (
               <div className="fade-in">
-                {/* Etiqueta descriptiva */}
                 <span className="label">Configuration Blueprint</span>
-
-                {/* Texto dinámico */}
                 <span className="value">{selectedModel}</span>
               </div>
             ) : (
-              // Mensaje por defecto
               <span className="placeholder">Initiate Model Selection</span>
             )}
           </div>
         </TabsMenu>
       </div>
-    </section>
+    </Section>
   );
 }

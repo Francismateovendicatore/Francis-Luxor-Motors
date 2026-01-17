@@ -2,26 +2,26 @@
    IMPORTACIONES
    ====================================================== */
 
-// Importamos el hook useState desde React.
-// useState permite que el componente:
-// - tenga memoria (estado)
-// - reaccione a eventos del usuario
-// - se vuelva a renderizar automáticamente
+// useState es un HOOK de React.
+// Sirve para guardar un dato que puede cambiar
+// y provocar que el componente se vuelva a renderizar.
 import { useState } from "react";
 
-// Importamos el componente TabButton.
-// Representa un botón tipo pestaña reutilizable.
-// NO guarda estado propio, solo:
-// - recibe props
-// - notifica eventos al padre
+// TabButton es un componente reutilizable.
+// Representa UNA pestaña (botón).
+// ❌ No guarda estado
+// ✅ Solo recibe props y ejecuta acciones
 import TabButton from "../TabButton/TabButton";
 
-// Importamos TabsMenu.
-// Este componente se encarga de:
-// - la estructura del menú de pestañas
-// - renderizar los botones
+// TabsMenu es un componente de COMPOSICIÓN.
+// Se encarga de:
+// - organizar los botones
 // - renderizar el contenido (children)
 import TabsMenu from "../TabsMenu/TabsMenu";
+
+// Section es un componente base de layout.
+// Evita repetir <section>, títulos y estructura.
+import Section from "../Section/Section";
 
 /* ======================================================
    COMPONENTE: ValuationAssessment
@@ -30,13 +30,11 @@ import TabsMenu from "../TabsMenu/TabsMenu";
    RESPONSABILIDAD:
    - Permitir seleccionar un vehículo
    - Mostrar su valoración de mercado
-   - Gestionar la selección con estado LOCAL
+   - Controlar la interacción con estado LOCAL
 
-   ARQUITECTURA:
-   Usuario hace click →
-   Cambia el estado →
-   React re-renderiza →
-   La UI se actualiza sola
+   IMPORTANTE:
+   - Este componente PIENSA
+   - Los hijos solo RENDERIZAN
 */
 
 export default function ValuationAssessment() {
@@ -45,66 +43,67 @@ export default function ValuationAssessment() {
      --------------------------------------------------
 
      selectedPrice:
-     - Guarda un TEXTO descriptivo de la valoración
-     - Inicia en null (no hay selección)
-     - Cuando cambia:
-         React vuelve a ejecutar el render()
+     - Guarda un TEXTO (string)
+     - Representa la valoración seleccionada
+     - null = no hay selección todavía
   */
   const [selectedPrice, setSelectedPrice] = useState(null);
 
   return (
     /* ==================================================
-       SECCIÓN PRINCIPAL DEL PANEL
+       SECCIÓN PRINCIPAL
        ==================================================
 
-       section:
-       - Elemento semántico HTML
-       - id puede usarse para navegación o testing
-       - className controla el diseño visual
+       Section:
+       - Componente reutilizable
+       - title → título visible
+       - id → navegación / testing
+       - className → estilos
     */
-    <section id="reactExamples2" className="interaction-panel">
-      {/* Título principal del panel */}
-      <h2 className="panel-title">Asset Valuation</h2>
-
-      {/* Contenedor visual (solo estética, no lógica) */}
-      <div className="gold-theme">
+    <Section
+      title="Asset Valuation"
+      id="reactExamples2"
+      className="interaction-panel"
+    >
+      {/* Contenedor visual (solo CSS, sin lógica) */}
+      <div
+        className="gold-theme"
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         {/* ==================================================
            TABS MENU
            ==================================================
 
-           TabsMenu NO sabe:
-           - qué botones renderiza
-           - qué lógica usan
-           - qué contenido muestran
-
-           Solo:
-           - estructura
-           - composición
+           TabsMenu:
+           - NO sabe qué botones hay
+           - NO sabe qué hacen
+           - SOLO organiza estructura
         */}
         <TabsMenu
           /* ----------------------------------------------
-             ButtonsContainer
+             BOTONES (PROPS)
              ----------------------------------------------
-             Indicamos que los botones se rendericen
-             dentro de un <menu> semántico
-          */
-          ButtonsContainer="menu"
-          /* ----------------------------------------------
-             buttons
-             ----------------------------------------------
-             Aquí enviamos TODOS los botones
-             como JSX dinámico
+
+             Enviamos TODOS los botones como JSX.
+             Esto es composición, no lógica.
           */
           buttons={
             <>
-              {/* ===== BOTÓN BUGATTI ===== */}
+              {/* ========= BUGATTI ========= */}
               <TabButton
-                // isSelected:
-                // true si el estado contiene "€4M"
-                // activa visualmente el botón
-                isSelected={selectedPrice?.includes("€4M")}
-                // onSelect:
-                // cuando el usuario hace click
+                // El botón está activo si:
+                // - el texto contiene "€4M"
+                // - y contiene "Bugatti"
+                isSelected={
+                  selectedPrice?.includes("€4M") &&
+                  selectedPrice?.includes("Bugatti")
+                }
+                // Al hacer click:
                 // actualizamos el estado
                 onSelect={() =>
                   setSelectedPrice(
@@ -115,7 +114,7 @@ export default function ValuationAssessment() {
                 Bugatti
               </TabButton>
 
-              {/* ===== BOTÓN FERRARI ===== */}
+              {/* ========= FERRARI ========= */}
               <TabButton
                 isSelected={selectedPrice?.includes("€300K")}
                 onSelect={() =>
@@ -127,7 +126,7 @@ export default function ValuationAssessment() {
                 Ferrari Roma
               </TabButton>
 
-              {/* ===== BOTÓN PAGANI ===== */}
+              {/* ========= PAGANI ========= */}
               <TabButton
                 isSelected={selectedPrice?.includes("€3M")}
                 onSelect={() =>
@@ -139,11 +138,7 @@ export default function ValuationAssessment() {
                 Pagani Huayra
               </TabButton>
 
-              {/* ===== BOTÓN ROLLS ROYCE =====
-                  Caso especial:
-                  Comparte el mismo precio que Toyota (€400K),
-                  por eso validamos también el nombre
-              */}
+              {/* ========= ROLLS ROYCE ========= */}
               <TabButton
                 isSelected={
                   selectedPrice?.includes("€400K") &&
@@ -158,7 +153,7 @@ export default function ValuationAssessment() {
                 Rolls Royce
               </TabButton>
 
-              {/* ===== BOTÓN TOYOTA ===== */}
+              {/* ========= TOYOTA ========= */}
               <TabButton
                 isSelected={
                   selectedPrice?.includes("€400K") &&
@@ -173,7 +168,7 @@ export default function ValuationAssessment() {
                 Toyota Supra MK5
               </TabButton>
 
-              {/* ===== BOTÓN KOENIGSEGG ===== */}
+              {/* ========= KOENIGSEGG ========= */}
               <TabButton
                 isSelected={selectedPrice?.includes("Regera")}
                 onSelect={() =>
@@ -185,7 +180,7 @@ export default function ValuationAssessment() {
                 Koenigsegg Regera
               </TabButton>
 
-              {/* ===== BOTÓN LAMBORGHINI ===== */}
+              {/* ========= LAMBORGHINI ========= */}
               <TabButton
                 isSelected={selectedPrice?.includes("€9M")}
                 onSelect={() =>
@@ -197,7 +192,7 @@ export default function ValuationAssessment() {
                 Lamborghini Veneno
               </TabButton>
 
-              {/* ===== BOTÓN ASTON MARTIN ===== */}
+              {/* ========= ASTON MARTIN ========= */}
               <TabButton
                 isSelected={selectedPrice?.includes("€2.5M")}
                 onSelect={() =>
@@ -212,31 +207,29 @@ export default function ValuationAssessment() {
           }
         >
           {/* ==================================================
-             CHILDREN (ZONA DE VISUALIZACIÓN)
+             ZONA DE CONTENIDO (children)
              ==================================================
 
-             children es el contenido que TabsMenu
-             renderiza DEBAJO de los botones
+             Aquí mostramos la información
+             basada en el ESTADO
           */}
           <div className="display-surface">
-            {/* Renderizado condicional */}
             {selectedPrice ? (
+              // Si hay selección
               <div className="fade-in">
-                {/* Etiqueta descriptiva */}
                 <span className="label">Current Market Valuation</span>
 
-                {/* Texto dinámico basado en el estado */}
                 <span className="value" style={{ color: "#d4af37" }}>
                   {selectedPrice}
                 </span>
               </div>
             ) : (
-              // Mensaje cuando no hay selección
+              // Si NO hay selección
               <span className="placeholder">Select Asset for Valuation</span>
             )}
           </div>
         </TabsMenu>
       </div>
-    </section>
+    </Section>
   );
 }
