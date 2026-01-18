@@ -16,6 +16,16 @@ import AstonMartinValkyrie from "./assets/Screenshot 2025-12-21 185355.png";
 import HennesseyVenomF5 from "./assets/Screenshot 2025-12-31 134042.png";
 
 /* =====================================================
+Importacion Motores Piezas y Interior de Hiperdeportivos
+===================================================== */
+import BugattiMotor from "./assets/Screenshot 2026-01-17 201837.png"
+import InteriorBugatti from "./assets/Screenshot 2026-01-17 200851.png"
+import MotorFerrari from "./assets/Screenshot 2026-01-17 202433.png"
+import InteriorFerrari from "./assets/Screenshot 2026-01-17 202537.png"
+import  MotorPagani from "./assets/Screenshot 2026-01-17 202705.png"
+import InteriorPagani from "./assets/Screenshot 2026-01-17 202821.png"
+
+/* =====================================================
    COLECCIÓN PRINCIPAL DE DATOS
    -----------------------------------------------------
    CORE_COLLECTION es un array de objetos.
@@ -124,3 +134,33 @@ export const CORE_COLLECTION = [
       "The Hennessey Venom F5 is an ultra-high-performance hypercar built for extreme speed. It uses a carbon-fiber chassis and a twin-turbo V8 engine producing over 1,800 horsepower, with rear-wheel drive and advanced aerodynamics.",
   },
 ];
+
+/* =====================================================
+   DATOS TÉCNICOS DINÁMICOS (CARS_DETAILS)
+   ===================================================== */
+export const CARS_DETAILS = {
+  "Bugatti Chiron": {
+    engineImg: BugattiMotor,    // Usamos 'engineImg' como nombre estándar
+    interiorImg: InteriorBugatti, // Usamos 'interiorImg' como nombre estándar
+    engineDesc: "Corazón W16 de 8.0L: Una obra maestra de ingeniería con 4 turbocompresores y refrigeración líquida avanzada.",
+    hp: "1500 HP",
+    top: "420 km/h",
+    accent: "#ff3e3e" // Color de acento para el diseño
+  },
+  "Ferrari Roma": {
+    engineImg: MotorFerrari, 
+    interiorImg: InteriorFerrari,
+    engineDesc: "V8 Turbo cargado de 3.9L: Elegancia italiana con una respuesta de aceleración instantánea y sonido sinfónico.",
+    hp: "620 HP",
+    top: "320 km/h",
+    accent: "#ffff00"
+  },
+  "Pagani Huayra": {
+    engineImg: MotorPagani,
+    interiorImg: InteriorPagani,
+    engineDesc: "V12 biturbo de Mercedes-AMG: Ligereza extrema y aerodinámica activa en cada centímetro de fibra de carbono.",
+    hp: "800 HP",
+    top: "380 km/h",
+    accent: "#00f2ff"
+  },
+};

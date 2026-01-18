@@ -19,6 +19,7 @@ import "./CoreConcept.css";
    - price: precio del vehículo
    - availability: stock disponible
    - description: descripción técnica
+   - onSelect: (NUEVO) Función para activar la vista detallada
 ========================================================= */
 export default function CoreConcept({
   image,
@@ -26,9 +27,8 @@ export default function CoreConcept({
   price,
   availability,
   description,
-
+  onSelect, // Recibimos la función que viene desde App -> ExclusiveFleet
 }) {
-
   /* =======================================================
      JSX QUE SE RENDERIZA EN PANTALLA
      -------------------------------------------------------
@@ -36,13 +36,12 @@ export default function CoreConcept({
      ve en el navegador.
   ======================================================= */
   return (
-
     /* =====================================================
-       CONTENEDOR PRINCIPAL DE LA TARJETA
-       -----------------------------------------------------
-       <article> se usa para contenido independiente.
-       className="card__root" conecta con el CSS.
-    ===================================================== */
+        CONTENEDOR PRINCIPAL DE LA TARJETA
+        -----------------------------------------------------
+        <article> se usa para contenido independiente.
+        className="card__root" conecta con el CSS.
+     ===================================================== */
     <article className="card__root">
       <figure className="card__media">
         <img src={image} alt={model} className="card__image" loading="lazy" />
@@ -61,7 +60,13 @@ export default function CoreConcept({
 
         <p className="card__description">{description}</p>
 
-        <button className="card__action" type="button">
+        {/* =====================================================
+            BOTÓN DE ACCIÓN INTERACTIVO
+            -----------------------------------------------------
+            onClick={onSelect}: Al pulsar aquí, notificamos al 
+            estado de App.jsx para cambiar a la vista de detalles.
+         ===================================================== */}
+        <button className="card__action" type="button" onClick={onSelect}>
           Configurar
         </button>
       </div>
