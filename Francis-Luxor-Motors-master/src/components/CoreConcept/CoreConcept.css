@@ -1,0 +1,274 @@
+/* ================================
+   CoreConcept.css
+   Estilos para una tarjeta premium
+   ================================ */
+
+/* 
+  .card__root
+  Este selector es el CONTENEDOR PRINCIPAL de la tarjeta.
+  Aquí también declaramos VARIABLES CSS locales (scope local).
+*/
+.card__root {
+  /* Color de fondo de la tarjeta */
+  --card-bg: #0a0a0a;
+
+  /* Borde base (sutil, tipo cristal) */
+  --card-border: rgba(255, 255, 255, 0.08);
+
+  /* Borde al pasar el mouse (tono dorado elegante) */
+  --card-border-hover: rgba(212, 175, 55, 0.3);
+
+  /* Colores de texto */
+  --text-primary: #f0f0f0;
+  --text-secondary: #888888;
+
+  /* Color acento (oro lujo) */
+  --accent-gold: #d4af37;
+
+  /* Tipografías */
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+
+  /* Curva de animación suave (sensación premium) */
+  --ease-luxury: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+}
+
+/* ================================
+   CONTENEDOR PRINCIPAL
+   ================================ */
+.card__root {
+  position: relative; 
+  /* Permite posicionar elementos internos con absolute */
+
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+
+  display: flex;
+  flex-direction: column; 
+  /* La tarjeta se organiza en columna */
+
+  height: 100%;
+
+  /* Transiciones suaves al interactuar */
+  transition:
+    transform 0.6s var(--ease-luxury),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+
+  /* overflow: hidden
+     Oculta cualquier cosa que se salga del contenedor
+     (zoom de imagen, overlays, sombras internas) */
+  overflow: hidden;
+}
+
+/* EFECTO HOVER DE LA TARJETA */
+.card__root:hover {
+  border-color: var(--card-border-hover);
+
+  /* Eleva visualmente la tarjeta */
+  transform: translateY(-4px);
+
+  /* Sombra profunda (efecto flotante) */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ================================
+   MEDIA (IMAGEN)
+   ================================ */
+.card__media {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  margin: 0;
+
+  /* Oculta el zoom de la imagen */
+  overflow: hidden;
+
+  background-color: #000;
+}
+
+/* Imagen principal */
+.card__image {
+  width: 100%;
+  height: 100%;
+
+  /* Ajusta la imagen sin deformarla */
+  object-fit: cover;
+
+  /* Animación lenta y elegante */
+  transition:
+    transform 1.2s var(--ease-luxury),
+    opacity 0.4s ease;
+
+  opacity: 0.85;
+}
+
+/* Zoom de imagen al pasar el mouse */
+.card__root:hover .card__image {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* Overlay oscuro encima de la imagen */
+.card__overlay {
+  position: absolute;
+
+  /* inset: 0 equivale a top/right/bottom/left = 0 */
+  inset: 0;
+
+  /* Degradado para mejorar legibilidad */
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.5) 0%,
+    transparent 100%
+  );
+
+  opacity: 0.6;
+  transition: opacity 0.4s ease;
+
+  /* No interfiere con clics */
+  pointer-events: none;
+}
+
+/* Reduce el overlay en hover */
+.card__root:hover .card__overlay {
+  opacity: 0.3;
+}
+
+/* ================================
+   CONTENIDO DE TEXTO
+   ================================ */
+.card__content {
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  /* Permite que el texto crezca */
+  flex-grow: 1;
+}
+
+/* ================================
+   CABECERA (MODELO + PRECIO)
+   ================================ */
+.card__header {
+  display: flex;
+
+  /* Espacia título y precio */
+  justify-content: space-between;
+
+  align-items: baseline;
+
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+
+  /* Línea divisoria elegante */
+  border-bottom: 1px solid var(--card-border);
+}
+
+/* Título del modelo */
+.card__title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+
+  color: var(--text-primary);
+
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* Precio */
+.card__price {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: var(--text-primary);
+  opacity: 0.9;
+
+  /* Evita que se rompa en líneas */
+  white-space: nowrap;
+
+  margin-left: 1rem;
+}
+
+/* ================================
+   META (DISPONIBILIDAD)
+   ================================ */
+.card__meta {
+  margin-bottom: 1.25rem;
+}
+
+/* Badge de estado */
+.card__badge {
+  display: inline-block;
+
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+
+  color: var(--accent-gold);
+
+  border: 1px solid rgba(212, 175, 55, 0.2);
+
+  padding: 0.4em 0.8em;
+  border-radius: 2px;
+}
+
+/* ================================
+   DESCRIPCIÓN
+   ================================ */
+.card__description {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.7;
+
+  color: var(--text-secondary);
+
+  margin: 0 0 2.5rem 0;
+
+  /* Empuja el botón hacia abajo */
+  flex-grow: 1;
+
+  font-weight: 300;
+}
+
+/* ================================
+   BOTÓN DE ACCIÓN
+   ================================ */
+.card__action {
+  background: transparent;
+  border: none;
+
+  /* Línea inferior minimalista */
+  border-bottom: 1px solid var(--text-primary);
+
+  color: var(--text-primary);
+
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+
+  padding-bottom: 0.5rem;
+
+  cursor: pointer;
+
+  /* Alineado a la izquierda */
+  align-self: flex-start;
+
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+/* Hover del botón */
+.card__action:hover {
+  opacity: 1;
+  border-bottom-color: var(--accent-gold);
+  color: var(--accent-gold);
+}

@@ -1,0 +1,17 @@
+/* Estilo base para todas las secciones */
+section {
+  padding: 3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Línea sutil separadora */
+  margin-bottom: 2rem;
+}
+
+/* Estilo unificado para los títulos */
+.section-title {
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  font-size: 0.9rem;
+  color: #d4af37; /* Dorado de lujo */
+  text-align: center;
+  margin-bottom: 3rem;
+}

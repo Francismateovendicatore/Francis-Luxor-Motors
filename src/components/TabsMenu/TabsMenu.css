@@ -1,0 +1,88 @@
+/* ======================================================
+   CONTENEDOR DE LA BARRA DE TABS (BOTONES)
+   ====================================================== */
+
+.tab-bar {
+  /* Flexbox para alinear botones horizontalmente */
+  display: flex;
+
+  /* Permite que los botones bajen a otra fila si no caben */
+  flex-wrap: wrap;
+
+  /* Centra los botones horizontalmente */
+  justify-content: center;
+
+  /* Espacio entre cada botón */
+  gap: 1rem;
+
+  /* Quitamos estilos por defecto de <menu> o <ul> */
+  padding: 0;
+  margin: 2rem 0;
+  list-style: none;
+}
+/* ======================================================
+   LÍNEA DECORATIVA SUPERIOR (DETALLE DE LUJO)
+   ====================================================== */
+
+.display-surface::before {
+  content: "";
+
+  /* Posicionamos encima del contenedor */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* Ocupa todo el ancho */
+  width: 100%;
+  height: 2px;
+
+  /* Línea dorada degradada */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d4af37,
+    transparent
+  );
+
+  /* Muy sutil */
+  opacity: 0.3;
+}
+/* ======================================================
+   TEXTO INFORMATIVO (LABEL)
+   ====================================================== */
+
+.label {
+  display: block;
+
+  /* Tipografía moderna */
+  font-family: 'Inter', sans-serif;
+
+  /* Mayúsculas para estilo técnico */
+  text-transform: uppercase;
+
+  /* Separación entre letras */
+  letter-spacing: 4px;
+
+  /* Tamaño pequeño (etiqueta) */
+  font-size: 0.7rem;
+
+  /* Gris elegante */
+  color: #888;
+
+  /* Separación inferior */
+  margin-bottom: 1.5rem;
+}
+/* ======================================================
+   TEXTO CUANDO NO HAY SELECCIÓN
+   ====================================================== */
+
+.placeholder {
+  /* Estilo cursivo para indicar estado vacío */
+  font-style: italic;
+
+  /* Gris apagado */
+  color: #444;
+
+  /* Espaciado entre letras */
+  letter-spacing: 2px;
+}
