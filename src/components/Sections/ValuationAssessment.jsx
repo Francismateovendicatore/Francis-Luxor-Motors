@@ -1,234 +1,225 @@
-/* ======================================================
-   IMPORTACIONES
-   ====================================================== */
-
-// useState es un HOOK de React.
-// Sirve para guardar un dato que puede cambiar
-// y provocar que el componente se vuelva a renderizar.
-import { useState } from "react";
-
-// TabButton es un componente reutilizable.
-// Representa UNA pestaña (botón).
-// ❌ No guarda estado
-// ✅ Solo recibe props y ejecuta acciones
-import TabButton from "../TabButton/TabButton";
-
-// TabsMenu es un componente de COMPOSICIÓN.
-// Se encarga de:
-// - organizar los botones
-// - renderizar el contenido (children)
-import TabsMenu from "../TabsMenu/TabsMenu";
-
-// Section es un componente base de layout.
-// Evita repetir <section>, títulos y estructura.
+﻿import { useState } from "react";
 import Section from "../Section/Section";
+import { VEHICLES } from "../../data.js";
 
-/* ======================================================
-   COMPONENTE: ValuationAssessment
-   ======================================================
+import BugattiExt from "../../assets/Bugatti Chiron black side view.jpg";
+import BugattiInt from "../../assets/Bugatti Chiron interior cockpit.jpg";
+import BugattiEng from "../../assets/Bugatti Chiron engine W16.jpg";
+import FerrariExt from "../../assets/Ferrari Roma front view dark.jpg";
+import FerrariInt from "../../assets/Ferrari Roma interior red.jpg";
+import FerrariKit from "../../assets/Ferrari Roma rear night.jpg";
+import PaganiExt from "../../assets/Pagani Huayra carbon fiber.jpg";
+import PaganiInt from "../../assets/Pagani Huayra interior gold.jpg";
+import PaganiEng from "../../assets/Pagani Huayra engine AMG.jpg";
+import RollsExt from "../../assets/Rolls Royce Phantom black luxury.jpg";
+import RollsInt from "../../assets/Rolls Royce Phantom interior starlight.jpg";
+import RollsEng from "../../assets/Rolls Royce Phantom front grille.jpg";
+import SupraExt from "../../assets/Toyota Supra MK5.png";
+import SupraInt from "../../assets/Toyota Supra A90 interior.jpg";
+import SupraEng from "../../assets/Toyota Supra MK5 2JZ engine.jpg";
+import SupraKit from "../../assets/Toyota Supra widebody kit.jpg";
+import KoenigExt from "../../assets/Koenigsegg Regera hypercar.jpg";
+import KoenigInt from "../../assets/Koenigsegg Regera interior.jpg";
+import KoenigEng from "../../assets/Koenigsegg Regera engine hybrid.jpg";
+import LamboExt from "../../assets/Lamborghini Veneno side.jpg";
+import LamboInt from "../../assets/Lamborghini Veneno interior.jpg";
+import LamboKit from "../../assets/Lamborghini Veneno carbon.jpg";
+import AstonExt from "../../assets/Aston Martin Valkyrie F1.jpg";
+import AstonInt from "../../assets/Aston Martin Valkyrie interior.jpg";
+import AstonEng from "../../assets/Aston Martin Valkyrie engine Cosworth.jpg";
+import HennExt from "../../assets/Hennessey Venom F5 front.jpg";
+import HennInt from "../../assets/Hennessey Venom F5 interior.jpg";
+import HennEng from "../../assets/Hennessey Venom F5 engine.jpg";
 
-   RESPONSABILIDAD:
-   - Permitir seleccionar un vehículo
-   - Mostrar su valoración de mercado
-   - Controlar la interacción con estado LOCAL
+// pos = objectPosition para que el auto quede centrado sin espacios negros
+const CAR_IMAGES = {
+  "bugatti-chiron":        { exterior:{src:BugattiExt,pos:"center 40%"}, interior:{src:BugattiInt,pos:"center center"}, engine:{src:BugattiEng,pos:"center center"}, kit:{src:BugattiExt,pos:"center 40%"} },
+  "ferrari-roma":          { exterior:{src:FerrariExt,pos:"center 60%"}, interior:{src:FerrariInt,pos:"center center"}, engine:{src:FerrariExt,pos:"center 60%"},   kit:{src:FerrariKit,pos:"center 70%"} },
+  "pagani-huayra":         { exterior:{src:PaganiExt,pos:"center 50%"},  interior:{src:PaganiInt,pos:"center center"},  engine:{src:PaganiEng,pos:"center center"},  kit:{src:PaganiExt,pos:"center 50%"} },
+  "rolls-royce-phantom":   { exterior:{src:RollsExt,pos:"center 60%"},   interior:{src:RollsInt,pos:"center center"},   engine:{src:RollsEng,pos:"center 40%"},     kit:{src:RollsExt,pos:"center 60%"} },
+  "toyota-supra-mk5":      { exterior:{src:SupraExt,pos:"center 55%"},   interior:{src:SupraInt,pos:"center center"},   engine:{src:SupraEng,pos:"center center"},   kit:{src:SupraKit,pos:"center 50%"} },
+  "koenigsegg-regera":     { exterior:{src:KoenigExt,pos:"center 50%"},  interior:{src:KoenigInt,pos:"center center"},  engine:{src:KoenigEng,pos:"center center"},  kit:{src:KoenigExt,pos:"center 50%"} },
+  "lamborghini-veneno":    { exterior:{src:LamboExt,pos:"center 45%"},   interior:{src:LamboInt,pos:"center center"},   engine:{src:LamboKit,pos:"center center"},   kit:{src:LamboKit,pos:"center center"} },
+  "aston-martin-valkyrie": { exterior:{src:AstonExt,pos:"center 50%"},   interior:{src:AstonInt,pos:"center center"},   engine:{src:AstonEng,pos:"center center"},   kit:{src:AstonExt,pos:"center 50%"} },
+  "hennessey-venom-f5":    { exterior:{src:HennExt,pos:"center 45%"},    interior:{src:HennInt,pos:"center center"},    engine:{src:HennEng,pos:"center center"},    kit:{src:HennExt,pos:"center 45%"} },
+};
 
-   IMPORTANTE:
-   - Este componente PIENSA
-   - Los hijos solo RENDERIZAN
-*/
+const BASE_PRICES = {
+  "bugatti-chiron":4000000,"ferrari-roma":300000,"pagani-huayra":3000000,
+  "rolls-royce-phantom":450000,"toyota-supra-mk5":400000,"koenigsegg-regera":4000000,
+  "lamborghini-veneno":9000000,"aston-martin-valkyrie":2500000,"hennessey-venom-f5":1850000,
+};
+const META = {
+  "bugatti-chiron":{category:"Hypercar",lot:"01"},"ferrari-roma":{category:"GT Coupé",lot:"02"},
+  "pagani-huayra":{category:"Atelier",lot:"03"},"rolls-royce-phantom":{category:"Ultra Luxury",lot:"04"},
+  "toyota-supra-mk5":{category:"Sports Car",lot:"05"},"koenigsegg-regera":{category:"Megacar",lot:"06"},
+  "lamborghini-veneno":{category:"Collector",lot:"07"},"aston-martin-valkyrie":{category:"Track Weapon",lot:"08"},
+  "hennessey-venom-f5":{category:"Speed Record",lot:"09"},
+};
+const VIEW_TABS=[{key:"exterior",label:"Exterior"},{key:"interior",label:"Interior"},{key:"engine",label:"Engine"},{key:"kit",label:"Body Kit"}];
+const CONFIG_OPTIONS={
+  colors:[{name:"Noir Obsidian",price:0,hex:"#1a1a1a"},{name:"Arctic White",price:12000,hex:"#f0f0f0"},{name:"Racing Red",price:8000,hex:"#8b0000"},{name:"Midnight Blue",price:8000,hex:"#0a1628"},{name:"Gold Edition",price:25000,hex:"#d4af37"},{name:"Matte Carbon",price:18000,hex:"#2d2d2d"}],
+  interiors:[{name:"Black Leather",price:0,view:"interior"},{name:"Cream Nappa",price:15000,view:"interior"},{name:"Red Alcantara",price:22000,view:"interior"},{name:"Carbon Fiber",price:35000,view:"interior"},{name:"Cognac Full Grain",price:28000,view:"interior"}],
+  performance:[{name:"Standard",price:0,view:"exterior"},{name:"Sport Package",price:45000,view:"engine"},{name:"Track Edition",price:85000,view:"engine"},{name:"Ultimate Performance",price:140000,view:"engine"}],
+  wheels:[{name:"Standard Alloy",price:0,view:"exterior"},{name:"Forged Carbon",price:18000,view:"kit"},{name:"Titanium Sport",price:28000,view:"kit"},{name:"Signature Edition",price:42000,view:"kit"}],
+};
+const fmt=n=>"€"+n.toLocaleString("de-DE");
+const F={sans:"Montserrat,sans-serif",serif:"'Cormorant Garamond',serif"};
 
-export default function ValuationAssessment() {
-  /* --------------------------------------------------
-     ESTADO LOCAL
-     --------------------------------------------------
-
-     selectedPrice:
-     - Guarda un TEXTO (string)
-     - Representa la valoración seleccionada
-     - null = no hay selección todavía
-  */
-  const [selectedPrice, setSelectedPrice] = useState(null);
-
-  return (
-    /* ==================================================
-       SECCIÓN PRINCIPAL
-       ==================================================
-
-       Section:
-       - Componente reutilizable
-       - title → título visible
-       - id → navegación / testing
-       - className → estilos
-    */
-    <Section
-      title="Asset Valuation"
-      id="reactExamples2"
-      className="interaction-panel"
-    >
-      {/* Contenedor visual (solo CSS, sin lógica) */}
-      <div
-        className="gold-theme"
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {/* ==================================================
-           TABS MENU
-           ==================================================
-
-           TabsMenu:
-           - NO sabe qué botones hay
-           - NO sabe qué hacen
-           - SOLO organiza estructura
-        */}
-        <TabsMenu
-          /* ----------------------------------------------
-             BOTONES (PROPS)
-             ----------------------------------------------
-
-             Enviamos TODOS los botones como JSX.
-             Esto es composición, no lógica.
-          */
-          buttons={
-            <>
-              {/* ========= BUGATTI ========= */}
-              <TabButton
-                // El botón está activo si:
-                // - el texto contiene "€4M"
-                // - y contiene "Bugatti"
-                isSelected={
-                  selectedPrice?.includes("€4M") &&
-                  selectedPrice?.includes("Bugatti")
-                }
-                // Al hacer click:
-                // actualizamos el estado
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Bugatti valued at €4M, enhanced with active aerodynamics and bespoke luxury."
-                  )
-                }
-              >
-                Bugatti
-              </TabButton>
-
-              {/* ========= FERRARI ========= */}
-              <TabButton
-                isSelected={selectedPrice?.includes("€300K")}
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Ferrari Roma valued at €300K, upgraded with valved sport exhaust and carbon package."
-                  )
-                }
-              >
-                Ferrari Roma
-              </TabButton>
-
-              {/* ========= PAGANI ========= */}
-              <TabButton
-                isSelected={selectedPrice?.includes("€3M")}
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Pagani Huayra valued at €3M, refined with titanium exhaust and handcrafted interior."
-                  )
-                }
-              >
-                Pagani Huayra
-              </TabButton>
-
-              {/* ========= ROLLS ROYCE ========= */}
-              <TabButton
-                isSelected={
-                  selectedPrice?.includes("€400K") &&
-                  selectedPrice?.includes("Rolls")
-                }
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Rolls-Royce valued at €400K, customized with starlight headliner and Black Badge tuning."
-                  )
-                }
-              >
-                Rolls Royce
-              </TabButton>
-
-              {/* ========= TOYOTA ========= */}
-              <TabButton
-                isSelected={
-                  selectedPrice?.includes("€400K") &&
-                  selectedPrice?.includes("Toyota")
-                }
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Toyota Supra MK5 valued at €400K, modified with Stage 2 turbo and widebody kit."
-                  )
-                }
-              >
-                Toyota Supra MK5
-              </TabButton>
-
-              {/* ========= KOENIGSEGG ========= */}
-              <TabButton
-                isSelected={selectedPrice?.includes("Regera")}
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Koenigsegg Regera valued at €4M, optimized with hybrid power and weight reduction."
-                  )
-                }
-              >
-                Koenigsegg Regera
-              </TabButton>
-
-              {/* ========= LAMBORGHINI ========= */}
-              <TabButton
-                isSelected={selectedPrice?.includes("€9M")}
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Lamborghini Veneno valued at €9M, configured with F1 exhaust and race interior."
-                  )
-                }
-              >
-                Lamborghini Veneno
-              </TabButton>
-
-              {/* ========= ASTON MARTIN ========= */}
-              <TabButton
-                isSelected={selectedPrice?.includes("€2.5M")}
-                onSelect={() =>
-                  setSelectedPrice(
-                    "Aston Martin Valkyrie valued at €2.5M, upgraded with motorsport suspension."
-                  )
-                }
-              >
-                Aston Martin Valkyrie
-              </TabButton>
-            </>
-          }
-        >
-          {/* ==================================================
-             ZONA DE CONTENIDO (children)
-             ==================================================
-
-             Aquí mostramos la información
-             basada en el ESTADO
-          */}
-          <div className="display-surface">
-            {selectedPrice ? (
-              // Si hay selección
-              <div className="fade-in">
-                <span className="label">Current Market Valuation</span>
-
-                <span className="value" style={{ color: "#d4af37" }}>
-                  {selectedPrice}
-                </span>
+export default function ValuationAssessment(){
+  const [sel,setSel]=useState(null);
+  const [activeView,setActiveView]=useState("exterior");
+  const [color,setColor]=useState(0);
+  const [interior,setInterior]=useState(0);
+  const [perf,setPerf]=useState(0);
+  const [wheels,setWheels]=useState(0);
+  const car=VEHICLES.find(v=>v.slug===sel);
+  const meta=sel?META[sel]:null;
+  const imgs=sel?CAR_IMAGES[sel]:null;
+  const base=sel?BASE_PRICES[sel]:0;
+  const total=base+CONFIG_OPTIONS.colors[color].price+CONFIG_OPTIONS.interiors[interior].price+CONFIG_OPTIONS.performance[perf].price+CONFIG_OPTIONS.wheels[wheels].price;
+  const extras=total-base;
+  const currentImg=imgs?imgs[activeView]:null;
+  const S={
+    label:{fontSize:"0.5rem",letterSpacing:"0.45em",color:"#555",textTransform:"uppercase",fontFamily:F.sans,marginBottom:"0.6rem",display:"block"},
+    optBtn:a=>({background:a?"linear-gradient(135deg,rgba(212,175,55,0.15),rgba(212,175,55,0.05))":"rgba(255,255,255,0.02)",border:a?"1px solid rgba(212,175,55,0.6)":"1px solid rgba(255,255,255,0.07)",color:a?"#d4af37":"#666",padding:"0.6rem 1rem",fontFamily:F.sans,fontSize:"0.58rem",letterSpacing:"0.15em",textTransform:"uppercase",cursor:"pointer",transition:"all 0.3s ease",fontWeight:a?"500":"300"}),
+    viewTab:a=>({background:a?"rgba(212,175,55,0.12)":"rgba(255,255,255,0.02)",border:a?"1px solid rgba(212,175,55,0.5)":"1px solid rgba(255,255,255,0.06)",color:a?"#d4af37":"#555",padding:"0.5rem 1.4rem",fontFamily:F.sans,fontSize:"0.52rem",letterSpacing:"0.25em",textTransform:"uppercase",cursor:"pointer",transition:"all 0.3s ease",fontWeight:a?"500":"300"}),
+  };
+  return(
+    <Section title="Asset Configurator" id="reactExamples2" className="interaction-panel">
+      <div style={{width:"100%",maxWidth:"1300px",margin:"0 auto"}}>
+        {!sel?(
+          <>
+            <p style={{textAlign:"center",fontFamily:F.sans,fontSize:"0.65rem",color:"#444",letterSpacing:"0.3em",textTransform:"uppercase",marginBottom:"3rem"}}>Select a vehicle to begin configuration</p>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"1.2rem"}}>
+              {VEHICLES.map((v,i)=>{
+                const m=META[v.slug];
+                const imgData=CAR_IMAGES[v.slug].exterior;
+                return(
+                  <div key={v.slug} onClick={()=>{setSel(v.slug);setActiveView("exterior");setColor(0);setInterior(0);setPerf(0);setWheels(0);}}
+                    style={{position:"relative",overflow:"hidden",cursor:"pointer",border:"1px solid rgba(255,255,255,0.06)",minHeight:"200px",transition:"border-color 0.4s ease"}}
+                    onMouseEnter={e=>{e.currentTarget.style.borderColor="rgba(212,175,55,0.5)";e.currentTarget.querySelector(".cbg").style.transform="scale(1.05)";}}
+                    onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.06)";e.currentTarget.querySelector(".cbg").style.transform="scale(1)";}}>
+                    <div className="cbg" style={{position:"absolute",inset:0,backgroundImage:`url(${imgData.src})`,backgroundSize:"cover",backgroundPosition:imgData.pos,transition:"transform 0.6s ease"}}/>
+                    <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,rgba(0,0,0,0.0) 0%,rgba(0,0,0,0.85) 100%)"}}/>
+                    <div style={{position:"relative",zIndex:1,padding:"1.8rem 1.5rem"}}>
+                      <div style={{position:"absolute",top:"1rem",right:"1rem",fontFamily:F.serif,fontSize:"2.5rem",color:"rgba(212,175,55,0.15)",lineHeight:1}}>{String(i+1).padStart(2,"0")}</div>
+                      <div style={{fontSize:"0.45rem",letterSpacing:"0.4em",color:"#d4af37",marginBottom:"0.5rem",textTransform:"uppercase",fontFamily:F.sans}}>{m.category}</div>
+                      <div style={{fontFamily:F.serif,fontSize:"1.3rem",color:"#fff",fontWeight:"400",marginBottom:"0.8rem",lineHeight:1.3,textShadow:"0 2px 12px rgba(0,0,0,0.9)"}}>{v.model}</div>
+                      <div style={{width:"25px",height:"1px",background:"linear-gradient(to right,rgba(212,175,55,0.6),transparent)",marginBottom:"0.8rem"}}/>
+                      <div style={{fontSize:"0.6rem",color:"#d4af37",fontFamily:F.sans,letterSpacing:"0.1em"}}>{fmt(BASE_PRICES[v.slug])}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        ):(
+          <div key={sel} style={{animation:"luxuryFadeIn 0.6s ease forwards"}}>
+            <button onClick={()=>setSel(null)} style={{background:"none",border:"none",color:"#555",fontFamily:F.sans,fontSize:"0.58rem",letterSpacing:"0.3em",textTransform:"uppercase",cursor:"pointer",marginBottom:"2.5rem",padding:"0",display:"flex",alignItems:"center",gap:"0.7rem"}}>
+              <span>←</span> Back to Collection
+            </button>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 380px",gap:"2rem",alignItems:"start"}}>
+              <div>
+                <div style={{position:"relative",height:"420px",overflow:"hidden",marginBottom:"1rem",border:"1px solid rgba(212,175,55,0.1)"}}>
+                  <img key={activeView+sel} src={currentImg.src} alt={car.model}
+                    style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:currentImg.pos,filter:"brightness(0.92) contrast(1.05)",animation:"luxuryFadeIn 0.45s ease forwards"}}/>
+                  <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.0) 45%)"}}/>
+                  <div style={{position:"absolute",bottom:"1.8rem",left:"1.8rem"}}>
+                    <div style={{fontSize:"0.5rem",letterSpacing:"0.5em",color:"#d4af37",fontFamily:F.sans,marginBottom:"0.3rem"}}>{meta.category}</div>
+                    <div style={{fontFamily:F.serif,fontSize:"2.2rem",color:"#fff",fontWeight:"400",lineHeight:1}}>{car.model}</div>
+                  </div>
+                  <div style={{position:"absolute",top:"1.2rem",left:"1.5rem",background:"rgba(0,0,0,0.65)",border:"1px solid rgba(212,175,55,0.35)",padding:"0.35rem 1rem"}}>
+                    <span style={{fontSize:"0.48rem",letterSpacing:"0.35em",color:"#d4af37",fontFamily:F.sans,textTransform:"uppercase"}}>{VIEW_TABS.find(t=>t.key===activeView)?.label} View</span>
+                  </div>
+                  <div style={{position:"absolute",top:"1.2rem",right:"1.5rem",width:"46px",height:"46px",border:"1px solid rgba(212,175,55,0.3)",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.4)"}}>
+                    <span style={{fontFamily:F.serif,fontSize:"0.75rem",color:"rgba(212,175,55,0.8)"}}>{meta.lot}</span>
+                  </div>
+                </div>
+                <div style={{display:"flex",gap:"0.5rem",marginBottom:"2.5rem",flexWrap:"wrap"}}>
+                  {VIEW_TABS.map(tab=>(
+                    <button key={tab.key} onClick={()=>setActiveView(tab.key)} style={S.viewTab(activeView===tab.key)}>{tab.label}</button>
+                  ))}
+                </div>
+                <div style={{display:"flex",flexDirection:"column",gap:"2rem"}}>
+                  <div>
+                    <span style={S.label}>Exterior Color</span>
+                    <div style={{display:"flex",gap:"0.6rem",flexWrap:"wrap",alignItems:"center"}}>
+                      {CONFIG_OPTIONS.colors.map((c,i)=>(
+                        <div key={i} onClick={()=>{setColor(i);setActiveView("exterior");}} title={c.name}
+                          style={{width:"34px",height:"34px",borderRadius:"50%",background:c.hex,border:color===i?"2px solid #d4af37":"2px solid rgba(255,255,255,0.08)",cursor:"pointer",transition:"all 0.3s ease",boxShadow:color===i?"0 0 16px rgba(212,175,55,0.6)":"none",outline:color===i?"1px solid rgba(212,175,55,0.3)":"none",outlineOffset:"3px"}}/>
+                      ))}
+                      <span style={{fontSize:"0.62rem",color:"#d4af37",fontFamily:F.sans,letterSpacing:"0.1em",marginLeft:"0.5rem"}}>
+                        {CONFIG_OPTIONS.colors[color].name}{CONFIG_OPTIONS.colors[color].price>0?"  +"+fmt(CONFIG_OPTIONS.colors[color].price):""}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <span style={S.label}>Interior & Upholstery</span>
+                    <div style={{display:"flex",gap:"0.5rem",flexWrap:"wrap"}}>
+                      {CONFIG_OPTIONS.interiors.map((o,i)=>(
+                        <button key={i} onClick={()=>{setInterior(i);setActiveView("interior");}} style={S.optBtn(interior===i)}>{o.name}{o.price>0?" +"+fmt(o.price):""}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <span style={S.label}>Performance Package</span>
+                    <div style={{display:"flex",gap:"0.5rem",flexWrap:"wrap"}}>
+                      {CONFIG_OPTIONS.performance.map((o,i)=>(
+                        <button key={i} onClick={()=>{setPerf(i);setActiveView(o.view);}} style={S.optBtn(perf===i)}>{o.name}{o.price>0?" +"+fmt(o.price):""}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <span style={S.label}>Wheels & Body Kit</span>
+                    <div style={{display:"flex",gap:"0.5rem",flexWrap:"wrap"}}>
+                      {CONFIG_OPTIONS.wheels.map((o,i)=>(
+                        <button key={i} onClick={()=>{setWheels(i);setActiveView(o.view);}} style={S.optBtn(wheels===i)}>{o.name}{o.price>0?" +"+fmt(o.price):""}</button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-            ) : (
-              // Si NO hay selección
-              <span className="placeholder">Select Asset for Valuation</span>
-            )}
+              <div style={{position:"sticky",top:"2rem",border:"1px solid rgba(212,175,55,0.15)",background:"rgba(255,255,255,0.02)"}}>
+                <div style={{padding:"2rem",borderBottom:"1px solid rgba(255,255,255,0.05)"}}>
+                  <div style={{fontSize:"0.5rem",letterSpacing:"0.5em",color:"#555",fontFamily:F.sans,marginBottom:"0.5rem",textTransform:"uppercase"}}>Configuration Summary</div>
+                  <div style={{fontFamily:F.serif,fontSize:"1.1rem",color:"#ccc",fontWeight:"400"}}>{car.model}</div>
+                </div>
+                <div style={{padding:"1.5rem 2rem",display:"flex",flexDirection:"column",gap:"1rem"}}>
+                  {[
+                    {label:"Base Price",val:fmt(base)},
+                    {label:"Color: "+CONFIG_OPTIONS.colors[color].name,val:CONFIG_OPTIONS.colors[color].price>0?"+"+fmt(CONFIG_OPTIONS.colors[color].price):"Included"},
+                    {label:"Interior: "+CONFIG_OPTIONS.interiors[interior].name,val:CONFIG_OPTIONS.interiors[interior].price>0?"+"+fmt(CONFIG_OPTIONS.interiors[interior].price):"Included"},
+                    {label:"Performance: "+CONFIG_OPTIONS.performance[perf].name,val:CONFIG_OPTIONS.performance[perf].price>0?"+"+fmt(CONFIG_OPTIONS.performance[perf].price):"Included"},
+                    {label:"Wheels: "+CONFIG_OPTIONS.wheels[wheels].name,val:CONFIG_OPTIONS.wheels[wheels].price>0?"+"+fmt(CONFIG_OPTIONS.wheels[wheels].price):"Included"},
+                  ].map((row,i)=>(
+                    <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",gap:"1rem"}}>
+                      <span style={{fontSize:"0.55rem",color:"#444",fontFamily:F.sans,letterSpacing:"0.05em"}}>{row.label}</span>
+                      <span style={{fontSize:"0.6rem",color:"#666",fontFamily:F.sans,whiteSpace:"nowrap"}}>{row.val}</span>
+                    </div>
+                  ))}
+                </div>
+                {extras>0&&(
+                  <div style={{padding:"1rem 2rem",borderTop:"1px solid rgba(255,255,255,0.04)",display:"flex",justifyContent:"space-between"}}>
+                    <span style={{fontSize:"0.55rem",color:"#555",fontFamily:F.sans}}>Options Total</span>
+                    <span style={{fontSize:"0.6rem",color:"#888",fontFamily:F.sans}}>+{fmt(extras)}</span>
+                  </div>
+                )}
+                <div style={{padding:"1.5rem 2rem",borderTop:"1px solid rgba(212,175,55,0.15)",background:"rgba(212,175,55,0.03)"}}>
+                  <div style={{fontSize:"0.5rem",letterSpacing:"0.4em",color:"#555",fontFamily:F.sans,marginBottom:"0.5rem",textTransform:"uppercase"}}>Total Configuration</div>
+                  <div style={{fontFamily:F.serif,fontSize:"2.2rem",color:"#d4af37",fontWeight:"600",textShadow:"0 0 30px rgba(212,175,55,0.25)"}}>{fmt(total)}</div>
+                </div>
+                <div style={{padding:"1.5rem 2rem",borderTop:"1px solid rgba(255,255,255,0.04)"}}>
+                  <div style={{border:"1px solid rgba(212,175,55,0.3)",padding:"1rem",textAlign:"center",cursor:"pointer",transition:"all 0.4s ease"}}
+                    onMouseEnter={e=>e.currentTarget.style.background="rgba(212,175,55,0.08)"}
+                    onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
+                    <span style={{fontSize:"0.6rem",letterSpacing:"0.3em",color:"#d4af37",textTransform:"uppercase",fontFamily:F.sans}}>Request Quotation →</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </TabsMenu>
+        )}
       </div>
     </Section>
   );
