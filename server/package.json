@@ -1,7 +1,7 @@
 {
   "name": "francis-luxor-backend",
   "version": "1.0.0",
-  "description": "Backend de Francis Luxor - API de vehículos",
+  "description": "Backend Francis Luxor Motors",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "sql.js": "^1.13.0",
-    "sqlite3": "5.1.7"
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "license": "ISC",
+  "type": "commonjs"
 }
