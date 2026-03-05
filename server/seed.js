@@ -33,7 +33,7 @@ async function seed() {
     // Insertar cada vehiculo
     for (const v of VEHICLES) {
       await pool.query(
-        'INSERT INTO vehicles (slug, model, valuation, stock, description, engine_desc, hp, top, accent) VALUES (\,\,\,\,\,\,\,\,\)',
+        'INSERT INTO vehicles (slug, model, valuation, stock, description, engine_desc, hp, top, accent) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
         [v.slug, v.model, v.valuation, v.stock, v.description, v.engine_desc, v.hp, v.top, v.accent]
       );
       console.log('  OK: ' + v.model);
@@ -50,3 +50,5 @@ async function seed() {
 }
 
 seed();
+
+

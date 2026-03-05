@@ -4,7 +4,7 @@ import ExclusiveFleet from "./components/Sections/ExclusiveFleet";
 import ValuationAssessment from "./components/Sections/ValuationAssessment";
 import InventorySpecs from "./components/Sections/InventorySpecs";
 import CarDetailView from "./components/Sections/CarDetailView";
-import { VEHICLES } from "./data.js";
+import { useVehicles } from "./hooks/useVehicles";
 import BugattiMotor from "./assets/Screenshot 2026-01-17 201837.png";
 import InteriorBugatti from "./assets/Screenshot 2026-01-17 200851.png";
 import MotorFerrari from "./assets/Screenshot 2026-01-17 202433.png";
@@ -27,14 +27,15 @@ const DETAIL_IMAGES = { "bugatti-chiron": { engineImg: BugattiMotor, interiorImg
 function modelToSlug(model) { return model.toLowerCase().replace(/\s+/g, "-"); }
 export default function App() {
   const [selectedCar, setSelectedCar] = useState(null);
+  const { vehicles } = useVehicles();
   const handleCloseDetail = () => setSelectedCar(null);
   const getCarDetailData = () => {
     if (!selectedCar) return null;
     const slug = modelToSlug(selectedCar);
-    const carData = VEHICLES.find((v) => v.slug === slug);
+    const carData = vehicles.find((v) => v.slug === slug);
     const images = DETAIL_IMAGES[slug];
     if (!carData || !images) return null;
-    return { engineImg: images.engineImg, interiorImg: images.interiorImg, engineDesc: carData.engineDesc, hp: carData.hp, top: carData.top, accent: carData.accent };
+    return { engineImg: images.engineImg, interiorImg: images.interiorImg, engineDesc: carData.engine_desc, hp: carData.hp, top: carData.top, accent: carData.accent };
   };
   const carDetail = getCarDetailData();
   return (
@@ -56,3 +57,7 @@ export default function App() {
     </div>
   );
 }
+
+
+
+

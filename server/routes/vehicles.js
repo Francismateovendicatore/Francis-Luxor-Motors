@@ -1,60 +1,37 @@
 // routes/vehicles.js
-// Define las rutas de la API de vehículos.
-// Es una función que recibe "db" y "DB_PATH" desde server.js
+// Rutas de la API de vehiculos - usa PostgreSQL via pool
 
-const { Router } = require("express");
+const { Router } = require('express');
+const router = Router();
+const pool = require('../database');
 
-module.exports = function (db, DB_PATH) {
-  const router = Router();
+// GET /api/vehicles — Retorna TODOS los vehiculos
+router.get('/', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM vehicles ORDER BY id');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error GET /api/vehicles:', err.message);
+    res.status(500).json({ error: 'Error al obtener vehiculos' });
+  }
+});
 
-  // ─────────────────────────────────────────────
-  // GET /api/vehicles — Retorna TODOS los vehículos
-  // ─────────────────────────────────────────────
-  router.get("/", (req, res) => {
-    const result = db.exec("SELECT * FROM vehicles");
-
-    if (result.length === 0) {
-      return res.json([]);
-    }
-
-    // Convertimos el formato de sql.js a objetos normales
-    const columns = result[0].columns;
-    const rows = result[0].values;
-
-    const vehicles = rows.map((row) => {
-      const obj = {};
-      columns.forEach((col, index) => {
-        obj[col] = row[index];
-      });
-      return obj;
-    });
-
-    res.json(vehicles);
-  });
-
-  // ─────────────────────────────────────────────
-  // GET /api/vehicles/:slug — Retorna UN solo vehículo
-  // Ejemplo: /api/vehicles/bugatti-chiron
-  // ─────────────────────────────────────────────
-  router.get("/:slug", (req, res) => {
+// GET /api/vehicles/:slug — Retorna UN solo vehiculo
+// Ejemplo: /api/vehicles/bugatti-chiron
+router.get('/:slug', async (req, res) => {
+  try {
     const { slug } = req.params;
+    const result = await pool.query('SELECT * FROM vehicles WHERE slug = $1', [slug]);
 
-    const result = db.exec("SELECT * FROM vehicles WHERE slug = ?", [slug]);
-
-    if (result.length === 0) {
-      return res.status(404).json({ error: "Vehículo no encontrado" });
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Vehiculo no encontrado' });
     }
 
-    const columns = result[0].columns;
-    const row = result[0].values[0];
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error GET /api/vehicles/:slug:', err.message);
+    res.status(500).json({ error: 'Error al obtener vehiculo' });
+  }
+});
 
-    const vehicle = {};
-    columns.forEach((col, index) => {
-      vehicle[col] = row[index];
-    });
-
-    res.json(vehicle);
-  });
-
-  return router;
-};
+module.exports = router;
