@@ -2,6 +2,7 @@
 import Header from "./components/Header/Header";
 import ExclusiveFleet from "./components/Sections/ExclusiveFleet";
 import ValuationAssessment from "./components/Sections/ValuationAssessment";
+import PurchaseMenu from "./components/Sections/PurchaseMenu";
 import InventorySpecs from "./components/Sections/InventorySpecs";
 import CarDetailView from "./components/Sections/CarDetailView";
 import { useVehicles } from "./hooks/useVehicles";
@@ -50,6 +51,7 @@ export default function App() {
             <div className="interaction-suite">
               <ValuationAssessment />
               <InventorySpecs />
+              <PurchaseMenu />
             </div>
           </>
         )}
@@ -57,6 +59,8 @@ export default function App() {
     </div>
   );
 }
+
+
 
 
 
