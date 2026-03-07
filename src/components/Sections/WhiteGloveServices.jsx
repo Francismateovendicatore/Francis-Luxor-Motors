@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+﻿import { useState, useEffect, useRef, useCallback } from "react";
 
-/* ═══════════════════════ CONSTANTS ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CONSTANTS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const G = "#D4AF37";
 
 const CITIES = [
@@ -19,31 +19,31 @@ const EXT_COLORS = [
   { name: "Gold Edition",   hex: "#c8a415" }, { name: "Matte Carbon",   hex: "#2a2a2a" },
 ];
 const INTERIORS = [
-  { name: "Black Nappa",    price: "+€0",      img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80" },
-  { name: "Cream Alcantara",price: "+€15,000", img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80" },
-  { name: "Red Suede",      price: "+€22,000", img: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80"   },
-  { name: "Carbon Panel",   price: "+€35,000", img: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80" },
+  { name: "Black Nappa",    price: "+â‚¬0",      img: new URL("../../assets/wg-custom-config.jpg", import.meta.url).href },
+  { name: "Cream Alcantara",price: "+â‚¬15,000", img: new URL("../../assets/wg-insurance.jpg", import.meta.url).href },
+  { name: "Red Suede",      price: "+â‚¬22,000", img: new URL("../../assets/wg-insurance.jpg", import.meta.url).href   },
+  { name: "Carbon Panel",   price: "+â‚¬35,000", img: new URL("../../assets/wg-global-delivery.jpg", import.meta.url).href },
 ];
 const WHEELS = [
-  { name: "Standard Alloy", price: "+€0",      img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80" },
-  { name: "Forged Carbon",  price: "+€18,000", img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80" },
-  { name: "Titanium Sport", price: "+€28,000", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80"  },
-  { name: "Signature Ed.",  price: "+€42,000", img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80" },
+  { name: "Standard Alloy", price: "+â‚¬0",      img: new URL("../../assets/wg-private-concierge.jpg", import.meta.url).href },
+  { name: "Forged Carbon",  price: "+â‚¬18,000", img: new URL("../../assets/wg-secure-transport.jpg", import.meta.url).href },
+  { name: "Titanium Sport", price: "+â‚¬28,000", img: new URL("../../assets/wg-custom-config.jpg", import.meta.url).href  },
+  { name: "Signature Ed.",  price: "+â‚¬42,000", img: new URL("../../assets/wg-insurance.jpg", import.meta.url).href },
 ];
 const SEC_FEATURES = [
-  { icon: "📡", title: "GPS Tracking",      desc: "24/7 satellite tracking with 30-second refresh intervals. Dedicated monitoring team alerts you at every checkpoint." },
-  { icon: "🛡",  title: "Armoured Carriers", desc: "Climate-controlled reinforced carriers. Unmarked vehicles with rotating routes — invisible to external observation." },
-  { icon: "👮", title: "Security Escort",   desc: "Armed escort vehicles on request for ultra-high-value deliveries, coordinated with local law enforcement agencies." },
-  { icon: "🔒", title: "Biometric Access",  desc: "Carrier access restricted to verified biometric credentials. Full chain-of-custody documentation from door to door." },
+  { icon: "ðŸ“¡", title: "GPS Tracking",      desc: "24/7 satellite tracking with 30-second refresh intervals. Dedicated monitoring team alerts you at every checkpoint." },
+  { icon: "ðŸ›¡",  title: "Armoured Carriers", desc: "Climate-controlled reinforced carriers. Unmarked vehicles with rotating routes â€” invisible to external observation." },
+  { icon: "ðŸ‘®", title: "Security Escort",   desc: "Armed escort vehicles on request for ultra-high-value deliveries, coordinated with local law enforcement agencies." },
+  { icon: "ðŸ”’", title: "Biometric Access",  desc: "Carrier access restricted to verified biometric credentials. Full chain-of-custody documentation from door to door." },
 ];
 const MAINT_TIERS = [
-  { tier: "Silver",   price: "€8,500 / yr",   c: "#a0a0a0", features: ["Annual inspection","Oil & fluids service","Basic diagnostics","48-hr response"] },
-  { tier: "Gold",     price: "€18,000 / yr",  c: G,          features: ["Bi-annual service","Priority booking","Loaner vehicle","24-hr hotline","OEM parts"] },
-  { tier: "Platinum", price: "€38,000 / yr",  c: "#e5e0d0",  features: ["Unlimited service","Dedicated technician","Factory inspection","Concierge pickup","All parts","Valet service"] },
+  { tier: "Silver",   price: "â‚¬8,500 / yr",   c: "#a0a0a0", features: ["Annual inspection","Oil & fluids service","Basic diagnostics","48-hr response"] },
+  { tier: "Gold",     price: "â‚¬18,000 / yr",  c: G,          features: ["Bi-annual service","Priority booking","Loaner vehicle","24-hr hotline","OEM parts"] },
+  { tier: "Platinum", price: "â‚¬38,000 / yr",  c: "#e5e0d0",  features: ["Unlimited service","Dedicated technician","Factory inspection","Concierge pickup","All parts","Valet service"] },
 ];
 const INS_PLANS = [
-  { name: "Standard",  cov: "€2M",    price: "€4,200 / yr", feats: ["Theft & fire","Accident damage","Roadside assistance"] },
-  { name: "Prestige",  cov: "€8M",    price: "€9,800 / yr", feats: ["All Standard+","Track day cover","Agreed value","Global cover"] },
+  { name: "Standard",  cov: "â‚¬2M",    price: "â‚¬4,200 / yr", feats: ["Theft & fire","Accident damage","Roadside assistance"] },
+  { name: "Prestige",  cov: "â‚¬8M",    price: "â‚¬9,800 / yr", feats: ["All Standard+","Track day cover","Agreed value","Global cover"] },
   { name: "Sovereign", cov: "Agreed", price: "Bespoke",      feats: ["All Prestige+","No depreciation","Private valuation","24/7 claims"] },
 ];
 
@@ -52,24 +52,24 @@ const SERVICES = [
     id: "delivery",    n: "01",
     title: "Global Delivery",           sub: "Worldwide Logistics",
     cta: "View Delivery Routes",
-    blurb: "Your vehicle, anywhere on earth. Air freight, enclosed luxury transport and full customs clearance — managed with complete discretion from our six global hubs.",
-    img: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=85&auto=format&fit=crop",
+    blurb: "Your vehicle, anywhere on earth. Air freight, enclosed luxury transport and full customs clearance â€” managed with complete discretion from our six global hubs.",
+    img: new URL("../../assets/wg-global-delivery.jpg", import.meta.url).href,
     accent: "47+ Countries",
   },
   {
     id: "concierge",   n: "02",
     title: "Private Concierge",         sub: "Dedicated Advisor",
     cta: "Request Private Advisor",
-    blurb: "One advisor. Every detail. From first enquiry to final handover, your dedicated specialist handles sourcing, configuration and scheduling — so you simply decide.",
-    img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=85&auto=format&fit=crop",
+    blurb: "One advisor. Every detail. From first enquiry to final handover, your dedicated specialist handles sourcing, configuration and scheduling â€” so you simply decide.",
+    img: new URL("../../assets/wg-private-concierge.jpg", import.meta.url).href,
     accent: "24 / 7 Access",
   },
   {
     id: "config",      n: "03",
     title: "Custom Configuration",      sub: "Bespoke Specification",
     cta: "Explore Configurations",
-    blurb: "Manufacturer-level options unavailable elsewhere. Every surface, stitch and finish is curated to your exact specification — creating a vehicle that exists nowhere else.",
-    img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=85&auto=format&fit=crop",
+    blurb: "Manufacturer-level options unavailable elsewhere. Every surface, stitch and finish is curated to your exact specification â€” creating a vehicle that exists nowhere else.",
+    img: new URL("../../assets/wg-custom-config.jpg", import.meta.url).href,
     accent: "Unlimited Options",
   },
   {
@@ -77,28 +77,28 @@ const SERVICES = [
     title: "Secure Transport",          sub: "White-Glove Logistics",
     cta: "View Security Protocols",
     blurb: "Enclosed armoured carriers. Real-time GPS. Security escorts on request. Every kilometre of your vehicle's journey is tracked, insured and documented.",
-    img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=900&q=85&auto=format&fit=crop",
+    img: new URL("../../assets/wg-secure-transport.jpg", import.meta.url).href,
     accent: "Fully Insured",
   },
   {
     id: "maintenance", n: "05",
     title: "VIP Maintenance",           sub: "Priority Service",
     cta: "View Maintenance Program",
-    blurb: "Factory-certified technicians. Priority scheduling. Original manufacturer parts, always. The atelier service experience — anywhere in the world.",
-    img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=85&auto=format&fit=crop",
+    blurb: "Factory-certified technicians. Priority scheduling. Original manufacturer parts, always. The atelier service experience â€” anywhere in the world.",
+    img: new URL("../../assets/wg-vip-maintenance.jpg", import.meta.url).href,
     accent: "OEM Parts Only",
   },
   {
     id: "insurance",   n: "06",
     title: "Insurance & Registration",  sub: "Complete Ownership",
     cta: "View Coverage Details",
-    blurb: "Global insurance, registration and import/export documentation across every jurisdiction. Ownership begins the moment you decide — we handle the rest.",
-    img: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=900&q=85&auto=format&fit=crop",
+    blurb: "Global insurance, registration and import/export documentation across every jurisdiction. Ownership begins the moment you decide â€” we handle the rest.",
+    img: new URL("../../assets/wg-insurance.jpg", import.meta.url).href,
     accent: "Global Coverage",
   },
 ];
 
-/* ═══════════════════════ UTIL ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• UTIL â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function useInView(t = 0.08) {
   const r = useRef(null), [v, sv] = useState(false);
   useEffect(() => {
@@ -109,7 +109,7 @@ function useInView(t = 0.08) {
   return [r, v];
 }
 
-/* ═══════════════════════ MODAL SHELL ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MODAL SHELL â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function Modal({ title, sub, wide, onClose, children }) {
   useEffect(() => {
     const h = e => e.key === "Escape" && onClose();
@@ -122,7 +122,7 @@ function Modal({ title, sub, wide, onClose, children }) {
       <div className={`ml-box${wide ? " ml-wide" : ""}`} onClick={e => e.stopPropagation()}>
         <div className="ml-hdr">
           <div><div className="ml-sub">{sub}</div><div className="ml-ttl">{title}</div></div>
-          <button className="ml-x" onClick={onClose}>×</button>
+          <button className="ml-x" onClick={onClose}>Ã—</button>
         </div>
         <div className="ml-body">{children}</div>
       </div>
@@ -130,15 +130,15 @@ function Modal({ title, sub, wide, onClose, children }) {
   );
 }
 
-/* ═══════════════════════ MODAL: DELIVERY ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MODAL: DELIVERY â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function DeliveryModal({ onClose }) {
   const [ac, setAc] = useState(null);
   const [at, setAt] = useState(0);
   const city = ac !== null ? CITIES[ac] : null;
   const transports = [
-    { icon: "✈", label: "Air Freight",    desc: "Private cargo — under 48h" },
-    { icon: "🚛", label: "Enclosed Truck", desc: "Climate-controlled, GPS-tracked" },
-    { icon: "🚢", label: "Secure Sea",     desc: "Crated, insured ocean freight" },
+    { icon: "âœˆ", label: "Air Freight",    desc: "Private cargo â€” under 48h" },
+    { icon: "ðŸš›", label: "Enclosed Truck", desc: "Climate-controlled, GPS-tracked" },
+    { icon: "ðŸš¢", label: "Secure Sea",     desc: "Crated, insured ocean freight" },
   ];
   return (
     <Modal title="Global Delivery Routes" sub="Worldwide Logistics Network" wide onClose={onClose}>
@@ -208,7 +208,7 @@ function DeliveryModal({ onClose }) {
   );
 }
 
-/* ═══════════════════════ MODAL: CONCIERGE ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MODAL: CONCIERGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function ConciergeModal({ onClose }) {
   const [f, sf] = useState({ name: "", email: "", vehicle: "", msg: "" });
   const [sent, setSent] = useState(false);
@@ -220,7 +220,7 @@ function ConciergeModal({ onClose }) {
   if (sent) return (
     <Modal title="Request Received" sub="Private Concierge" onClose={onClose}>
       <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
-        <div style={{ fontSize: "2.5rem", color: G, marginBottom: "1.2rem" }}>◆</div>
+        <div style={{ fontSize: "2.5rem", color: G, marginBottom: "1.2rem" }}>â—†</div>
         <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.8rem", color: "#f0ece4", marginBottom: ".8rem" }}>Request confirmed.</div>
         <div style={{ fontSize: ".62rem", color: "rgba(255,255,255,.4)", lineHeight: 1.8, marginBottom: "2rem" }}>A dedicated advisor will contact you within 2 hours during business hours.</div>
         <button className="wgbtn" onClick={onClose}>Close</button>
@@ -239,19 +239,19 @@ function ConciergeModal({ onClose }) {
         ))}
         <div className="cf-row"><label className="cf-lbl">Vehicle of Interest</label>
           <select className="cf-in cf-sel" value={f.vehicle} onChange={e => sf({ ...f, vehicle: e.target.value })}>
-            <option value="">Select a vehicle…</option>
+            <option value="">Select a vehicleâ€¦</option>
             {["Bugatti Chiron", "Ferrari Roma", "Pagani Huayra", "Rolls-Royce Phantom", "Koenigsegg Regera", "Lamborghini Veneno", "Aston Martin Valkyrie", "Hennessey Venom F5", "Toyota Supra MK5"].map(v => <option key={v}>{v}</option>)}
           </select></div>
         <div className="cf-row"><label className="cf-lbl">Message</label>
-          <textarea className="cf-in cf-ta" placeholder="Tell us about your acquisition…" value={f.msg} onChange={e => sf({ ...f, msg: e.target.value })} /></div>
-        <button className="wgbtn wgbtn-full" onClick={submit} disabled={busy}>{busy ? "Sending…" : "Submit Request →"}</button>
+          <textarea className="cf-in cf-ta" placeholder="Tell us about your acquisitionâ€¦" value={f.msg} onChange={e => sf({ ...f, msg: e.target.value })} /></div>
+        <button className="wgbtn wgbtn-full" onClick={submit} disabled={busy}>{busy ? "Sendingâ€¦" : "Submit Request â†’"}</button>
         <div style={{ fontSize: ".44rem", color: "rgba(255,255,255,.2)", textAlign: "center", marginTop: ".8rem" }}>Your information is kept strictly confidential.</div>
       </div>
     </Modal>
   );
 }
 
-/* ═══════════════════════ MODAL: CONFIG ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MODAL: CONFIG â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function ConfigModal({ onClose }) {
   const [tab, setTab] = useState("color");
   const [sc, setSc] = useState(0);
@@ -270,7 +270,7 @@ function ConfigModal({ onClose }) {
         </div>
         <div className="cfg-right">
           <div className="cfg-tabs">
-            {[["color", "◯ Exterior"], ["interior", "◈ Interior"], ["wheels", "◉ Wheels"]].map(([k, l]) => (
+            {[["color", "â—¯ Exterior"], ["interior", "â—ˆ Interior"], ["wheels", "â—‰ Wheels"]].map(([k, l]) => (
               <button key={k} className={`cfg-tab${tab === k ? " a" : ""}`} onClick={() => changeTab(k)}>{l}</button>
             ))}
           </div>
@@ -311,14 +311,14 @@ function ConfigModal({ onClose }) {
               </div>
             </div>
           )}
-          <button className="wgbtn wgbtn-full" style={{ marginTop: "1.4rem" }}>Save Configuration →</button>
+          <button className="wgbtn wgbtn-full" style={{ marginTop: "1.4rem" }}>Save Configuration â†’</button>
         </div>
       </div>
     </Modal>
   );
 }
 
-/* ═══════════════════════ MODAL: SECURITY ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MODAL: SECURITY â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function SecurityModal({ onClose }) {
   const [a, sA] = useState(0);
   return (
@@ -336,7 +336,7 @@ function SecurityModal({ onClose }) {
           <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.8rem", fontWeight: 300, color: "#f0ece4", marginBottom: ".8rem" }}>{SEC_FEATURES[a].title}</div>
           <div style={{ width: 40, height: 1, background: `linear-gradient(to right,${G},transparent)`, marginBottom: "1.2rem" }} />
           <div style={{ fontSize: ".65rem", lineHeight: 1.9, color: "rgba(255,255,255,.5)", marginBottom: "1.5rem" }}>{SEC_FEATURES[a].desc}</div>
-          <div className="sec-badge"><span className="sec-dot" />Protocol Active — All deliveries</div>
+          <div className="sec-badge"><span className="sec-dot" />Protocol Active â€” All deliveries</div>
           <div className="sec-tracker">
             <div style={{ fontSize: ".42rem", letterSpacing: ".35em", color: "rgba(212,175,55,.45)", textTransform: "uppercase", marginBottom: ".8rem" }}>Live route simulation</div>
             <div style={{ height: 3, background: "rgba(255,255,255,.06)", marginBottom: "1rem", overflow: "hidden" }}>
@@ -357,7 +357,7 @@ function SecurityModal({ onClose }) {
   );
 }
 
-/* ═══════════════════════ MODAL: MAINTENANCE ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MODAL: MAINTENANCE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function MaintenanceModal({ onClose }) {
   const [sel, setSel] = useState(1);
   return (
@@ -369,14 +369,14 @@ function MaintenanceModal({ onClose }) {
               <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.4rem", color: t.c, marginBottom: ".3rem" }}>{t.tier}</div>
               <div style={{ fontSize: ".55rem", color: "rgba(255,255,255,.4)", marginBottom: ".8rem" }}>{t.price}</div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {t.features.map((f, j) => <li key={j} style={{ fontSize: ".48rem", color: "rgba(255,255,255,.35)", padding: ".18rem 0" }}>◆  {f}</li>)}
+                {t.features.map((f, j) => <li key={j} style={{ fontSize: ".48rem", color: "rgba(255,255,255,.35)", padding: ".18rem 0" }}>â—†  {f}</li>)}
               </ul>
               {sel === i && <div style={{ position: "absolute", top: ".7rem", right: ".7rem", fontSize: ".38rem", color: G, border: `1px solid rgba(212,175,55,.3)`, padding: ".2rem .5rem", letterSpacing: ".2em", textTransform: "uppercase" }}>Selected</div>}
             </button>
           ))}
         </div>
         <div>
-          <div style={{ fontSize: ".42rem", letterSpacing: ".4em", color: "rgba(212,175,55,.5)", textTransform: "uppercase", marginBottom: "1.2rem", paddingBottom: ".7rem", borderBottom: "1px solid rgba(212,175,55,.1)" }}>Service Schedule — {MAINT_TIERS[sel].tier}</div>
+          <div style={{ fontSize: ".42rem", letterSpacing: ".4em", color: "rgba(212,175,55,.5)", textTransform: "uppercase", marginBottom: "1.2rem", paddingBottom: ".7rem", borderBottom: "1px solid rgba(212,175,55,.1)" }}>Service Schedule â€” {MAINT_TIERS[sel].tier}</div>
           {[["Month 1","Delivery inspection & handover",true],["Month 3","Initial 3-month check",true],["Month 6","Mid-year fluid & systems service",false],["Month 12","Annual factory inspection",false],["Month 18","Mid-cycle performance optimisation",false],["Month 24","Full 2-year comprehensive service",false]].map(([m, t, done], i) => (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: ".8rem", padding: ".65rem 0", position: "relative" }}>
               <div style={{ width: 12, height: 12, borderRadius: "50%", background: done ? G : "transparent", border: `1px solid ${done ? G : "rgba(212,175,55,.3)"}`, flexShrink: 0, marginTop: ".25rem" }} />
@@ -387,14 +387,14 @@ function MaintenanceModal({ onClose }) {
               </div>
             </div>
           ))}
-          <button className="wgbtn" style={{ marginTop: "1.2rem" }}>Book Priority Service →</button>
+          <button className="wgbtn" style={{ marginTop: "1.2rem" }}>Book Priority Service â†’</button>
         </div>
       </div>
     </Modal>
   );
 }
 
-/* ═══════════════════════ MODAL: INSURANCE ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MODAL: INSURANCE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function InsuranceModal({ onClose }) {
   const [sel, setSel] = useState(1);
   return (
@@ -407,7 +407,7 @@ function InsuranceModal({ onClose }) {
               <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1rem", color: G, marginBottom: ".25rem" }}>{p.cov}</div>
               <div style={{ fontSize: ".5rem", color: "rgba(255,255,255,.35)", marginBottom: ".7rem" }}>{p.price}</div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {p.feats.map((f, j) => <li key={j} style={{ fontSize: ".46rem", color: "rgba(255,255,255,.35)", padding: ".2rem 0" }}>✓ {f}</li>)}
+                {p.feats.map((f, j) => <li key={j} style={{ fontSize: ".46rem", color: "rgba(255,255,255,.35)", padding: ".2rem 0" }}>âœ“ {f}</li>)}
               </ul>
             </button>
           ))}
@@ -420,17 +420,17 @@ function InsuranceModal({ onClose }) {
           <div style={{ fontSize: ".42rem", letterSpacing: ".35em", color: "rgba(212,175,55,.5)", textTransform: "uppercase", marginBottom: ".9rem" }}>Registration Included</div>
           {["Document preparation & filing","Import / export clearance","Customs duty management","Legal ownership transfer","International re-registration"].map((s, i) => (
             <div key={i} style={{ display: "flex", gap: ".7rem", padding: ".5rem 0", borderBottom: "1px solid rgba(212,175,55,.06)", fontSize: ".55rem", color: "rgba(255,255,255,.5)", alignItems: "center" }}>
-              <span style={{ color: "rgba(212,175,55,.5)", fontSize: ".45rem" }}>◆</span>{s}
+              <span style={{ color: "rgba(212,175,55,.5)", fontSize: ".45rem" }}>â—†</span>{s}
             </div>
           ))}
-          <button className="wgbtn" style={{ marginTop: "2rem" }}>Get a Quote →</button>
+          <button className="wgbtn" style={{ marginTop: "2rem" }}>Get a Quote â†’</button>
         </div>
       </div>
     </Modal>
   );
 }
 
-/* ═══════════════════════ SERVICE ROW ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SERVICE ROW â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function ServiceRow({ s, idx, onCta }) {
   const [ref, vis] = useInView(0.06);
   const even = idx % 2 === 0;
@@ -449,12 +449,12 @@ function ServiceRow({ s, idx, onCta }) {
       <div className="sr-content">
         <div className="sr-eyebrow">{s.sub}</div>
         <h3 className="sr-title">{s.title}</h3>
-        <div className="sr-divider"><span className="sr-div-line" /><span className="sr-div-dot">◆</span><span className="sr-div-line" /></div>
+        <div className="sr-divider"><span className="sr-div-line" /><span className="sr-div-dot">â—†</span><span className="sr-div-line" /></div>
         <p className="sr-blurb">{s.blurb}</p>
         <button className="sr-cta" onClick={() => onCta(s.id)}>
           <span className="sr-cta-inner">
             <span>{s.cta}</span>
-            <span className="sr-arr">→</span>
+            <span className="sr-arr">â†’</span>
           </span>
         </button>
       </div>
@@ -462,7 +462,7 @@ function ServiceRow({ s, idx, onCta }) {
   );
 }
 
-/* ═══════════════════════ MAIN ═══════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MAIN â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function WhiteGloveServices() {
   const [hRef, hVis] = useInView(0.05);
   const [sRef, sVis] = useInView(0.1);
@@ -533,7 +533,7 @@ export default function WhiteGloveServices() {
 
         .sr-blurb{font-size:.68rem;line-height:1.95;font-weight:300;color:rgba(255,255,255,.42);margin:0 0 2.2rem;max-width:420px;}
 
-        /* CTA — ALWAYS VISIBLE */
+        /* CTA â€” ALWAYS VISIBLE */
         .sr-cta{display:inline-flex;align-items:stretch;cursor:pointer;background:transparent;border:none;padding:0;text-align:left;}
         .sr-cta-inner{display:flex;align-items:center;gap:.9rem;padding:.9rem 2rem;border:1px solid rgba(212,175,55,.35);color:rgba(212,175,55,.8);font-family:'Montserrat',sans-serif;font-size:.48rem;letter-spacing:.28em;text-transform:uppercase;position:relative;overflow:hidden;transition:border-color .4s ease,color .4s ease,letter-spacing .4s ease;}
         .sr-cta-inner::before{content:'';position:absolute;inset:0;background:rgba(212,175,55,.08);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.23,1,.32,1);}
@@ -737,9 +737,11 @@ export default function WhiteGloveServices() {
           <div className="wg-clbl">Private Acquisition</div>
           <h3 className="wg-ctit">Begin Your <em>Acquisition</em></h3>
           <p className="wg-csub">Reserved exclusively for those who expect nothing less than extraordinary.</p>
-          <button className="wgbtn" onClick={() => setModal("concierge")}>Request Private Concierge →</button>
+          <button className="wgbtn" onClick={() => setModal("concierge")}>Request Private Concierge â†’</button>
         </div>
       </div>
     </section>
   );
 }
+
+

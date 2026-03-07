@@ -1,14 +1,18 @@
-/* ═══════════════════════════════════════════════════════════════
+﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant:ital,wght@0,300;1,300&family=Libre+Bodoni:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PRESTIGE APP.CSS - ULTRA LUXURY EDITION
-   Inspirado en: Rolls-Royce, Patek Philippe, Hermès, Bvlgari
-   Transformación completa hacia la alta costura digital
-   ═══════════════════════════════════════════════════════════════ */
+   Inspirado en: Rolls-Royce, Patek Philippe, HermÃ¨s, Bvlgari
+   TransformaciÃ³n completa hacia la alta costura digital
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600&family=Montserrat:wght@100;200;300;400;500;600&display=swap');
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    VARIABLES GLOBALES DE ULTRA LUJO
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 :root {
   /* ---- PALETA NOIR PROFUNDO ---- */
   --bg-dark: #000000;
@@ -37,7 +41,7 @@
   --border-gold: rgba(212, 175, 55, 0.3);
   --border-accent: rgba(212, 175, 55, 0.5);
   
-  /* ---- TIPOGRAFÍAS DE ALTA GAMA ---- */
+  /* ---- TIPOGRAFÃAS DE ALTA GAMA ---- */
   --font-sans: 'Montserrat', 'Inter', 'Futura', -apple-system, sans-serif;
   --font-serif: 'Cormorant Garamond', 'Playfair Display', 'Didot', serif;
   --font-display: 'Cinzel', 'Trajan Pro', serif;
@@ -47,16 +51,16 @@
   --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-silk: cubic-bezier(0.77, 0, 0.175, 1);
   
-  /* ---- SOMBRAS CINEMATOGRÁFICAS ---- */
+  /* ---- SOMBRAS CINEMATOGRÃFICAS ---- */
   --shadow-ambient: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.5);
   --shadow-dramatic: 0 20px 60px rgba(0, 0, 0, 0.7);
   --shadow-gold: 0 0 40px rgba(212, 175, 55, 0.2);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BASE & RESET PREMIUM
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -68,9 +72,9 @@
   color: var(--text-primary);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BODY - EXPERIENCIA INMERSIVA
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 body {
   margin: 0;
   background: 
@@ -88,7 +92,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Efecto de Partículas Doradas Sutiles */
+/* Efecto de PartÃ­culas Doradas Sutiles */
 body::before {
   content: "";
   position: fixed;
@@ -119,9 +123,9 @@ body::before {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CONTENEDOR PRINCIPAL
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .app-container {
   min-height: 100vh;
   display: flex;
@@ -130,9 +134,9 @@ body::before {
   z-index: 2;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   TÍTULOS - TIPOGRAFÍA MAJESTUOSA
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   TÃTULOS - TIPOGRAFÃA MAJESTUOSA
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .section-title,
 .panel-title {
   text-align: center;
@@ -148,7 +152,7 @@ body::before {
   text-shadow: 0 0 30px var(--gold-glow);
 }
 
-/* Línea Decorativa Bajo Título */
+/* LÃ­nea Decorativa Bajo TÃ­tulo */
 .section-title::after,
 .panel-title::after {
   content: "";
@@ -172,7 +176,7 @@ body::before {
 /* Ornamento Diamante Central */
 .section-title::before,
 .panel-title::before {
-  content: "◆";
+  content: "â—†";
   position: absolute;
   top: -2rem;
   left: 50%;
@@ -183,9 +187,9 @@ body::before {
   text-shadow: 0 0 20px var(--gold-glow);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECCIÓN SHOWCASE - GALERÍA PREMIUM
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECCIÃ“N SHOWCASE - GALERÃA PREMIUM
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .section-showcase {
   background: 
     linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.4) 50%, transparent 100%),
@@ -196,7 +200,7 @@ body::before {
   position: relative;
 }
 
-/* Efecto de Iluminación Superior */
+/* Efecto de IluminaciÃ³n Superior */
 .section-showcase::before {
   content: "";
   position: absolute;
@@ -213,9 +217,9 @@ body::before {
   pointer-events: none;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    GRID DE TARJETAS - LAYOUT ESPACIOSO
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -224,9 +228,9 @@ body::before {
   position: relative;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SUITE DE INTERACCIONES - ZONA EXPERIENCIAL
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .interaction-suite {
   display: flex;
   flex-direction: column;
@@ -273,9 +277,9 @@ body::before {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PANEL INDIVIDUAL - CONTENEDOR ELEGANTE
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .interaction-panel {
   display: flex;
   flex-direction: column;
@@ -284,9 +288,9 @@ body::before {
   z-index: 2;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   BARRA DE PESTAÑAS - MENÚ SOFISTICADO
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   BARRA DE PESTAÃ‘AS - MENÃš SOFISTICADO
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .tab-bar {
   display: flex;
   justify-content: center;
@@ -298,7 +302,7 @@ body::before {
   position: relative;
 }
 
-/* Sombra Decorativa Bajo Menú */
+/* Sombra Decorativa Bajo MenÃº */
 .tab-bar::after {
   content: "";
   position: absolute;
@@ -316,9 +320,9 @@ body::before {
   opacity: 0.5;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BOTONES - ELEMENTOS INTERACTIVOS DE LUJO
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 button {
   background: linear-gradient(
     180deg,
@@ -419,9 +423,9 @@ button:active {
   transition: transform 0.1s ease;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SUPERFICIE DE EXHIBICIÓN - VITRINA PREMIUM
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SUPERFICIE DE EXHIBICIÃ“N - VITRINA PREMIUM
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .display-surface {
   background: 
     radial-gradient(ellipse at top, rgba(255, 255, 255, 0.05) 0%, transparent 60%),
@@ -448,7 +452,7 @@ button:active {
   overflow: hidden;
 }
 
-/* Iluminación de Joyería */
+/* IluminaciÃ³n de JoyerÃ­a */
 .display-surface::before {
   content: "";
   position: absolute;
@@ -492,9 +496,9 @@ button:active {
   pointer-events: none;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ETIQUETAS & VALORES - TIPOGRAFÍA REFINADA
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   ETIQUETAS & VALORES - TIPOGRAFÃA REFINADA
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .label {
   display: block;
   font-family: var(--font-sans);
@@ -509,7 +513,7 @@ button:active {
   text-shadow: 0 0 15px var(--gold-glow);
 }
 
-/* Línea Bajo Etiqueta */
+/* LÃ­nea Bajo Etiqueta */
 .label::after {
   content: "";
   position: absolute;
@@ -564,9 +568,9 @@ button:active {
   opacity: 0.7;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ANIMACIONES CINEMATOGRÁFICAS
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   ANIMACIONES CINEMATOGRÃFICAS
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .fade-in {
   animation: luxuryFadeIn 1s var(--ease-luxury) forwards;
 }
@@ -588,9 +592,9 @@ button:active {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE LUXURY - ADAPTACIÓN ELEGANTE
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   RESPONSIVE LUXURY - ADAPTACIÃ“N ELEGANTE
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 @media (max-width: 1200px) {
   .interaction-suite {
     padding: 6rem 6%;
@@ -675,9 +679,9 @@ button:active {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    UTILIDADES PREMIUM
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* Scroll Suave */
 html {
@@ -707,7 +711,338 @@ html {
   background: var(--gold-light);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FIN - PRESTIGE APP.CSS
-   © Ultra Luxury Edition - Crafted with Excellence
-   ═══════════════════════════════════════════════════════════════ */
+   Â© Ultra Luxury Edition - Crafted with Excellence
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* ═══════════════════════════════════════════════════════
+   FRANCIS LUXOR MOTORS — TYPOGRAPHY SYSTEM
+   H1 → Didot  |  H2/H3 → Playfair Display  |  p → Cormorant
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --font-didot:     'Didot','GFS Didot','Libre Bodoni','Bodoni MT','Playfair Display',serif;
+  --font-playfair:  'Playfair Display','Cormorant Garamond',Georgia,serif;
+  --font-cormorant: 'Cormorant Garamond','Cormorant',Georgia,serif;
+  --gold: #D4AF37;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+h1 {
+  font-family: var(--font-didot) !important;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-family: var(--font-playfair) !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: var(--font-playfair) !important;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-playfair) !important;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+p, span, li, figcaption, blockquote {
+  font-family: var(--font-cormorant) !important;
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.015em;
+}
+
+blockquote {
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: #c8b89a;
+}
+
+/* WHITE-GLOVE SERVICES — special rule */
+.white-glove-title {
+  font-family: var(--font-didot) !important;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.28em;
+  align-items: baseline;
+}
+.wg-white    { font-family: var(--font-didot) !important; color: #fff; font-style: normal; }
+.wg-services { font-family: var(--font-didot) !important; color: var(--gold); font-style: italic; text-shadow: 0 0 28px rgba(212,175,55,0.3); }
+
+/* Utility classes */
+.font-didot       { font-family: var(--font-didot)     !important; }
+.font-didot-i     { font-family: var(--font-didot)     !important; font-style: italic !important; }
+.font-playfair    { font-family: var(--font-playfair)  !important; }
+.font-cormorant   { font-family: var(--font-cormorant) !important; }
+.lx-gold          { color: var(--gold) !important; }
+.lx-gold-i        { color: var(--gold) !important; font-style: italic !important; }
+
+.lx-label {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.62rem;
+  letter-spacing: 0.44em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* Component overrides */
+.card__title       { font-family: var(--font-playfair)  !important; letter-spacing: 0.04em !important; }
+.card__price       { font-family: var(--font-playfair)  !important; color: var(--gold)     !important; letter-spacing: 0.06em !important; }
+.card__description { font-family: var(--font-cormorant) !important; font-weight: 300       !important; line-height: 1.8 !important; }
+.card__badge       { font-family: 'Montserrat',sans-serif !important; font-size: 0.5rem !important; letter-spacing: 0.35em !important; }
+
+.inv-title         { font-family: var(--font-didot)     !important; letter-spacing: 0.08em !important; }
+.inv-info-title,
+.inv-photo-name,
+.inv-card-name     { font-family: var(--font-playfair)  !important; letter-spacing: 0.04em !important; }
+.inv-desc-txt,
+.inv-meta-val,
+.inv-sv            { font-family: var(--font-cormorant) !important; font-weight: 300 !important; line-height: 1.85 !important; }
+.inv-lot-num,
+.inv-footer-txt    { font-family: var(--font-didot)     !important; }
+.inv-sub           { font-family: var(--font-cormorant) !important; font-style: italic !important; }
+.inv-ph-txt        { font-family: var(--font-playfair)  !important; font-style: italic !important; }
+
+.value             { font-family: var(--font-playfair)  !important; font-weight: 400 !important; letter-spacing: 0.04em !important; }
+.value-text        { font-family: var(--font-cormorant) !important; font-weight: 300 !important; line-height: 1.85 !important; font-size: 1.05rem !important; }
+.placeholder       { font-family: var(--font-cormorant) !important; font-style: italic !important; }
+
+
+
+
+/* ── TYPOGRAPHY OVERRIDE: Didot-style thin serifs ── */
+:root {
+  --font-didot:     'Libre Bodoni','Bodoni MT','Bodoni 72',Georgia,serif !important;
+  --font-playfair:  'Cormorant Garamond','EB Garamond',Georgia,serif !important;
+  --font-cormorant: 'Cormorant Garamond','Cormorant',Georgia,serif !important;
+}
+
+h1, .wg-white, .wg-services,
+.white-glove-title,
+.inv-title, .inv-lot-num, .inv-footer-txt,
+.lx-hero-title {
+  font-family: 'Libre Bodoni','Bodoni MT','Bodoni 72',Georgia,serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.06em !important;
+  line-height: 1.05 !important;
+}
+
+h2, h3,
+.inv-info-title, .inv-photo-name, .inv-card-name,
+.card__title, .value, .lx-section-title {
+  font-family: 'Cormorant Garamond','EB Garamond',Georgia,serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.15 !important;
+}
+
+p, span, li, blockquote,
+.card__description, .inv-desc-txt, .inv-sv,
+.value-text, .placeholder, .lx-body {
+  font-family: 'Cormorant','Cormorant Garamond',Georgia,serif !important;
+  font-weight: 300 !important;
+  line-height: 1.85 !important;
+}
+
+.wg-services {
+  font-style: italic !important;
+  color: #D4AF37 !important;
+}
+
+
+/* ── SCRIPT TITLE FONT — Caligrafía elegante ── */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+:root {
+  --font-script: 'Great Vibes', 'Pinyon Script', cursive;
+}
+
+h1,
+.white-glove-title,
+.wg-white,
+.inv-title,
+.lx-hero-title {
+  font-family: 'Great Vibes', 'Pinyon Script', cursive !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.1 !important;
+}
+
+.wg-services {
+  font-family: 'Great Vibes', 'Pinyon Script', cursive !important;
+  font-style: normal !important;
+  color: #D4AF37 !important;
+  text-shadow: 0 0 30px rgba(212,175,55,0.35) !important;
+}
+
+h2, h3,
+.inv-info-title, .inv-photo-name, .inv-card-name,
+.card__title, .value {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: 0.03em !important;
+}
+
+
+/* ══ FINAL TYPOGRAPHY FIX — Cormorant Garamond italic for all titles ══ */
+h1,
+.inv-title,
+.lx-hero-title,
+[class*="hero"] h1,
+[class*="header"] h1 {
+  font-family: 'Cormorant Garamond', 'Libre Bodoni', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.05 !important;
+  font-size: clamp(3.5rem, 9vw, 8rem) !important;
+}
+
+h2, h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: 0.04em !important;
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+}
+
+.wg-white {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-style: italic !important;
+  color: #fff !important;
+  font-size: clamp(3.5rem, 8vw, 7rem) !important;
+}
+
+.wg-services {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-style: italic !important;
+  color: #D4AF37 !important;
+  font-size: clamp(3.5rem, 8vw, 7rem) !important;
+}
+
+
+/* ══ TITLE SIZE FIX — restore original sizes, keep Cormorant italic ══ */
+h1,
+.inv-title,
+.lx-hero-title,
+[class*="hero"] h1,
+[class*="header"] h1 {
+  font-size: revert !important;
+}
+
+h2, h3 {
+  font-size: revert !important;
+}
+
+.wg-white, .wg-services {
+  font-size: revert !important;
+}
+
+
+/* ══ TITLE SIZE — slightly larger ══ */
+h1,
+[class*="hero"] h1,
+[class*="header"] h1 {
+  font-size: 1.15em !important;
+}
+
+h2 { font-size: 1.15em !important; }
+h3 { font-size: 1.15em !important; }
+
+.wg-white, .wg-services { font-size: 1.15em !important; }
+
+
+/* ══ TITLE SIZE — bigger ══ */
+h1,
+[class*="hero"] h1,
+[class*="header"] h1 {
+  font-size: 1.4em !important;
+}
+
+h2 { font-size: 1.4em !important; }
+h3 { font-size: 1.4em !important; }
+
+.wg-white, .wg-services { font-size: 1.4em !important; }
+
+
+/* ══ TITLE SIZE — final boost ══ */
+h1,
+[class*="hero"] h1,
+[class*="header"] h1 {
+  font-size: 1.7em !important;
+}
+
+h2 { font-size: 1.7em !important; }
+h3 { font-size: 1.6em !important; }
+
+.wg-white, .wg-services { font-size: 1.7em !important; }
+
+
+/* ══ TITLE SIZE — maximum elegance ══ */
+h1,
+[class*="hero"] h1,
+[class*="header"] h1 {
+  font-size: 2em !important;
+}
+
+h2 { font-size: 2em !important; }
+h3 { font-size: 1.9em !important; }
+
+.wg-white, .wg-services { font-size: 2em !important; }
+
+
+/* ══ SWAP SIZES — Francis Luxure ↔ Exclusive Fleet ══ */
+h1 { font-size: 1.2em !important; }
+h2 { font-size: 2.5em !important; }
+h3 { font-size: 2.3em !important; }
+
+
+/* ══ SWAP SIZES — Francis Luxure ↔ Exclusive Fleet ══ */
+h1 { font-size: 1.2em !important; }
+h2 { font-size: 2.5em !important; }
+h3 { font-size: 2.3em !important; }
+
+
+/* ══ SWAP SIZES — Francis Luxure ↔ Exclusive Fleet ══ */
+h1 { font-size: 1.2em !important; }
+h2 { font-size: 2.5em !important; }
+h3 { font-size: 2.3em !important; }
+
+
+/* ══ TITLE SIZE — maximum elegance ══ */
+h1,
+[class*="hero"] h1,
+[class*="header"] h1 {
+  font-size: 2em !important;
+}
+
+h2 { font-size: 2em !important; }
+h3 { font-size: 1.9em !important; }
+
+.wg-white, .wg-services { font-size: 2em !important; }
+
+
+/* ══ SR TITLE — slightly larger ══ */
+.sr-title { font-size: clamp(2.2rem, 3.5vw, 3.5rem) !important; }
+

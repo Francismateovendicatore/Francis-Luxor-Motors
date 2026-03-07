@@ -1,0 +1,778 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FRANCIS LUXOR MOTORS — LUXURY TYPOGRAPHY SYSTEM
+   Didot · Playfair Display · Cormorant Garamond
+   The definitive typographic identity of a hypercar atelier.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant:ital,wght@0,300;1,300&family=Montserrat:wght@100;200;300;400;500;600&family=Cinzel:wght@400;500;600&display=swap');
+
+/* ── DIDOT FALLBACK STACK ────────────────────────────────────────── */
+/* True Didot loads from system; if unavailable → Libre Bodoni CDN  */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap');
+
+/* ─────────────────────────────────────────────────────────────────
+   CSS CUSTOM PROPERTIES
+   ───────────────────────────────────────────────────────────────── */
+:root {
+  /* FONT STACKS */
+  --font-didot:     'Didot', 'GFS Didot', 'Libre Bodoni', 'Bodoni MT', 'Bodoni 72', 'Playfair Display', serif;
+  --font-playfair:  'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-cormorant: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+  --font-sans:      'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-display:   'Cinzel', 'Trajan Pro', serif;
+
+  /* COLOUR PALETTE */
+  --bg-dark:      #000000;
+  --bg-panel:     #0a0a0a;
+  --bg-elevated:  #111111;
+  --bg-glass:     rgba(255, 255, 255, 0.02);
+
+  --gold:         #D4AF37;
+  --gold-light:   #F4D03F;
+  --gold-deep:    #C29D2E;
+  --gold-shimmer: #E8C66F;
+  --gold-shadow:  rgba(212, 175, 55, 0.25);
+  --gold-glow:    rgba(212, 175, 55, 0.15);
+  --gold-muted:   #C9A84C;
+
+  --text-primary:   #ffffff;
+  --text-secondary: #b8b8b8;
+  --text-muted:     #666666;
+  --text-whisper:   #404040;
+
+  --glass:          rgba(255, 255, 255, 0.03);
+  --glass-strong:   rgba(255, 255, 255, 0.06);
+  --border-subtle:  rgba(255, 255, 255, 0.08);
+  --border-gold:    rgba(212, 175, 55, 0.3);
+  --border-accent:  rgba(212, 175, 55, 0.5);
+
+  --ease-luxury:  cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-silk:    cubic-bezier(0.77, 0, 0.175, 1);
+
+  --shadow-ambient:  0 2px 8px rgba(0,0,0,0.3);
+  --shadow-elevated: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-dramatic: 0 20px 60px rgba(0,0,0,0.7);
+  --shadow-gold:     0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   BASE & RESET
+   ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at top, rgba(212,175,55,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(212,175,55,0.02) 0%, transparent 50%),
+    var(--bg-dark);
+  background-attachment: fixed;
+  color: var(--text-secondary);
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* Particle shimmer layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(1px 1px at 20% 30%, rgba(212,175,55,0.1), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(212,175,55,0.08), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.06), transparent),
+    radial-gradient(1px 1px at 80% 10%, rgba(212,175,55,0.09), transparent);
+  background-size: 300% 300%;
+  animation: particleFloat 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+@keyframes particleFloat {
+  0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 10%; opacity: 0.3; }
+  50%       { background-position: 100% 100%, 0% 0%, 60% 40%, 20% 90%; opacity: 0.5; }
+}
+
+::selection {
+  background: var(--gold-shadow);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  TYPOGRAPHIC HIERARCHY
+   ───────────────────────────────────────────────────────────────── */
+
+/* H1 — DIDOT — Principal Titles */
+h1 {
+  font-family: var(--font-didot);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  text-rendering: optimizeLegibility;
+}
+
+/* H2 — PLAYFAIR DISPLAY — Section Titles */
+h2 {
+  font-family: var(--font-playfair);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  color: #f0ebe2;
+}
+
+/* H3 — PLAYFAIR DISPLAY — Subtitles */
+h3 {
+  font-family: var(--font-playfair);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  color: #e8e0d0;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-playfair);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* BODY — CORMORANT GARAMOND */
+p, span, li, td, th, figcaption {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.015em;
+}
+
+blockquote {
+  font-family: var(--font-cormorant);
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+  color: #c8b89a;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  WHITE-GLOVE SERVICES — SPECIAL RULE
+   .white-glove-title wraps the full heading
+   .wg-white  → Didot, white
+   .wg-services → Didot italic, gold
+   ───────────────────────────────────────────────────────────────── */
+.white-glove-title {
+  font-family: var(--font-didot);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.28em;
+  align-items: baseline;
+}
+
+.wg-white {
+  font-family: var(--font-didot);
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.wg-services {
+  font-family: var(--font-didot);
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 28px rgba(212,175,55,0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  UTILITY CLASSES — LX- PREFIX
+   ───────────────────────────────────────────────────────────────── */
+
+/* Didot */
+.font-didot         { font-family: var(--font-didot) !important; }
+.font-didot-italic  { font-family: var(--font-didot) !important; font-style: italic !important; }
+
+/* Playfair */
+.font-playfair      { font-family: var(--font-playfair) !important; }
+.font-playfair-i    { font-family: var(--font-playfair) !important; font-style: italic !important; }
+
+/* Cormorant */
+.font-cormorant     { font-family: var(--font-cormorant) !important; }
+.font-cormorant-i   { font-family: var(--font-cormorant) !important; font-style: italic !important; }
+
+/* Gold */
+.lx-gold   { color: var(--gold) !important; }
+.lx-gold-i { color: var(--gold) !important; font-style: italic !important; }
+.lx-white  { color: #ffffff !important; }
+
+/* Editorial micro-label (Montserrat ALL CAPS) */
+.lx-label {
+  font-family: var(--font-sans) !important;
+  font-size: 0.62rem;
+  letter-spacing: 0.44em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* Hero title */
+.lx-hero-title {
+  font-family: var(--font-didot) !important;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  color: #fff;
+}
+
+/* Section title */
+.lx-section-title {
+  font-family: var(--font-playfair) !important;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  color: #f0ebe2;
+}
+
+/* Card title */
+.lx-card-title {
+  font-family: var(--font-playfair) !important;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  color: #e8e0d0;
+}
+
+/* Body copy */
+.lx-body {
+  font-family: var(--font-cormorant) !important;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.85;
+  letter-spacing: 0.015em;
+  color: #a09080;
+}
+
+/* Price / number display */
+.lx-price {
+  font-family: var(--font-playfair) !important;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+
+/* Badge (category) */
+.lx-badge {
+  font-family: var(--font-sans) !important;
+  font-size: 0.5rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* Caption */
+.lx-caption {
+  font-family: var(--font-cormorant) !important;
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: #666;
+}
+
+/* Divider */
+.lx-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 1.5rem auto;
+}
+
+.lx-rule {
+  border: none;
+  border-top: 1px solid rgba(212,175,55,0.2);
+  margin: 3rem 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  COMPONENT OVERRIDES — Card, Section, Inventory, Valuation
+   ───────────────────────────────────────────────────────────────── */
+
+/* CoreConcept card */
+.card__title {
+  font-family: var(--font-playfair) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+  color: #e8e0d0 !important;
+}
+.card__price {
+  font-family: var(--font-playfair) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.06em !important;
+  color: var(--gold) !important;
+}
+.card__badge {
+  font-family: var(--font-sans) !important;
+  font-size: 0.5rem !important;
+  letter-spacing: 0.35em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  color: var(--gold) !important;
+}
+.card__description {
+  font-family: var(--font-cormorant) !important;
+  font-weight: 300 !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.01em !important;
+}
+.card__action {
+  font-family: var(--font-sans) !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+}
+
+/* Section component heading */
+.section__title,
+[class*="section"] > h2,
+[class*="section"] > h3 {
+  font-family: var(--font-playfair) !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* InventorySpecs */
+.inv-title {
+  font-family: var(--font-didot) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.08em !important;
+}
+.inv-sub {
+  font-family: var(--font-cormorant) !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.06em !important;
+  font-style: italic !important;
+}
+.inv-info-title,
+.inv-photo-name {
+  font-family: var(--font-playfair) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+}
+.inv-card-name {
+  font-family: var(--font-playfair) !important;
+  letter-spacing: 0.03em !important;
+}
+.inv-desc-txt {
+  font-family: var(--font-cormorant) !important;
+  font-weight: 300 !important;
+  line-height: 1.85 !important;
+  font-size: 1rem !important;
+}
+.inv-meta-val {
+  font-family: var(--font-cormorant) !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.02em !important;
+}
+.inv-meta-label,
+.inv-sl,
+.inv-badge-txt,
+.inv-gal-label,
+.inv-card-badge,
+.inv-info-label,
+.inv-lot-label,
+.inv-photo-cat {
+  font-family: var(--font-sans) !important;
+  letter-spacing: 0.32em !important;
+  font-weight: 500 !important;
+}
+.inv-sv {
+  font-family: var(--font-cormorant) !important;
+  font-size: 1.15rem !important;
+  font-weight: 300 !important;
+}
+.inv-lot-num {
+  font-family: var(--font-didot) !important;
+  font-weight: 400 !important;
+}
+.inv-ph-txt {
+  font-family: var(--font-playfair) !important;
+  font-style: italic !important;
+}
+.inv-footer-txt {
+  font-family: var(--font-didot) !important;
+  font-style: italic !important;
+}
+
+/* ValuationAssessment */
+.value {
+  font-family: var(--font-playfair) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em !important;
+}
+.value-text {
+  font-family: var(--font-cormorant) !important;
+  font-weight: 300 !important;
+  line-height: 1.85 !important;
+  font-size: 1.05rem !important;
+}
+.label {
+  font-family: var(--font-sans) !important;
+  letter-spacing: 0.48em !important;
+  font-size: 0.58rem !important;
+  font-weight: 400 !important;
+}
+.placeholder {
+  font-family: var(--font-cormorant) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.12em !important;
+  font-size: 1rem !important;
+}
+
+/* Section + Panel titles */
+.section-title,
+.panel-title {
+  font-family: var(--font-display) !important;
+  letter-spacing: 0.42em !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  BUTTONS
+   ───────────────────────────────────────────────────────────────── */
+button {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.04) 0%,
+    rgba(255,255,255,0.01) 100%
+  );
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 1rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  cursor: pointer;
+  transition: all 0.6s var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 0 rgba(212,175,55,0), inset 0 1px 0 rgba(255,255,255,0.05);
+  outline: none;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -150%;
+  width: 60%; height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.3) 50%,
+    rgba(255,255,255,0.05) 75%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 1s var(--ease-silk);
+  pointer-events: none;
+}
+
+button:hover,
+button:focus {
+  border-color: var(--border-accent);
+  color: var(--gold);
+  background: radial-gradient(ellipse at center, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 100%);
+  box-shadow: 0 0 30px var(--gold-glow), 0 8px 25px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.2);
+  transform: translateY(-2px) scale(1.02);
+}
+
+button:hover::after { left: 150%; transition: left 1.2s var(--ease-silk); }
+button:active { transform: translateY(0) scale(0.98); transition: transform 0.1s ease; }
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  STRUCTURAL LAYOUT (preserved from original)
+   ───────────────────────────────────────────────────────────────── */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.section-showcase {
+  background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%), var(--bg-dark);
+  padding: 8rem 2rem;
+  max-width: 1800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-showcase::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%; height: 200px;
+  background: radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.section-title,
+.panel-title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  font-weight: 400;
+  margin-bottom: 4rem;
+  color: var(--gold);
+  font-size: 1rem;
+  font-family: var(--font-display);
+  position: relative;
+  padding-bottom: 1.5rem;
+  text-shadow: 0 0 30px var(--gold-glow);
+}
+
+.section-title::after,
+.panel-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, transparent);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.section-title::before,
+.panel-title::before {
+  content: "◆";
+  position: absolute;
+  top: -2rem; left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 0.6rem;
+  opacity: 0.6;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 3rem;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.interaction-suite {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  padding: 8rem 10%;
+  background: linear-gradient(to bottom, var(--bg-dark) 0%, rgba(10,10,10,0.8) 30%, rgba(15,15,15,0.9) 70%, var(--bg-dark) 100%);
+  border-top: 1px solid var(--border-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.interaction-suite::before {
+  content: "";
+  position: absolute;
+  top: -50%; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at center, rgba(212,175,55,0.05) 0%, transparent 50%);
+  animation: ambientGlow 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ambientGlow {
+  0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 0.6; transform: translateX(-50%) scale(1.1); }
+}
+
+.interaction-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.tab-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  padding: 0;
+  list-style: none;
+  position: relative;
+}
+
+.display-surface {
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 60%), linear-gradient(180deg, var(--glass-strong) 0%, var(--glass) 100%);
+  border: 1px solid var(--border-subtle);
+  border-top-color: rgba(255,255,255,0.12);
+  padding: 4rem 5rem;
+  text-align: center;
+  backdrop-filter: blur(20px) saturate(150%);
+  width: 100%;
+  max-width: 800px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -1px 0 rgba(0,0,0,0.3), var(--shadow-dramatic);
+  position: relative;
+  overflow: hidden;
+}
+
+.display-surface::before {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 30%);
+  animation: jewelrySpotlight 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes jewelrySpotlight {
+  0%, 100% { transform: translate(0,0) scale(1); opacity: 0.4; }
+  50%       { transform: translate(8%,-8%) scale(1.15); opacity: 0.7; }
+}
+
+.label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.7em;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+  text-shadow: 0 0 15px var(--gold-glow);
+}
+
+.label::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+.value {
+  font-family: var(--font-playfair);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 8px 16px rgba(0,0,0,0.3);
+  margin: 0.5rem 0;
+}
+
+.value-text {
+  font-family: var(--font-cormorant);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  max-width: 85%;
+  letter-spacing: 0.02em;
+}
+
+.placeholder {
+  color: var(--text-whisper);
+  font-family: var(--font-cormorant);
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  ANIMATIONS
+   ───────────────────────────────────────────────────────────────── */
+.fade-in { animation: luxuryFadeIn 1s var(--ease-luxury) forwards; }
+
+@keyframes luxuryFadeIn {
+  0%   { opacity: 0; transform: translateY(25px) scale(0.96); filter: blur(12px); }
+  60%  { opacity: 0.8; filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes luxuryFadeIn { 0% { opacity:0; transform:translateY(20px); } 100% { opacity:1; transform:none; } }
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  SCROLLBAR
+   ───────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 8px; background: var(--bg-dark); }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--gold), var(--gold-deep)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
+
+/* ─────────────────────────────────────────────────────────────────
+   ██  RESPONSIVE
+   ───────────────────────────────────────────────────────────────── */
+@media (max-width: 1200px) { .interaction-suite { padding: 6rem 6%; gap: 8rem; } }
+
+@media (max-width: 768px) {
+  body::before { opacity: 0.2; }
+  .section-title, .panel-title { font-size: 0.9rem; letter-spacing: 0.4em; margin-bottom: 3rem; }
+  .section-showcase { padding: 5rem 1.5rem; }
+  .cards-container  { grid-template-columns: 1fr; gap: 2rem; padding: 0 1rem; }
+  .interaction-suite { padding: 4rem 5%; gap: 6rem; }
+  button { padding: 0.9rem 1.8rem; font-size: 0.65rem; letter-spacing: 0.25em; }
+  .display-surface { padding: 3rem 2.5rem; min-height: 180px; }
+  .value { font-size: 1.6rem; }
+  .value-text { font-size: 0.95rem; max-width: 95%; }
+}
+
+@media (max-width: 480px) {
+  .section-showcase { padding: 4rem 1rem; }
+  .interaction-suite { padding: 3rem 3%; gap: 5rem; }
+  button { padding: 0.8rem 1.5rem; font-size: 0.6rem; }
+  .display-surface { padding: 2.5rem 2rem; }
+  .value { font-size: 1.4rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FIN — FRANCIS LUXOR MOTORS TYPOGRAPHY SYSTEM
+   Didot · Playfair Display · Cormorant Garamond
+   ═══════════════════════════════════════════════════════════════════ */
