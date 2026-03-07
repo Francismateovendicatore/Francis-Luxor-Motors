@@ -2,9 +2,9 @@
 import Header from "./components/Header/Header";
 import ExclusiveFleet from "./components/Sections/ExclusiveFleet";
 import ValuationAssessment from "./components/Sections/ValuationAssessment";
-import PurchaseMenu from "./components/Sections/PurchaseMenu";
-import InventorySpecs from "./components/Sections/InventorySpecs";
 import CarDetailView from "./components/Sections/CarDetailView";
+import WhiteGloveServices from "./components/Sections/WhiteGloveServices";
+import PurchaseMenu from "./components/Sections/PurchaseMenu";
 import { useVehicles } from "./hooks/useVehicles";
 import BugattiMotor from "./assets/Screenshot 2026-01-17 201837.png";
 import InteriorBugatti from "./assets/Screenshot 2026-01-17 200851.png";
@@ -50,7 +50,7 @@ export default function App() {
             <ExclusiveFleet onSelectCar={setSelectedCar} />
             <div className="interaction-suite">
               <ValuationAssessment />
-              <InventorySpecs />
+              <WhiteGloveServices />
               <PurchaseMenu />
             </div>
           </>
@@ -59,9 +59,3 @@ export default function App() {
     </div>
   );
 }
-
-
-
-
-
-
