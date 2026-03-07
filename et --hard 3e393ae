@@ -1,0 +1,11 @@
+[33me56555b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33mcc06f23[m HEAD@{1}: reset: moving to HEAD~1
+[33m3e393ae[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{2}: commit: Major UI update: redesigned Exclusive Fleet into luxury showroom, removed Asset Configuration section, added interior/engine/exterior views, improved White-Glove Services typography
+[33mcc06f23[m HEAD@{3}: commit: Major UI redesign: improved layout, enhanced styling, luxury acquisition portal design, better images and overall visual improvements
+[33me56555b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{4}: commit: feat: Add Acquisition Portal with Fleet, Orders and Inventory tabs
+[33m50d8a04[m HEAD@{5}: commit: Migración del backend: reemplazo de SQLite por PostgreSQL y preparación de arquitectura backend
+[33m05fb516[m HEAD@{6}: commit: Fix seed.js insert query and backup before disconnect
+[33meabc559[m HEAD@{7}: commit: Backup antes de migrar a PostgreSQL
+[33mbc14a47[m HEAD@{8}: commit: Actualización de InventorySpecs
+[33m8bc265a[m HEAD@{9}: commit: descripcion Nueva en ajuste de vehiculos
+[33m6901f6c[m HEAD@{10}: commit (initial): Remove backend dependency, use local data
