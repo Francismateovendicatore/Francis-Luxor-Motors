@@ -169,7 +169,7 @@
 /* Título del modelo */
 .card__title {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 400;
 
   color: var(--text-primary);
@@ -224,7 +224,7 @@
    ================================ */
 .card__description {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.7;
 
   color: var(--text-secondary);
@@ -272,3 +272,5 @@
   border-bottom-color: var(--accent-gold);
   color: var(--accent-gold);
 }
+
+

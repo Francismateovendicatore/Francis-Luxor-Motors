@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+﻿import { useState, useEffect, useCallback, useRef } from "react";
 
-// ─── Images ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Images â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 import BugattiImg    from "../../assets/Bugatti Chiron black side view.jpg";
 import FerrariImg    from "../../assets/Ferrari Roma front view dark.jpg";
 import PaganiImg     from "../../assets/Pagani Huayra carbon fiber.jpg";
@@ -31,7 +31,7 @@ const INT_IMAGES = {
   "lamborghini-veneno":LamboInt,"aston-martin-valkyrie":AstonInt,"hennessey-venom-f5":HennesseyInt,
 };
 
-// ─── Constants ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Constants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const API  = "http://localhost:3000/api";
 const GOLD = "#d4af37";
 const F    = { serif:"'Cormorant Garamond',serif", sans:"'Montserrat',sans-serif", tenor:"'Tenor Sans',sans-serif" };
@@ -72,13 +72,13 @@ const TABS = [
 
 const PROCESS_STEPS = [
   {num:"01",title:"Select Your Vehicle",desc:"Browse our curated collection of the world's most exclusive hypercars and grand tourers."},
-  {num:"02",title:"Configure Specifications",desc:"Personalise every detail — colour, interior, performance package and bespoke wheel set."},
+  {num:"02",title:"Configure Specifications",desc:"Personalise every detail â€” colour, interior, performance package and bespoke wheel set."},
   {num:"03",title:"Submit Request",desc:"Submit your acquisition request securely through our encrypted platform."},
   {num:"04",title:"Specialist Contact",desc:"A dedicated Luxor Motors specialist will reach you within 24 hours to discuss your order."},
   {num:"05",title:"Finalise Purchase",desc:"Complete your acquisition with full concierge support and white-glove delivery worldwide."},
 ];
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const STYLES = `
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Montserrat:wght@200;300;400;500&family=Tenor+Sans&display=swap');
 @keyframes pmFadeUp  { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
@@ -113,7 +113,7 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { opacity:1; }
 `;
 
-// ─── Toast ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Toast â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Toast({ msg, type, onClose }) {
   useEffect(()=>{ const t=setTimeout(onClose,3500); return()=>clearTimeout(t); },[onClose]);
   return (
@@ -123,7 +123,7 @@ function Toast({ msg, type, onClose }) {
   );
 }
 
-// ─── Configurator Modal ───────────────────────────────────────────────────────
+// â”€â”€â”€ Configurator Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
   const [colorIdx,setColorIdx] = useState(0);
   const [interIdx,setInterIdx] = useState(0);
@@ -156,7 +156,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
           <div style={{fontFamily:F.tenor,fontSize:"1.15rem",color:GOLD}}>{vehicle.valuation}</div>
         </div>
         <button onClick={onClose} style={{position:"absolute",top:"1.8rem",left:"1.8rem",background:"rgba(0,0,0,0.7)",border:"1px solid rgba(255,255,255,0.1)",color:"rgba(255,255,255,0.45)",width:"40px",height:"40px",cursor:"pointer",fontSize:"1.1rem",display:"flex",alignItems:"center",justifyContent:"center",backdropFilter:"blur(8px)"}}>
-          ×
+          Ã—
         </button>
       </div>
 
@@ -272,7 +272,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
   );
 }
 
-// ─── Vehicle Card ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Vehicle Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function VehicleCard({ vehicle, index, onConfigure }) {
   const stockNum = parseInt(vehicle.stock)||0;
   const soldOut  = stockNum===0;
@@ -291,7 +291,7 @@ function VehicleCard({ vehicle, index, onConfigure }) {
         <div style={{fontFamily:F.serif,fontSize:"1.5rem",fontWeight:300,color:"#e8e8e8",lineHeight:1.1,marginBottom:"0.55rem"}}>{vehicle.model}</div>
         <div style={{width:"26px",height:"1px",background:`linear-gradient(to right,${GOLD},transparent)`,marginBottom:"1rem"}}/>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1.2rem"}}>
-          <span style={{fontFamily:F.tenor,fontSize:"1rem",color:GOLD}}>{vehicle.valuation}</span>
+          <span style={{fontFamily:F.tenor,fontSize:"1.2rem",color:GOLD}}>{vehicle.valuation}</span>
           <span style={{fontFamily:F.sans,fontSize:"0.37rem",letterSpacing:"0.2em",color:soldOut?"rgba(255,255,255,0.18)":"rgba(212,175,55,0.58)",border:`1px solid ${soldOut?"rgba(255,255,255,0.06)":"rgba(212,175,55,0.16)"}`,padding:"0.26rem 0.7rem"}}>
             {soldOut?"SOLD OUT":vehicle.stock}
           </span>
@@ -309,7 +309,7 @@ function VehicleCard({ vehicle, index, onConfigure }) {
   );
 }
 
-// ─── How It Works ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ How It Works â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function HowItWorks() {
   return (
     <div style={{margin:"80px 0",borderTop:"1px solid rgba(212,175,55,0.08)",borderBottom:"1px solid rgba(212,175,55,0.08)",padding:"80px 0"}}>
@@ -331,7 +331,7 @@ function HowItWorks() {
   );
 }
 
-// ─── Orders Tab ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Orders Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function OrdersTab({ orders, onCancel, loading }) {
   if (loading) return <div style={{textAlign:"center",padding:"5rem",fontFamily:F.sans,fontSize:"0.44rem",letterSpacing:"0.42em",color:"rgba(255,255,255,0.14)",textTransform:"uppercase"}}>Loading\u2026</div>;
   if (orders.length===0) return (
@@ -369,7 +369,7 @@ function OrdersTab({ orders, onCancel, loading }) {
   );
 }
 
-// ─── Inventory Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Inventory Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function InventoryTab({ vehicles, onStockChange }) {
   const [changes,setChanges]=useState({});const [saving,setSaving]=useState(false);
   const save=async(slug)=>{const n=changes[slug];if(n===undefined)return;setSaving(true);await onStockChange(slug,n);setChanges(p=>{const c={...p};delete c[slug];return c;});setSaving(false);};
@@ -395,7 +395,7 @@ function InventoryTab({ vehicles, onStockChange }) {
   );
 }
 
-// ─── Admin Panel ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Admin Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function AdminPanel({ vehicles, onRefresh, notify }) {
   const [view,setView]=useState("list");const [editSlug,setEditSlug]=useState(null);
   const [allOrders,setAllOrders]=useState([]);const [loadingOrders,setLoadingOrders]=useState(false);const [saving,setSaving]=useState(false);
@@ -486,7 +486,7 @@ function AdminPanel({ vehicles, onRefresh, notify }) {
   );
 }
 
-// ─── Main Export ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Main Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function PurchaseMenu() {
   const [tab,setTab]           = useState("fleet");
   const [vehicles,setVehicles] = useState([]);
@@ -557,3 +557,5 @@ export default function PurchaseMenu() {
     </section>
   );
 }
+
+

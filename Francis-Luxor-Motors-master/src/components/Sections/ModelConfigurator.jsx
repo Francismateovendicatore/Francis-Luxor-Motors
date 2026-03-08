@@ -109,7 +109,8 @@ export default function ModelConfigurator() {
                   )
                 }
               >
-                Aston Martin Valkyrie
+                Aston Martin ValkyrieGet-Content "C:\Users\franc\Downloads\Francis PRG\Francis-Luxor-Motors-master\src\App.css"
+
               </TabButton>
             </>
           }

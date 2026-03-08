@@ -1,4 +1,4 @@
-/* ================================
+﻿/* ================================
    CoreConcept.css
    Estilos para una tarjeta premium
    ================================ */
@@ -6,7 +6,7 @@
 /* 
   .card__root
   Este selector es el CONTENEDOR PRINCIPAL de la tarjeta.
-  Aquí también declaramos VARIABLES CSS locales (scope local).
+  AquÃ­ tambiÃ©n declaramos VARIABLES CSS locales (scope local).
 */
 .card__root {
   /* Color de fondo de la tarjeta */
@@ -25,11 +25,11 @@
   /* Color acento (oro lujo) */
   --accent-gold: #d4af37;
 
-  /* Tipografías */
+  /* TipografÃ­as */
   --font-serif: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
 
-  /* Curva de animación suave (sensación premium) */
+  /* Curva de animaciÃ³n suave (sensaciÃ³n premium) */
   --ease-luxury: cubic-bezier(0.2, 0.0, 0.0, 1.0);
 }
 
@@ -95,7 +95,7 @@
   /* Ajusta la imagen sin deformarla */
   object-fit: cover;
 
-  /* Animación lenta y elegante */
+  /* AnimaciÃ³n lenta y elegante */
   transition:
     transform 1.2s var(--ease-luxury),
     opacity 0.4s ease;
@@ -154,7 +154,7 @@
 .card__header {
   display: flex;
 
-  /* Espacia título y precio */
+  /* Espacia tÃ­tulo y precio */
   justify-content: space-between;
 
   align-items: baseline;
@@ -162,14 +162,14 @@
   margin-bottom: 1rem;
   padding-bottom: 1rem;
 
-  /* Línea divisoria elegante */
+  /* LÃ­nea divisoria elegante */
   border-bottom: 1px solid var(--card-border);
 }
 
-/* Título del modelo */
+/* TÃ­tulo del modelo */
 .card__title {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 400;
 
   color: var(--text-primary);
@@ -188,7 +188,7 @@
   color: var(--text-primary);
   opacity: 0.9;
 
-  /* Evita que se rompa en líneas */
+  /* Evita que se rompa en lÃ­neas */
   white-space: nowrap;
 
   margin-left: 1rem;
@@ -220,31 +220,31 @@
 }
 
 /* ================================
-   DESCRIPCIÓN
+   DESCRIPCIÃ“N
    ================================ */
 .card__description {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.7;
 
   color: var(--text-secondary);
 
   margin: 0 0 2.5rem 0;
 
-  /* Empuja el botón hacia abajo */
+  /* Empuja el botÃ³n hacia abajo */
   flex-grow: 1;
 
   font-weight: 300;
 }
 
 /* ================================
-   BOTÓN DE ACCIÓN
+   BOTÃ“N DE ACCIÃ“N
    ================================ */
 .card__action {
   background: transparent;
   border: none;
 
-  /* Línea inferior minimalista */
+  /* LÃ­nea inferior minimalista */
   border-bottom: 1px solid var(--text-primary);
 
   color: var(--text-primary);
@@ -266,9 +266,11 @@
   opacity: 0.8;
 }
 
-/* Hover del botón */
+/* Hover del botÃ³n */
 .card__action:hover {
   opacity: 1;
   border-bottom-color: var(--accent-gold);
   color: var(--accent-gold);
 }
+
+

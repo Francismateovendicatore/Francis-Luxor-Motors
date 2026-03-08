@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    HEADER.CSS
    ========================================================= */
 
@@ -21,7 +21,7 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── ROOT ── */
+/* â”€â”€ ROOT â”€â”€ */
 .header__root {
   position: relative;
   display: flex;
@@ -33,7 +33,7 @@
   z-index: 10;
 }
 
-/* ── CONTENT ── */
+/* â”€â”€ CONTENT â”€â”€ */
 .header__content {
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   z-index: 2;
 }
 
-/* ── EMBLEM ── */
+/* â”€â”€ EMBLEM â”€â”€ */
 .header__emblem-wrapper {
   position: relative;
   margin: 0 0 3rem 0;
@@ -87,7 +87,7 @@
   z-index: -1;
 }
 
-/* ── TYPOGRAPHY ── */
+/* â”€â”€ TYPOGRAPHY â”€â”€ */
 .header__typography {
   display: flex;
   flex-direction: column;
@@ -96,11 +96,11 @@
   opacity: 0;
 }
 
-/* ── MAIN TITLE — enlarged ── */
+/* â”€â”€ MAIN TITLE â€” enlarged â”€â”€ */
 .header__title {
   font-family: var(--font-serif);
 
-  /* Increased from 4rem → 6.5rem with fluid scaling */
+  /* Increased from 4rem â†’ 6.5rem with fluid scaling */
   font-size: clamp(3.8rem, 8vw, 6.5rem);
 
   font-weight: 400;
@@ -118,7 +118,7 @@
   animation: shimmer 8s linear infinite;
 }
 
-/* ── SEPARATOR ── */
+/* â”€â”€ SEPARATOR â”€â”€ */
 .header__separator {
   width: 72px;
   height: 1px;
@@ -132,7 +132,7 @@
   opacity: 0.7;
 }
 
-/* ── SUBTITLE ── */
+/* â”€â”€ SUBTITLE â”€â”€ */
 .header__subtitle {
   font-family: var(--font-sans);
 
@@ -146,7 +146,7 @@
   margin: 0;
 }
 
-/* ── ANIMATIONS ── */
+/* â”€â”€ ANIMATIONS â”€â”€ */
 @keyframes fadeDescend {
   from { opacity: 0; transform: translateY(-30px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -161,7 +161,7 @@
   to { background-position: 200% center; }
 }
 
-/* ── RESPONSIVE ── */
+/* â”€â”€ RESPONSIVE â”€â”€ */
 @media (max-width: 768px) {
   .header__root {
     padding: 6rem 1.5rem 4rem;
@@ -191,3 +191,5 @@
     font-size: clamp(2.4rem, 10vw, 3.2rem);
   }
 }
+
+

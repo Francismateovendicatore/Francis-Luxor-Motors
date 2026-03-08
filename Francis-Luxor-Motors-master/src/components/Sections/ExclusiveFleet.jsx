@@ -399,11 +399,11 @@ export default function ExclusiveFleet({ vehicleImages }) {
         .vc:hover .vc-num{color:rgba(212,175,55,.1);}
 
         .vc-info{flex:1;}
-        .vc-name{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:300;
+        .vc-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;
           color:#f0ece4;letter-spacing:.04em;line-height:1.08;margin:0 0 .5rem;
           transition:color .4s ease;}
         .vc:hover .vc-name{color:#fff;}
-        .vc-price{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;
+        .vc-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;
           color:${G};letter-spacing:.08em;margin-bottom:.9rem;}
         .vc-rule{width:36px;height:1px;background:linear-gradient(to right,${G},transparent);margin-bottom:.9rem;
           transition:width .55s cubic-bezier(.23,1,.32,1);}
@@ -570,3 +570,5 @@ export default function ExclusiveFleet({ vehicleImages }) {
     </section>
   );
 }
+
+
