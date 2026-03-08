@@ -249,7 +249,7 @@ blockquote {
 /* Section title */
 .lx-section-title {
   font-family: var(--font-playfair) !important;
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size: clamp(1rem, 2vw, 1.4rem);
   font-weight: 500;
   letter-spacing: 0.05em;
   line-height: 1.15;
@@ -554,7 +554,7 @@ button:active { transform: translateY(0) scale(0.98); transition: transform 0.1s
   font-weight: 400;
   margin-bottom: 4rem;
   color: var(--gold);
-  font-size: 1rem;
+  font-size: 0.65rem;
   font-family: var(--font-display);
   position: relative;
   padding-bottom: 1.5rem;
@@ -579,7 +579,7 @@ button:active { transform: translateY(0) scale(0.98); transition: transform 0.1s
   top: -2rem; left: 50%;
   transform: translateX(-50%);
   color: var(--gold);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   opacity: 0.6;
 }
 
@@ -719,7 +719,7 @@ button:active { transform: translateY(0) scale(0.98); transition: transform 0.1s
 .placeholder {
   color: var(--text-whisper);
   font-family: var(--font-cormorant);
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 300;
   font-style: italic;
   letter-spacing: 0.12em;
@@ -754,7 +754,7 @@ button:active { transform: translateY(0) scale(0.98); transition: transform 0.1s
 
 @media (max-width: 768px) {
   body::before { opacity: 0.2; }
-  .section-title, .panel-title { font-size: 0.9rem; letter-spacing: 0.4em; margin-bottom: 3rem; }
+  .section-title, .panel-title { font-size: 0.65rem; letter-spacing: 0.4em; margin-bottom: 3rem; }
   .section-showcase { padding: 5rem 1.5rem; }
   .cards-container  { grid-template-columns: 1fr; gap: 2rem; padding: 0 1rem; }
   .interaction-suite { padding: 4rem 5%; gap: 6rem; }
@@ -776,6 +776,11 @@ button:active { transform: translateY(0) scale(0.98); transition: transform 0.1s
    FIN â€” FRANCIS LUXOR MOTORS TYPOGRAPHY SYSTEM
    Didot Â· Playfair Display Â· Cormorant Garamond
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+
+
+
+
 
 
 

@@ -39,7 +39,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 1000px;
+  max-width: 1400px;
   width: 100%;
   position: relative;
   z-index: 2;
@@ -101,7 +101,7 @@
   font-family: var(--font-serif);
 
   /* Increased from 4rem â†’ 6.5rem with fluid scaling */
-  font-size: clamp(3.8rem, 8vw, 6.5rem);
+  font-size: clamp(3.5rem, 6vw, 5rem);
 
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -167,7 +167,7 @@
     padding: 6rem 1.5rem 4rem;
   }
   .header__title {
-    font-size: clamp(2.8rem, 9vw, 4rem);
+    font-size: clamp(3.5rem, 6vw, 5rem);
     letter-spacing: 0.01em;
   }
   .header__emblem-wrapper {
@@ -188,8 +188,16 @@
 
 @media (max-width: 480px) {
   .header__title {
-    font-size: clamp(2.4rem, 10vw, 3.2rem);
+    font-size: clamp(3.5rem, 6vw, 5rem);
   }
 }
+
+
+
+
+
+
+
+
 
 
