@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export function useVehicles() {
   const [vehicles, setVehicles] = useState([]);
@@ -6,7 +6,7 @@ export function useVehicles() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/vehicles")
+    fetch("https://francis-luxor-motors.onrender.com/api/vehicles")
       .then((res) => res.json())
       .then((data) => { setVehicles(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
