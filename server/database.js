@@ -1,7 +1,3 @@
-// database.js
-// Conexion a PostgreSQL usando pg (Pool de conexiones)
-// Un Pool mantiene varias conexiones abiertas y las reutiliza eficientemente
-
 require('dotenv').config();
 const { Pool } = require('pg');
 
@@ -11,14 +7,11 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   user:     process.env.DB_USER,
   password: process.env.DB_PASSWORD,
+  ssl: process.env.DB_HOST && process.env.DB_HOST.includes('render.com') ? { rejectUnauthorized: false } : false
 });
 
-// Verificar conexion al iniciar
 pool.connect((err, client, release) => {
-  if (err) {
-    console.error('ERROR conectando a PostgreSQL:', err.message);
-    return;
-  }
+  if (err) { console.error('ERROR conectando a PostgreSQL:', err.message); return; }
   console.log('Conectado a PostgreSQL - Base de datos:', process.env.DB_NAME);
   release();
 });
