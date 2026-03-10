@@ -18,7 +18,7 @@ router.get('/:slug', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { slug, model, valuation, stock, description, category, hp, top, accent, engine_desc } = req.body;
+  const { slug, model, valuation, stock, description, category, hp, top, accent, engine_desc, image_url } = req.body;
   if (!slug || !model) return res.status(400).json({ error: 'slug y model son requeridos' });
   try {
     const result = await pool.query(
@@ -58,5 +58,6 @@ router.patch('/:slug/stock', async (req, res) => {
 });
 
 module.exports = router;
+
 
 
