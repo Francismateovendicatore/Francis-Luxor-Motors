@@ -19,11 +19,12 @@ export default function ExclusiveFleet({ onSelectCar }) {
     <Section id="core-concepts" title="Exclusive Fleet" className="section-showcase">
       <div className="cards-container">
         {vehicles.map((car) => (
-          <CoreConcept key={car.id} image={CAR_IMAGES[car.slug]} model={car.model} price={car.valuation} availability={car.stock} description={car.description} onSelect={() => onSelectCar(car.model)} />
+          <CoreConcept key={car.id} image={car.image_url || CAR_IMAGES[car.slug]} model={car.model} price={car.valuation} availability={car.stock} description={car.description} onSelect={() => onSelectCar(car.model)} />
         ))}
       </div>
     </Section>
   );
 }
+
 
 

@@ -22,8 +22,8 @@ router.post('/', async (req, res) => {
   if (!slug || !model) return res.status(400).json({ error: 'slug y model son requeridos' });
   try {
     const result = await pool.query(
-      'INSERT INTO vehicles (slug, model, valuation, stock, description, category, hp, top, accent, engine_desc) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *',
-      [slug, model, valuation, stock, description, category, hp, top, accent, engine_desc]
+      'INSERT INTO vehicles (slug, model, valuation, stock, description, category, hp, top, accent, engine_desc, image_url) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *',
+      [slug, model, valuation, stock, description, category, hp, top, accent, engine_desc, image_url]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) { res.status(500).json({ error: err.message }); }
@@ -58,3 +58,5 @@ router.patch('/:slug/stock', async (req, res) => {
 });
 
 module.exports = router;
+
+
