@@ -55,7 +55,7 @@ export default function CoreConcept({
         </header>
 
         <div className="card__meta">
-          <span className="card__badge">{availability}</span>
+          <span className="card__badge" style={{fontSize:"1rem",letterSpacing:"0.08em",padding:"0.5em 1em"}}>{availability}</span>
         </div>
 
         <p className="card__description">{description}</p>
@@ -73,3 +73,4 @@ export default function CoreConcept({
     </article>
   );
 }
+

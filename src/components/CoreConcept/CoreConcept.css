@@ -1,4 +1,4 @@
-﻿/* ================================
+/* ================================
    CoreConcept.css
    Estilos para una tarjeta premium
    ================================ */
@@ -6,7 +6,7 @@
 /* 
   .card__root
   Este selector es el CONTENEDOR PRINCIPAL de la tarjeta.
-  AquÃ­ tambiÃ©n declaramos VARIABLES CSS locales (scope local).
+  Aquí también declaramos VARIABLES CSS locales (scope local).
 */
 .card__root {
   /* Color de fondo de la tarjeta */
@@ -25,11 +25,11 @@
   /* Color acento (oro lujo) */
   --accent-gold: #d4af37;
 
-  /* TipografÃ­as */
+  /* Tipografías */
   --font-serif: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
 
-  /* Curva de animaciÃ³n suave (sensaciÃ³n premium) */
+  /* Curva de animación suave (sensación premium) */
   --ease-luxury: cubic-bezier(0.2, 0.0, 0.0, 1.0);
 }
 
@@ -95,7 +95,7 @@
   /* Ajusta la imagen sin deformarla */
   object-fit: cover;
 
-  /* AnimaciÃ³n lenta y elegante */
+  /* Animación lenta y elegante */
   transition:
     transform 1.2s var(--ease-luxury),
     opacity 0.4s ease;
@@ -154,7 +154,7 @@
 .card__header {
   display: flex;
 
-  /* Espacia tÃ­tulo y precio */
+  /* Espacia título y precio */
   justify-content: space-between;
 
   align-items: baseline;
@@ -162,11 +162,11 @@
   margin-bottom: 1rem;
   padding-bottom: 1rem;
 
-  /* LÃ­nea divisoria elegante */
+  /* Línea divisoria elegante */
   border-bottom: 1px solid var(--card-border);
 }
 
-/* TÃ­tulo del modelo */
+/* Título del modelo */
 .card__title {
   font-family: var(--font-serif);
   font-size: 1.7rem;
@@ -188,7 +188,7 @@
   color: var(--text-primary);
   opacity: 0.9;
 
-  /* Evita que se rompa en lÃ­neas */
+  /* Evita que se rompa en líneas */
   white-space: nowrap;
 
   margin-left: 1rem;
@@ -206,7 +206,7 @@
   display: inline-block;
 
   font-family: var(--font-sans);
-  font-size: 0.65rem;
+  font-size:1rem;
 
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -220,7 +220,7 @@
 }
 
 /* ================================
-   DESCRIPCIÃ“N
+   DESCRIPCIÓN
    ================================ */
 .card__description {
   font-family: var(--font-sans);
@@ -231,20 +231,20 @@
 
   margin: 0 0 2.5rem 0;
 
-  /* Empuja el botÃ³n hacia abajo */
+  /* Empuja el botón hacia abajo */
   flex-grow: 1;
 
   font-weight: 300;
 }
 
 /* ================================
-   BOTÃ“N DE ACCIÃ“N
+   BOTÓN DE ACCIÓN
    ================================ */
 .card__action {
   background: transparent;
   border: none;
 
-  /* LÃ­nea inferior minimalista */
+  /* Línea inferior minimalista */
   border-bottom: 1px solid var(--text-primary);
 
   color: var(--text-primary);
@@ -266,11 +266,14 @@
   opacity: 0.8;
 }
 
-/* Hover del botÃ³n */
+/* Hover del botón */
 .card__action:hover {
   opacity: 1;
   border-bottom-color: var(--accent-gold);
   color: var(--accent-gold);
 }
+
+
+
 
 

@@ -32,7 +32,7 @@ const INT_IMAGES = {
 };
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const API  = "https://francis-luxor-motors.onrender.com/api";
+const API  = (import.meta.env.VITE_API_URL || "http://localhost:3000") + "/api";
 const GOLD = "#d4af37";
 const F    = { serif:"'Cormorant Garamond',serif", sans:"'Montserrat',sans-serif", tenor:"'Tenor Sans',sans-serif" };
 const fmt  = (n) => "\u20ac" + Number(n).toLocaleString("de-DE");
@@ -557,5 +557,6 @@ export default function PurchaseMenu() {
     </section>
   );
 }
+
 
 
