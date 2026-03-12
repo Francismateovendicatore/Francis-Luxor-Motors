@@ -67,7 +67,7 @@ export default function CoreConcept({
             estado de App.jsx para cambiar a la vista de detalles.
          ===================================================== */}
         <button className="card__action" type="button" onClick={onSelect}>
-          Configurar
+          View Details
         </button>
       </div>
     </article>

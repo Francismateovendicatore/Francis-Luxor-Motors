@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    HEADER.CSS
    ========================================================= */
 
@@ -21,19 +21,19 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* â”€â”€ ROOT â”€â”€ */
+/* ── ROOT ── */
 .header__root {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8rem 2rem 6rem;
+  padding: 4rem 2rem 3rem;
   background-color: var(--header-bg);
   overflow: hidden;
   z-index: 10;
 }
 
-/* â”€â”€ CONTENT â”€â”€ */
+/* ── CONTENT ── */
 .header__content {
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   z-index: 2;
 }
 
-/* â”€â”€ EMBLEM â”€â”€ */
+/* ── EMBLEM ── */
 .header__emblem-wrapper {
   position: relative;
   margin: 0 0 3rem 0;
@@ -87,7 +87,7 @@
   z-index: -1;
 }
 
-/* â”€â”€ TYPOGRAPHY â”€â”€ */
+/* ── TYPOGRAPHY ── */
 .header__typography {
   display: flex;
   flex-direction: column;
@@ -96,11 +96,11 @@
   opacity: 0;
 }
 
-/* â”€â”€ MAIN TITLE â€” enlarged â”€â”€ */
+/* ── MAIN TITLE — enlarged ── */
 .header__title {
   font-family: var(--font-serif);
 
-  /* Increased from 4rem â†’ 6.5rem with fluid scaling */
+  /* Increased from 4rem → 6.5rem with fluid scaling */
   font-size: clamp(3.5rem, 6vw, 5rem);
 
   font-weight: 400;
@@ -118,7 +118,7 @@
   animation: shimmer 8s linear infinite;
 }
 
-/* â”€â”€ SEPARATOR â”€â”€ */
+/* ── SEPARATOR ── */
 .header__separator {
   width: 72px;
   height: 1px;
@@ -132,7 +132,7 @@
   opacity: 0.7;
 }
 
-/* â”€â”€ SUBTITLE â”€â”€ */
+/* ── SUBTITLE ── */
 .header__subtitle {
   font-family: var(--font-sans);
 
@@ -146,7 +146,7 @@
   margin: 0;
 }
 
-/* â”€â”€ ANIMATIONS â”€â”€ */
+/* ── ANIMATIONS ── */
 @keyframes fadeDescend {
   from { opacity: 0; transform: translateY(-30px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -161,7 +161,7 @@
   to { background-position: 200% center; }
 }
 
-/* â”€â”€ RESPONSIVE â”€â”€ */
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .header__root {
     padding: 6rem 1.5rem 4rem;
