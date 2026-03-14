@@ -43,6 +43,20 @@ const INT_IMAGES = {
   "hennessey-venom-f5": HennesseyInt,
 };
 
+// ─── Video sources — files must exist in /public/ ─────────────────────────────
+// Vite serves /public/ at root: /Bugatti Chiron.mp4, etc.
+const VIDEO_SOURCES = {
+  "bugatti-chiron": "/Bugatti Chiron.mp4",
+  "ferrari-roma": "/Ferrari Roma.mp4",
+  "pagani-huayra": "/Pagani Huayra.mp4",
+  "rolls-royce-phantom": "/Rolls-Royce Phantom.mp4",
+  "toyota-supra-mk5": "/Toyota Supra MK5.mp4",
+  "koenigsegg-regera": "/Koenigsegg Regera.mp4",
+  "lamborghini-veneno": "/Lamborghini Veneno.mp4",
+  "aston-martin-valkyrie": "/Aston Martin Valkyrie.mp4",
+  "hennessey-venom-f5": "/2Hennessey Venom F5.mp4",
+};
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 const API = (import.meta.env.VITE_API_URL || "http://localhost:3000") + "/api";
 const GOLD = "#d4af37";
@@ -51,7 +65,7 @@ const F = {
   sans: "'Montserrat',sans-serif",
   tenor: "'Tenor Sans',sans-serif",
 };
-const fmt = (n) => "\u20ac" + Number(n).toLocaleString("de-DE");
+const fmt = (n) => "€" + Number(n).toLocaleString("de-DE");
 
 const BASE_PRICES = {
   "bugatti-chiron": 4000000,
@@ -95,10 +109,10 @@ const CONFIG = {
 };
 
 const TABS = [
-  { key: "fleet", label: "Fleet", icon: "\u25c8" },
-  { key: "orders", label: "My Orders", icon: "\u25c9" },
-  { key: "inventory", label: "Inventory", icon: "\u25c6" },
-  { key: "admin", label: "Admin Panel", icon: "\u2b21" },
+  { key: "fleet", label: "Fleet", icon: "◈" },
+  { key: "orders", label: "My Orders", icon: "◉" },
+  { key: "inventory", label: "Inventory", icon: "◆" },
+  { key: "admin", label: "Admin Panel", icon: "⬡" },
 ];
 
 const PROCESS_STEPS = [
@@ -132,99 +146,139 @@ const PROCESS_STEPS = [
 // ─── Styles ───────────────────────────────────────────────────────────────────
 const STYLES = `
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Montserrat:wght@200;300;400;500&family=Tenor+Sans&display=swap');
-@keyframes pmFadeUp  { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
-@keyframes pmFadeIn  { from{opacity:0} to{opacity:1} }
-@keyframes pmLineIn  { from{width:0} to{width:120px} }
-@keyframes pmToastIn { from{opacity:0;transform:translateX(18px)} to{opacity:1;transform:none} }
-@keyframes pmModalIn { from{opacity:0;transform:scale(0.97)} to{opacity:1;transform:none} }
-@keyframes cfgSlideIn { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:none} }
-@keyframes cfgImgFade { from{opacity:0;transform:scale(1.04)} to{opacity:1;transform:scale(1)} }
-@keyframes cfgPulse   { 0%,100%{opacity:0.4} 50%{opacity:1} }
-@keyframes shimmer    { 0%{background-position:-200% center} 100%{background-position:200% center} }
 
-.lx-card { position:relative; overflow:hidden; cursor:pointer; background:#050505; border:1px solid rgba(255,255,255,0.05); transition:border-color 0.4s ease,transform 0.4s ease; }
-.lx-card:hover { border-color:rgba(212,175,55,0.35); transform:translateY(-3px); }
-.lx-card-img { width:100%; height:260px; object-fit:cover; display:block; filter:brightness(0.68) saturate(0.85); transition:filter 0.7s ease,transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94); }
-.lx-card:hover .lx-card-img { filter:brightness(0.88) saturate(1); transform:scale(1.05); }
+/* ── Keyframes ── */
+@keyframes pmFadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
+@keyframes pmFadeIn    { from{opacity:0} to{opacity:1} }
+@keyframes pmLineIn    { from{width:0} to{width:120px} }
+@keyframes pmToastIn   { from{opacity:0;transform:translateX(18px)} to{opacity:1;transform:none} }
+@keyframes cfgSlideIn  { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:none} }
+@keyframes cfgImgFade  { from{opacity:0;transform:scale(1.04)} to{opacity:1;transform:scale(1)} }
+@keyframes cfgPulse    { 0%,100%{opacity:0.4} 50%{opacity:1} }
+@keyframes shimmer     { 0%{background-position:-200% center} 100%{background-position:200% center} }
+
+/* ── Cinematic video entry ── */
+@keyframes videoFadeIn   { from{opacity:0} to{opacity:1} }
+@keyframes videoZoomIn   { from{transform:scale(1.08)} to{transform:scale(1.0)} }
+@keyframes statsReveal   { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+@keyframes lineGrow      { from{width:0;opacity:0} to{width:36px;opacity:1} }
+@keyframes scanline      { 0%{transform:translateY(-100%)} 100%{transform:translateY(100vh)} }
+@keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+/* ── Fleet Cards ── */
+.lx-card { position:relative;overflow:hidden;cursor:pointer;background:#050505;border:1px solid rgba(255,255,255,0.05);transition:border-color 0.4s ease,transform 0.4s ease; }
+.lx-card:hover { border-color:rgba(212,175,55,0.35);transform:translateY(-3px); }
+.lx-card-img { width:100%;height:260px;object-fit:cover;display:block;filter:brightness(0.68) saturate(0.85);transition:filter 0.7s ease,transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94); }
+.lx-card:hover .lx-card-img { filter:brightness(0.88) saturate(1);transform:scale(1.05); }
 .lx-card-shine { position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(105deg,transparent 40%,rgba(212,175,55,0.07) 50%,transparent 60%);transition:left 0.8s ease;pointer-events:none;z-index:2; }
 .lx-card:hover .lx-card-shine { left:150%; }
 .lx-card-bar { position:absolute;bottom:0;left:0;height:2px;width:0;background:linear-gradient(to right,#d4af37,rgba(212,175,55,0.2));transition:width 0.5s cubic-bezier(0.23,1,0.32,1); }
 .lx-card:hover .lx-card-bar { width:100%; }
 
-.pm-tab { padding:1.1rem 2.5rem;background:none;border:none;border-bottom:2px solid transparent;font-family:'Montserrat',sans-serif;font-size:0.47rem;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:0.6rem;transition:color 0.3s,border-color 0.3s;color:rgba(255,255,255,0.25); }
+/* ── Main tabs ── */
+.pm-tab { padding:1.1rem 2.8rem;background:none;border:none;border-bottom:2px solid transparent;font-family:'Montserrat',sans-serif;font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:0.6rem;transition:color 0.3s,border-color 0.3s;color:rgba(255,255,255,0.25); }
 .pm-tab.active { color:#d4af37!important;border-bottom-color:#d4af37!important;background:rgba(212,175,55,0.03)!important; }
 .pm-tab:hover:not(.active) { color:rgba(255,255,255,0.5)!important; }
 .pm-badge { background:#d4af37;color:#000;border-radius:50%;width:16px;height:16px;font-size:0.42rem;display:flex;align-items:center;justify-content:center;font-weight:600; }
 
-.cfg-btn { background:transparent;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.35);padding:0.55rem 1rem;font-family:'Montserrat',sans-serif;font-size:0.47rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.25s; }
-.cfg-btn.active { background:rgba(212,175,55,0.08);border-color:rgba(212,175,55,0.6);color:#d4af37; }
-.cfg-btn:hover:not(.active) { border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6); }
-
-.color-swatch { width:38px;height:38px;cursor:pointer;transition:all 0.25s;border:2px solid transparent; }
-.color-swatch.active { border-color:#d4af37;box-shadow:0 0 0 1px #d4af37; }
-.color-swatch:hover:not(.active) { transform:scale(1.12); }
-
-/* ── NEW CONFIGURATOR STYLES ── */
-.cfg-option-row {
-  position:relative; display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 1.2rem; cursor:pointer; border:1px solid rgba(255,255,255,0.04);
-  background:transparent; width:100%; text-align:left;
-  transition:border-color 0.3s, background 0.3s; overflow:hidden;
-}
-.cfg-option-row::before {
-  content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
-  background:#d4af37; transform:scaleY(0); transition:transform 0.3s ease; transform-origin:bottom;
-}
-.cfg-option-row.active { background:rgba(212,175,55,0.04); border-color:rgba(212,175,55,0.2); }
+/* ── Configurator option rows ── */
+.cfg-option-row { position:relative;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;cursor:pointer;border:1px solid rgba(255,255,255,0.04);background:transparent;width:100%;text-align:left;transition:border-color 0.3s,background 0.3s;overflow:hidden; }
+.cfg-option-row::before { content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#d4af37;transform:scaleY(0);transition:transform 0.3s ease;transform-origin:bottom; }
+.cfg-option-row.active { background:rgba(212,175,55,0.04);border-color:rgba(212,175,55,0.2); }
 .cfg-option-row.active::before { transform:scaleY(1); }
-.cfg-option-row:hover:not(.active) { background:rgba(255,255,255,0.02); border-color:rgba(255,255,255,0.1); }
+.cfg-option-row:hover:not(.active) { background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.1); }
 
-.cfg-swatch-new {
-  width:32px; height:32px; cursor:pointer;
-  transition:transform 0.25s, box-shadow 0.25s; position:relative;
-}
-.cfg-swatch-new::after {
-  content:''; position:absolute; inset:-3px;
-  border:1px solid transparent; transition:border-color 0.25s;
-}
+/* ── Color swatch ── */
+.cfg-swatch-new { width:32px;height:32px;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s;position:relative; }
+.cfg-swatch-new::after { content:'';position:absolute;inset:-3px;border:1px solid transparent;transition:border-color 0.25s; }
 .cfg-swatch-new.active::after { border-color:#d4af37; }
 .cfg-swatch-new:hover { transform:scale(1.15); }
 
-.cfg-tab-new {
-  flex:1; padding:1rem 0.5rem; background:transparent; border:none;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-  font-family:'Montserrat',sans-serif; font-size:0.38rem; letter-spacing:0.28em;
-  text-transform:uppercase; cursor:pointer; transition:all 0.25s;
-  color:rgba(255,255,255,0.2); position:relative;
-}
-.cfg-tab-new::after {
-  content:''; position:absolute; bottom:-1px; left:0; right:0; height:1px;
-  background:#d4af37; transform:scaleX(0); transition:transform 0.3s ease;
-}
+/* ── Configurator tabs ── */
+.cfg-tab-new { flex:1;padding:1.1rem 0.5rem;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.05);font-family:'Montserrat',sans-serif;font-size:0.52rem;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;transition:all 0.25s;color:rgba(255,255,255,0.2);position:relative; }
+.cfg-tab-new::after { content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:#d4af37;transform:scaleX(0);transition:transform 0.3s ease; }
 .cfg-tab-new.active { color:#d4af37; }
 .cfg-tab-new.active::after { transform:scaleX(1); }
 .cfg-tab-new:hover:not(.active) { color:rgba(255,255,255,0.45); }
 
-.price-shimmer {
-  background: linear-gradient(90deg, #d4af37 0%, #f5e070 40%, #d4af37 60%, #a07820 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
-}
+/* ── Price shimmer ── */
+.price-shimmer { background:linear-gradient(90deg,#d4af37 0%,#f5e070 40%,#d4af37 60%,#a07820 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite; }
 
-.confirm-btn {
-  position:relative; overflow:hidden; cursor:pointer;
-  background:transparent; border:1px solid rgba(212,175,55,0.5); transition:all 0.4s;
-}
-.confirm-btn::before {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(135deg,rgba(212,175,55,0.12) 0%,rgba(212,175,55,0.04) 100%);
-  transform:translateX(-100%); transition:transform 0.4s ease;
-}
+/* ── Confirm button ── */
+.confirm-btn { position:relative;overflow:hidden;cursor:pointer;background:transparent;border:1px solid rgba(212,175,55,0.5);transition:all 0.4s; }
+.confirm-btn::before { content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,175,55,0.12) 0%,rgba(212,175,55,0.04) 100%);transform:translateX(-100%);transition:transform 0.4s ease; }
 .confirm-btn:hover::before { transform:translateX(0); }
-.confirm-btn:hover { border-color:rgba(212,175,55,0.8); box-shadow:0 0 30px rgba(212,175,55,0.1); }
+.confirm-btn:hover { border-color:rgba(212,175,55,0.8);box-shadow:0 0 30px rgba(212,175,55,0.1); }
+
+/* ── Cinematic video panel ── */
+.cfg-video-wrap { position:absolute;inset:0;overflow:hidden; }
+.cfg-video-el {
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  animation: videoFadeIn 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards,
+             videoZoomIn 8s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+}
+.cfg-video-overlay-base {
+  position:absolute;inset:0;pointer-events:none;
+  background: linear-gradient(to right, rgba(0,0,0,0.22) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.18) 100%);
+}
+.cfg-video-overlay-bottom {
+  position:absolute;bottom:0;left:0;right:0;height:68%;pointer-events:none;
+  background: linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.72) 30%, rgba(0,0,0,0.25) 60%, transparent 100%);
+}
+.cfg-video-overlay-top {
+  position:absolute;top:0;left:0;right:0;height:22%;pointer-events:none;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%);
+}
+/* Subtle scanline texture */
+.cfg-scanlines {
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+}
+/* Color tint layer — reacts to selected color */
+.cfg-color-tint {
+  position:absolute;inset:0;pointer-events:none;z-index:2;
+  mix-blend-mode:screen;transition:background 1.1s ease;
+}
+/* Accent top line */
+.cfg-accent-line {
+  position:absolute;top:0;left:0;right:0;height:1px;z-index:10;pointer-events:none;
+}
+/* Stats container */
+.cfg-stats-bar {
+  display:flex;gap:2.4rem;
+}
+.cfg-stat-item {
+  display:flex;flex-direction:column;gap:0.22rem;
+  animation: statsReveal 0.7s cubic-bezier(0.23,1,0.32,1) both;
+}
+.cfg-stat-label {
+  font-family:'Montserrat',sans-serif;font-size:0.27rem;letter-spacing:0.48em;
+  color:rgba(255,255,255,0.2);text-transform:uppercase;
+}
+.cfg-stat-value {
+  font-family:'Tenor Sans',sans-serif;font-size:0.88rem;
+  color:rgba(255,255,255,0.6);letter-spacing:0.04em;
+}
+/* Config pills */
+.cfg-pill {
+  font-family:'Montserrat',sans-serif;font-size:0.29rem;letter-spacing:0.2em;
+  text-transform:uppercase;padding:0.22rem 0.62rem;
+  border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.28);
+  background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);
+  transition:border-color 0.4s,color 0.4s;
+}
+/* Tab change transition */
+.cfg-tab-content { animation: cfgSlideIn 0.28s ease; }
+
+/* Image fallback fade */
+.cfg-img-fade { animation: cfgImgFade 0.65s cubic-bezier(0.25,0.46,0.45,0.94); }
+
+/* Video mode indicator */
+.cfg-mode-badge {
+  position:absolute;top:1.4rem;right:4rem;z-index:20;
+  font-family:'Montserrat',sans-serif;font-size:0.27rem;letter-spacing:0.4em;
+  color:rgba(212,175,55,0.18);text-transform:uppercase;user-select:none;
+}
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { opacity:1; }
@@ -266,7 +320,302 @@ function Toast({ msg, type, onClose }) {
   );
 }
 
-// ─── Configurator Modal (REDESIGNED) ─────────────────────────────────────────
+// ─── Cinematic Left Panel ─────────────────────────────────────────────────────
+function CinematicPanel({ vehicle, colorIdx, cfgTab, onClose }) {
+  const videoRef = useRef(null);
+  const [videoReady, setVideoReady] = useState(false);
+  const [prevVideo, setPrevVideo] = useState(null);
+  const [transitioning, setTransitioning] = useState(false);
+
+  const videoSrc = VIDEO_SOURCES[vehicle.slug];
+  const accentColor = vehicle.accent || GOLD;
+  const colorHex = CONFIG.colors[colorIdx].hex;
+
+  // Show interior image when on interior tab, video otherwise
+  const showInterior = cfgTab === "interior";
+  const interiorImg = INT_IMAGES[vehicle.slug];
+  const heroImg = HERO_IMAGES[vehicle.slug];
+
+  // Preload + play video
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !videoSrc) return;
+    el.load();
+    el.oncanplaythrough = () => setVideoReady(true);
+    el.play().catch(() => {});
+    return () => {
+      el.oncanplaythrough = null;
+    };
+  }, [videoSrc]);
+
+  // Smooth tab transition
+  const prevTabRef = useRef(cfgTab);
+  useEffect(() => {
+    if (prevTabRef.current !== cfgTab) {
+      setTransitioning(true);
+      const t = setTimeout(() => setTransitioning(false), 350);
+      prevTabRef.current = cfgTab;
+      return () => clearTimeout(t);
+    }
+  }, [cfgTab]);
+
+  return (
+    <div
+      style={{
+        flex: "0 0 54%",
+        position: "relative",
+        overflow: "hidden",
+        background: "#030303",
+      }}
+    >
+      {/* ── VIDEO LAYER ── */}
+      {videoSrc && !showInterior && (
+        <div
+          className="cfg-video-wrap"
+          style={{
+            opacity: transitioning ? 0.6 : 1,
+            transition: "opacity 0.35s ease",
+          }}
+        >
+          <video
+            ref={videoRef}
+            className="cfg-video-el"
+            src={videoSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ filter: `brightness(0.72) saturate(0.9)` }}
+          />
+        </div>
+      )}
+
+      {/* ── INTERIOR IMAGE (when interior tab active) ── */}
+      {showInterior && interiorImg && (
+        <img
+          key="interior"
+          src={interiorImg}
+          alt={`${vehicle.model} interior`}
+          className="cfg-img-fade"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "brightness(0.5) saturate(0.85)",
+          }}
+        />
+      )}
+
+      {/* ── FALLBACK image if no video ── */}
+      {!videoSrc && !showInterior && heroImg && (
+        <img
+          key="hero"
+          src={heroImg}
+          alt={vehicle.model}
+          className="cfg-img-fade"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "brightness(0.5) saturate(0.85)",
+          }}
+        />
+      )}
+
+      {/* ── OVERLAYS ── */}
+      <div className="cfg-scanlines" />
+      <div className="cfg-video-overlay-base" />
+      <div className="cfg-video-overlay-top" />
+      <div className="cfg-video-overlay-bottom" />
+
+      {/* Dynamic color tint — reacts to selected color */}
+      <div
+        className="cfg-color-tint"
+        style={{
+          background: `radial-gradient(ellipse at 30% 70%, ${colorHex}28 0%, transparent 62%)`,
+        }}
+      />
+
+      {/* Accent top line */}
+      <div
+        className="cfg-accent-line"
+        style={{
+          background: `linear-gradient(to right, transparent 0%, ${accentColor}70 50%, transparent 100%)`,
+        }}
+      />
+
+      {/* ── BOTTOM INFO BLOCK ── */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: "0 2.8rem 2.8rem",
+          zIndex: 10,
+        }}
+      >
+        {/* Brand label */}
+        <div
+          style={{
+            fontFamily: F.sans,
+            fontSize: "0.3rem",
+            letterSpacing: "0.55em",
+            color: "rgba(212,175,55,0.28)",
+            textTransform: "uppercase",
+            marginBottom: "0.9rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.7rem",
+          }}
+        >
+          <span>Francis Luxor Motors</span>
+          <span style={{ color: "rgba(212,175,55,0.12)" }}>—</span>
+          <span>{showInterior ? "Interior View" : "Exterior View"}</span>
+        </div>
+
+        {/* Vehicle name */}
+        <div
+          style={{
+            fontFamily: F.serif,
+            fontSize: "clamp(1.8rem,3vw,2.85rem)",
+            fontWeight: 200,
+            color: "#fff",
+            lineHeight: 1,
+            letterSpacing: "0.03em",
+            marginBottom: "0.45rem",
+            animation: "statsReveal 0.6s ease both",
+          }}
+        >
+          {vehicle.model}
+        </div>
+
+        {/* Gold line */}
+        <div
+          style={{
+            width: "36px",
+            height: "1px",
+            background: `linear-gradient(to right, ${accentColor}, transparent)`,
+            marginBottom: "1rem",
+            animation: "lineGrow 0.8s cubic-bezier(0.23,1,0.32,1) 0.2s both",
+          }}
+        />
+
+        {/* Config pills */}
+        <div
+          style={{
+            display: "flex",
+            gap: "0.45rem",
+            flexWrap: "wrap",
+            marginBottom: "1.3rem",
+          }}
+        >
+          {[
+            CONFIG.colors[colorIdx].n,
+            ...(cfgTab === "interior" ? ["Viewing Interior"] : []),
+          ].map((label, i) => (
+            <span
+              key={i}
+              className="cfg-pill"
+              style={{
+                animationDelay: `${i * 0.08}s`,
+              }}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+
+        {/* Stats */}
+        <div className="cfg-stats-bar">
+          {[
+            { label: "Power", value: vehicle.hp ? `${vehicle.hp} HP` : "—" },
+            {
+              label: "Top Speed",
+              value: vehicle.top ? `${vehicle.top} KM/H` : "—",
+            },
+            { label: "Availability", value: vehicle.stock || "—" },
+          ].map(({ label, value }, i) => (
+            <div
+              key={label}
+              className="cfg-stat-item"
+              style={{ animationDelay: `${0.15 + i * 0.1}s` }}
+            >
+              <span className="cfg-stat-label">{label}</span>
+              <span className="cfg-stat-value">{value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── CLOSE BUTTON ── */}
+      <button
+        onClick={onClose}
+        style={{
+          position: "absolute",
+          top: "1.4rem",
+          left: "1.4rem",
+          zIndex: 20,
+          background: "rgba(0,0,0,0.55)",
+          backdropFilter: "blur(14px)",
+          border: "1px solid rgba(255,255,255,0.07)",
+          color: "rgba(255,255,255,0.35)",
+          width: "36px",
+          height: "36px",
+          cursor: "pointer",
+          fontSize: "1rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "all 0.25s",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = "#fff";
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = "rgba(255,255,255,0.35)";
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+        }}
+      >
+        ×
+      </button>
+
+      {/* ── VIDEO / IMAGE MODE BADGE ── */}
+      <div className="cfg-mode-badge">
+        {showInterior ?
+          "Interior"
+        : videoSrc ?
+          "4K · Live"
+        : "Photo"}
+      </div>
+
+      {/* Slug watermark */}
+      <div
+        style={{
+          position: "absolute",
+          top: "1.4rem",
+          right: "1.6rem",
+          zIndex: 20,
+          fontFamily: F.serif,
+          fontSize: "0.44rem",
+          color: "rgba(255,255,255,0.05)",
+          letterSpacing: "0.35em",
+          textTransform: "uppercase",
+          userSelect: "none",
+        }}
+      >
+        {vehicle.slug?.toUpperCase()}
+      </div>
+    </div>
+  );
+}
+
+// ─── Configurator Modal (CINEMATIC) ──────────────────────────────────────────
 function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
   const [colorIdx, setColorIdx] = useState(0);
   const [interIdx, setInterIdx] = useState(0);
@@ -282,11 +631,20 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
     CONFIG.interiors[interIdx].p +
     CONFIG.performance[perfIdx].p +
     CONFIG.wheels[wheelIdx].p;
-  const previewImg =
-    cfgTab === "interior" ?
-      INT_IMAGES[vehicle.slug]
-    : HERO_IMAGES[vehicle.slug];
+
   const accentColor = vehicle.accent || GOLD;
+  const currentAddon =
+    cfgTab === "color" ? CONFIG.colors[colorIdx].p
+    : cfgTab === "interior" ? CONFIG.interiors[interIdx].p
+    : cfgTab === "performance" ? CONFIG.performance[perfIdx].p
+    : CONFIG.wheels[wheelIdx].p;
+
+  const cfgTabs = [
+    { key: "color", label: "Colour", icon: "◈" },
+    { key: "interior", label: "Interior", icon: "◇" },
+    { key: "performance", label: "Performance", icon: "◆" },
+    { key: "wheels", label: "Wheels", icon: "○" },
+  ];
 
   const handleBuy = async () => {
     setLoading(true);
@@ -303,19 +661,6 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
     setLoading(false);
   };
 
-  const cfgTabs = [
-    { key: "color", label: "Colour", icon: "◈" },
-    { key: "interior", label: "Interior", icon: "◇" },
-    { key: "performance", label: "Performance", icon: "◆" },
-    { key: "wheels", label: "Wheels", icon: "○" },
-  ];
-
-  const currentAddon =
-    cfgTab === "color" ? CONFIG.colors[colorIdx].p
-    : cfgTab === "interior" ? CONFIG.interiors[interIdx].p
-    : cfgTab === "performance" ? CONFIG.performance[perfIdx].p
-    : CONFIG.wheels[wheelIdx].p;
-
   return (
     <div
       style={{
@@ -327,240 +672,15 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
         animation: "pmFadeIn 0.35s ease",
       }}
     >
-      {/* ── LEFT: Immersive Preview Panel ── */}
-      <div
-        style={{
-          flex: "0 0 54%",
-          position: "relative",
-          overflow: "hidden",
-          background: "#030303",
-        }}
-      >
-        {previewImg && (
-          <img
-            key={previewImg + cfgTab}
-            src={previewImg}
-            alt={vehicle.model}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              filter: "brightness(0.52) saturate(0.85)",
-              animation: "cfgImgFade 0.65s cubic-bezier(0.25,0.46,0.45,0.94)",
-            }}
-          />
-        )}
+      {/* ════ LEFT: CINEMATIC PANEL ════ */}
+      <CinematicPanel
+        vehicle={vehicle}
+        colorIdx={colorIdx}
+        cfgTab={cfgTab}
+        onClose={onClose}
+      />
 
-        {/* Dynamic color tint */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `radial-gradient(ellipse at 35% 65%, ${CONFIG.colors[colorIdx].hex}30 0%, transparent 58%)`,
-            transition: "background 0.9s ease",
-            pointerEvents: "none",
-            mixBlendMode: "screen",
-          }}
-        />
-
-        {/* Top accent line */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "1px",
-            background: `linear-gradient(to right, transparent 0%, ${accentColor}80 50%, transparent 100%)`,
-          }}
-        />
-
-        {/* Vignette sides */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.3) 100%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* Bottom info */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: "0 2.8rem 2.8rem",
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.75) 45%, transparent 100%)",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: F.sans,
-              fontSize: "0.32rem",
-              letterSpacing: "0.55em",
-              color: "rgba(212,175,55,0.3)",
-              textTransform: "uppercase",
-              marginBottom: "1rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.7rem",
-            }}
-          >
-            <span>Francis Luxor Motors</span>
-            <span style={{ color: "rgba(212,175,55,0.15)" }}>—</span>
-            <span>Configure & Acquire</span>
-          </div>
-
-          <div
-            style={{
-              fontFamily: F.serif,
-              fontSize: "clamp(1.8rem,3vw,2.9rem)",
-              fontWeight: 200,
-              color: "#fff",
-              lineHeight: 1,
-              letterSpacing: "0.03em",
-              marginBottom: "0.5rem",
-            }}
-          >
-            {vehicle.model}
-          </div>
-
-          <div
-            style={{
-              width: "36px",
-              height: "1px",
-              background: `linear-gradient(to right, ${accentColor}, transparent)`,
-              marginBottom: "1.1rem",
-            }}
-          />
-
-          {/* Active config pills */}
-          <div
-            style={{
-              display: "flex",
-              gap: "0.5rem",
-              flexWrap: "wrap",
-              marginBottom: "1.3rem",
-            }}
-          >
-            {[
-              CONFIG.colors[colorIdx].n,
-              CONFIG.interiors[interIdx].n,
-              CONFIG.performance[perfIdx].n,
-              CONFIG.wheels[wheelIdx].n,
-            ].map((label, i) => (
-              <span
-                key={i}
-                style={{
-                  fontFamily: F.sans,
-                  fontSize: "0.3rem",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  padding: "0.25rem 0.65rem",
-                  border: "1px solid rgba(255,255,255,0.09)",
-                  color: "rgba(255,255,255,0.3)",
-                  background: "rgba(255,255,255,0.02)",
-                  backdropFilter: "blur(6px)",
-                }}
-              >
-                {label}
-              </span>
-            ))}
-          </div>
-
-          {/* Vehicle stats */}
-          <div style={{ display: "flex", gap: "2.2rem" }}>
-            {[
-              { label: "Power", value: vehicle.hp ? `${vehicle.hp} HP` : "—" },
-              {
-                label: "Top Speed",
-                value: vehicle.top ? `${vehicle.top} KM/H` : "—",
-              },
-              { label: "Availability", value: vehicle.stock || "—" },
-            ].map(({ label, value }) => (
-              <div key={label}>
-                <div
-                  style={{
-                    fontFamily: F.sans,
-                    fontSize: "0.28rem",
-                    letterSpacing: "0.42em",
-                    color: "rgba(255,255,255,0.18)",
-                    textTransform: "uppercase",
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  {label}
-                </div>
-                <div
-                  style={{
-                    fontFamily: F.tenor,
-                    fontSize: "0.82rem",
-                    color: "rgba(255,255,255,0.55)",
-                  }}
-                >
-                  {value}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          style={{
-            position: "absolute",
-            top: "1.4rem",
-            left: "1.4rem",
-            background: "rgba(0,0,0,0.55)",
-            backdropFilter: "blur(14px)",
-            border: "1px solid rgba(255,255,255,0.07)",
-            color: "rgba(255,255,255,0.35)",
-            width: "36px",
-            height: "36px",
-            cursor: "pointer",
-            fontSize: "1rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "all 0.25s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "#fff";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "rgba(255,255,255,0.35)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-          }}
-        >
-          ×
-        </button>
-
-        {/* Slug watermark */}
-        <div
-          style={{
-            position: "absolute",
-            top: "1.4rem",
-            right: "1.6rem",
-            fontFamily: F.serif,
-            fontSize: "0.48rem",
-            color: "rgba(255,255,255,0.06)",
-            letterSpacing: "0.35em",
-            textTransform: "uppercase",
-            userSelect: "none",
-          }}
-        >
-          {vehicle.slug?.toUpperCase()}
-        </div>
-      </div>
-
-      {/* ── RIGHT: Configuration Panel ── */}
+      {/* ════ RIGHT: CONFIGURATION PANEL ════ */}
       <div
         style={{
           flex: "0 0 46%",
@@ -570,16 +690,16 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
           borderLeft: "1px solid rgba(255,255,255,0.035)",
         }}
       >
-        {/* Accent top line */}
+        {/* Accent line */}
         <div
           style={{
             height: "1px",
-            background: `linear-gradient(to right, ${accentColor}55, transparent 70%)`,
             flexShrink: 0,
+            background: `linear-gradient(to right, ${accentColor}55, transparent 70%)`,
           }}
         />
 
-        {/* Tab navigation */}
+        {/* Config tabs */}
         <div
           style={{
             display: "flex",
@@ -608,15 +728,15 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
           ))}
         </div>
 
-        {/* Scrollable config content */}
+        {/* Scrollable content */}
         <div style={{ flex: 1, padding: "2rem 2.4rem", overflowY: "auto" }}>
-          {/* Section header — animates on tab change */}
+          {/* Section header */}
           <div
+            key={cfgTab}
             style={{
               marginBottom: "1.6rem",
               animation: "cfgSlideIn 0.28s ease",
             }}
-            key={cfgTab}
           >
             <div
               style={{
@@ -671,7 +791,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
 
           {/* ── COLOUR ── */}
           {cfgTab === "color" && (
-            <div style={{ animation: "cfgSlideIn 0.28s ease" }}>
+            <div className="cfg-tab-content">
               <div
                 style={{
                   display: "flex",
@@ -755,7 +875,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
 
           {/* ── INTERIOR ── */}
           {cfgTab === "interior" && (
-            <div style={{ animation: "cfgSlideIn 0.28s ease" }}>
+            <div className="cfg-tab-content">
               <div
                 style={{ display: "flex", flexDirection: "column", gap: "2px" }}
               >
@@ -798,7 +918,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
 
           {/* ── PERFORMANCE ── */}
           {cfgTab === "performance" && (
-            <div style={{ animation: "cfgSlideIn 0.28s ease" }}>
+            <div className="cfg-tab-content">
               <div
                 style={{ display: "flex", flexDirection: "column", gap: "3px" }}
               >
@@ -868,7 +988,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
 
           {/* ── WHEELS ── */}
           {cfgTab === "wheels" && (
-            <div style={{ animation: "cfgSlideIn 0.28s ease" }}>
+            <div className="cfg-tab-content">
               <div
                 style={{ display: "flex", flexDirection: "column", gap: "2px" }}
               >
@@ -910,7 +1030,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
           )}
         </div>
 
-        {/* ── Footer: Breakdown + CTA ── */}
+        {/* ── FOOTER ── */}
         <div
           style={{
             flexShrink: 0,
@@ -986,7 +1106,7 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
               ))}
           </div>
 
-          {/* Total + details */}
+          {/* Total */}
           <div
             style={{
               display: "flex",
@@ -1010,13 +1130,13 @@ function ConfiguratorModal({ vehicle, onConfirm, onClose }) {
               </div>
               <div
                 className="price-shimmer"
+                key={total}
                 style={{
                   fontFamily: F.serif,
                   fontSize: "2.4rem",
                   fontWeight: 200,
                   lineHeight: 1,
                 }}
-                key={total}
               >
                 {fmt(total)}
               </div>
@@ -1226,7 +1346,7 @@ function VehicleCard({ vehicle, index, onConfigure }) {
             !soldOut && (e.currentTarget.style.background = "transparent")
           }
         >
-          {soldOut ? "Unavailable" : "Configure Vehicle \u2192"}
+          {soldOut ? "Unavailable" : "Configure Vehicle →"}
         </button>
       </div>
       <div className="lx-card-bar" />
@@ -1354,7 +1474,7 @@ function OrdersTab({ orders, onCancel, loading }) {
           textTransform: "uppercase",
         }}
       >
-        Loading\u2026
+        Loading…
       </div>
     );
   if (orders.length === 0)
@@ -1368,7 +1488,7 @@ function OrdersTab({ orders, onCancel, loading }) {
             marginBottom: "1.5rem",
           }}
         >
-          \u25c7
+          ◇
         </div>
         <div
           style={{
@@ -1491,7 +1611,7 @@ function OrdersTab({ orders, onCancel, loading }) {
                 month: "long",
                 year: "numeric",
               })}{" "}
-              \u00b7 Order #{String(o.id).padStart(4, "0")}
+              · Order #{String(o.id).padStart(4, "0")}
             </div>
           </div>
           <div style={{ textAlign: "right" }}>
@@ -1659,7 +1779,7 @@ function AdminPanel({ vehicles, onRefresh, notify }) {
   const [view, setView] = useState("list");
   const [editSlug, setEditSlug] = useState(null);
   const [allOrders, setAllOrders] = useState([]);
-  const [loadingOrders, setLoadingOrders] = useState(false);
+  const [loadingOrders, setLoadingO] = useState(false);
   const [saving, setSaving] = useState(false);
   const empty = {
     slug: "",
@@ -1676,14 +1796,14 @@ function AdminPanel({ vehicles, onRefresh, notify }) {
   const [form, setForm] = useState(empty);
 
   const loadOrders = async () => {
-    setLoadingOrders(true);
+    setLoadingO(true);
     try {
       const r = await fetch(`${API}/orders`);
       setAllOrders(await r.json());
     } catch {
       notify("Error loading orders", "error");
     }
-    setLoadingOrders(false);
+    setLoadingO(false);
   };
   const startEdit = (v) => {
     setEditSlug(v.slug);
@@ -1814,11 +1934,7 @@ function AdminPanel({ vehicles, onRefresh, notify }) {
           <Field label="Slug" field="slug" placeholder="ferrari-roma" />
         )}
         <Field label="Model" field="model" placeholder="Ferrari Roma" />
-        <Field
-          label="Valuation"
-          field="valuation"
-          placeholder="\u20ac300,000"
-        />
+        <Field label="Valuation" field="valuation" placeholder="€300,000" />
         <Field label="Stock" field="stock" placeholder="5 Units Available" />
         <Field label="HP" field="hp" placeholder="620 hp" />
         <Field label="Top Speed" field="top" placeholder="320 km/h" />
@@ -1875,8 +1991,8 @@ function AdminPanel({ vehicles, onRefresh, notify }) {
           {saving ?
             "Saving..."
           : view === "add" ?
-            "Add Vehicle \u2192"
-          : "Save Changes \u2192"}
+            "Add Vehicle →"
+          : "Save Changes →"}
         </button>
       </div>
     </>
@@ -2075,7 +2191,7 @@ function AdminPanel({ vehicles, onRefresh, notify }) {
                 marginBottom: "1rem",
               }}
             >
-              \u25c7
+              ◇
             </div>
             <p
               style={{
@@ -2145,7 +2261,7 @@ function AdminPanel({ vehicles, onRefresh, notify }) {
                       letterSpacing: "0.08em",
                     }}
                   >
-                    {o.color} \u00b7 {o.interior}
+                    {o.color} · {o.interior}
                   </div>
                 </div>
                 <div
@@ -2200,12 +2316,14 @@ export default function PurchaseMenu() {
   const sectionRef = useRef(null);
 
   const notify = (msg, type = "success") => setToast({ msg, type });
+
   const fetchVehicles = useCallback(() => {
     fetch(`${API}/vehicles`)
       .then((r) => r.json())
       .then(setVehicles)
       .catch(() => notify("Error loading vehicles", "error"));
   }, []);
+
   const fetchOrders = useCallback(() => {
     setLoad(true);
     fetch(`${API}/orders`)
@@ -2219,6 +2337,7 @@ export default function PurchaseMenu() {
         setLoad(false);
       });
   }, []);
+
   useEffect(() => {
     fetchVehicles();
   }, [fetchVehicles]);
@@ -2235,7 +2354,7 @@ export default function PurchaseMenu() {
       });
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || "Purchase failed");
-      notify(`Acquisition confirmed \u2014 ${data.vehicle_model}`);
+      notify(`Acquisition confirmed — ${data.vehicle_model}`);
       setModal(null);
       fetchVehicles();
       if (tab === "orders") fetchOrders();
@@ -2243,18 +2362,20 @@ export default function PurchaseMenu() {
       notify(e.message, "error");
     }
   };
+
   const handleCancel = async (id) => {
     try {
       const r = await fetch(`${API}/orders/${id}`, { method: "DELETE" });
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || "Cancel failed");
-      notify("Order cancelled \u00b7 Stock restored");
+      notify("Order cancelled · Stock restored");
       fetchOrders();
       fetchVehicles();
     } catch (e) {
       notify(e.message, "error");
     }
   };
+
   const handleStock = async (slug, qty) => {
     const s = qty === 1 ? "1 Unit Available" : `${qty} Units Available`;
     try {
@@ -2282,6 +2403,7 @@ export default function PurchaseMenu() {
       }}
     >
       <style>{STYLES}</style>
+
       {toast && (
         <Toast
           msg={toast.msg}
@@ -2289,6 +2411,7 @@ export default function PurchaseMenu() {
           onClose={() => setToast(null)}
         />
       )}
+
       {modal && (
         <ConfiguratorModal
           vehicle={modal}
@@ -2297,7 +2420,7 @@ export default function PurchaseMenu() {
         />
       )}
 
-      {/* HERO */}
+      {/* ── HERO ── */}
       <div
         style={{
           padding: "110px 80px 70px",
@@ -2372,7 +2495,7 @@ export default function PurchaseMenu() {
         </p>
       </div>
 
-      {/* TABS */}
+      {/* ── TABS ── */}
       <div
         style={{
           display: "flex",
@@ -2381,25 +2504,22 @@ export default function PurchaseMenu() {
           marginBottom: "4rem",
         }}
       >
-        {TABS.map((t) => {
-          const active = tab === t.key;
-          return (
-            <button
-              key={t.key}
-              className={`pm-tab ${active ? "active" : ""}`}
-              onClick={() => setTab(t.key)}
-            >
-              <span style={{ fontSize: "0.68rem" }}>{t.icon}</span>
-              <span style={{ fontFamily: F.sans }}>{t.label}</span>
-              {t.key === "orders" && orders.length > 0 && (
-                <span className="pm-badge">{orders.length}</span>
-              )}
-            </button>
-          );
-        })}
+        {TABS.map((t) => (
+          <button
+            key={t.key}
+            className={`pm-tab ${tab === t.key ? "active" : ""}`}
+            onClick={() => setTab(t.key)}
+          >
+            <span style={{ fontSize: "0.68rem" }}>{t.icon}</span>
+            <span style={{ fontFamily: F.sans }}>{t.label}</span>
+            {t.key === "orders" && orders.length > 0 && (
+              <span className="pm-badge">{orders.length}</span>
+            )}
+          </button>
+        ))}
       </div>
 
-      {/* CONTENT */}
+      {/* ── CONTENT ── */}
       <div style={{ maxWidth: "1340px", margin: "0 auto", padding: "0 60px" }}>
         {tab === "fleet" && (
           <div>
