@@ -1,4 +1,4 @@
-﻿// app.js
+// app.js
 // Servidor Express para la API de Luxor Motors
 // Ejecutar con: node app.js  o  npm start
 
@@ -15,7 +15,6 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas
-app.use('/api/orders', require('./routes/orders'));
 app.use('/api/vehicles', vehiclesRouter);
 
 // Health check
@@ -38,4 +37,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
